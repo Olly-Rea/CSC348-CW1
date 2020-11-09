@@ -18,8 +18,8 @@ class CreateRepliesTable extends Migration
             // Define primary key
             $table->id('replyID');
             // Define foreign keys
-            $table->foreignId('author')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('comment')->references('commentID')->on('comments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('userID')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('commentID')->references('commentID')->on('comments')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text("content");
             $table->integer("likes");

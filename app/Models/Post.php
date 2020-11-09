@@ -18,7 +18,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'author',
+        'userID',
         'title',
         'content',
         'tags',
@@ -27,17 +27,17 @@ class Post extends Model
     ];
 
     /**
-     * Parent model relationship
+     * Parent Model relationship
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "author");
+        return $this->belongsTo("App\Models\User", "userID");
     }
 
     /**
-     * Child model relationship
+     * Child Model relationship
      */
     public function comments() {
-        return $this->hasMany("App\Models\Comment");
+        return $this->hasMany("App\Models\Comment", "postID");
     }
 
 }

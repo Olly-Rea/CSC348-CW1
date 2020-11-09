@@ -18,21 +18,21 @@ class Reply extends Model
      * @var array
      */
     protected $fillable = [
-        'author',
-        'comment',
+        'userID',
+        'commentID',
         'content',
         'likes',
         'dislikes'
     ];
 
     /**
-     * Parent model relationship
+     * Parent Model relationships
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "author");
+        return $this->belongsTo("App\Models\User", "userID");
     }
      public function comment() {
-        return $this->belongsTo('App\Models\Comment');
+        return $this->belongsTo("App\Models\Comment", "commentID");
     }
 
 }

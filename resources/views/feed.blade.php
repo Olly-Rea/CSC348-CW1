@@ -12,23 +12,19 @@
 {{-- @foreach ($posts as $post) --}}
 @foreach($posts as $post)
 <div class="post-panel">
-    <p>{{ $post->user->first_name }} {{ $post->user->last_name }} • <i>{{ date("j F Y", strtotime($post->created_at)) }}</i></p>
+    <p>{{ $post->user->first_name }} {{ $post->user->last_name }} • <i>{{ date("j F Y", strtotime($post->created_at)) }} • PostID: {{ $post->postID }}</i></p>
     <h1><b>{{ $post->title }}</b></h1>
     <p>{{ $post->content }}</p>
     <div class="comments-panel">
-    @foreach($comments as $comment)
-        @if($comment->post == $post->postID)
-        <p>{{ $comment->user->first_name }} {{ $comment->user->last_name }} • {{ date("j F Y", strtotime($comment->created_at)) }}</p>
-        <p>{{ $comment->content }}</p>
+    @foreach($post->comments as $comment)
+        <p>{{ $comment->user->first_name }} {{ $comment->user->last_name }} • {{ date("j F Y", strtotime($comment->created_at)) }} • PostID: {{ $comment->postID }}</p>
+        <p>{{ $comment->content }} • CommentID: {{ $comment->commentID }} </p>
         <div class="replies-panel">
-            @foreach($replies as $reply)
-                @if($reply->comment == $comment->commentID)
-                <p>{{ $reply->user->first_name }} {{ $reply->user->last_name }} • {{ date("j F Y", strtotime($reply->created_at)) }}</p>
+            @foreach($comment->replies as $reply)
+                <p>{{ $reply->user->first_name }} {{ $reply->user->last_name }} • {{ date("j F Y", strtotime($reply->created_at)) }} • CommentID: {{ $reply->commentID }}</p>
                 <p>{{ $reply->content }}</p>
-                @endif
             @endforeach
             </div>
-        @endif
     @endforeach
     </div>
 </div>

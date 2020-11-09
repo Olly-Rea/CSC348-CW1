@@ -49,13 +49,13 @@ class User extends Authenticatable
      * Child Model relationships
      */
     public function posts() {
-        return $this->hasMany("App\Models\Post", "author");
+        return $this->hasMany("App\Models\Post", "userID");
     }
     public function comments() {
-        return $this->hasMany("App\Models\Comment", "author");
+        return $this->hasMany("App\Models\Comment", "userID");
     }
     public function replies() {
-        return $this->hasMany("App\Models\Reply", "author");
+        return $this->hasMany("App\Models\Reply", "userID");
     }
 
 }

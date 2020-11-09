@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             // Define primary key
             $table->id('postID');
             // Define foreign key
-            $table->foreignId('author')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('userID')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text("title");
             $table->text("content");

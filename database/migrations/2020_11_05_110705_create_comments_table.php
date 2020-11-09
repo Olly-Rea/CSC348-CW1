@@ -17,8 +17,8 @@ class CreateCommentsTable extends Migration
             // Define primary key
             $table->id('commentID');
             // Define foreign keys
-            $table->foreignId('author')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('post')->references('postID')->on('posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('userID')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('postID')->references('postID')->on('posts')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text("content");
             $table->integer("likes");

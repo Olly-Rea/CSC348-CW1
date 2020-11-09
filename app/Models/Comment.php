@@ -18,29 +18,28 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'author',
-        'post',
+        'userID',
+        'postID',
         'content',
         'likes',
         'dislikes'
     ];
 
     /**
-     * Parent model relationship
+     * Parent Model relationships
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "author");
+        return $this->belongsTo("App\Models\User", "userID");
     }
      public function post() {
-        return $this->belongsTo('App\Models\Post');
+        return $this->belongsTo("App\Models\Post", "postID");
     }
 
-
     /**
-     * Child model relationship
+     * Child Model relationship
      */
     public function replies() {
-        return $this->hasMany("App\Models\Reply");
+        return $this->hasMany("App\Models\Reply", "commentID");
     }
 
 }

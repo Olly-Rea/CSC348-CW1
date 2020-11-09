@@ -21,8 +21,6 @@ class PostController extends Controller
         $comments = Comment::orderBy('created_at')->get();
         $replies = Reply::orderBy('created_at')->get();
 
-        // dd(Post::inRandomOrder()->first()->user);
-
         return view('feed', ['posts' => $posts, 'comments' => $comments, 'replies' => $replies]);
     }
 
