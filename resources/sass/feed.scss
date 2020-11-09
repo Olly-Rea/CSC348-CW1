@@ -1,0 +1,65 @@
+@import 'global';
+
+main {
+    @include flexDisplay(column, flex-start, flex-start);
+}
+
+nav,
+#screen-split {
+    position: fixed;
+    left: 66%
+}
+
+nav {
+    top: 15%;
+    transform: translateY(-50%);
+
+    margin-left: 1%;
+
+    #or-container {
+        @include flexDisplay(row, center, center);
+        width: 90%;
+        margin: 5vh 0;
+        p {
+            margin: 0 10%;
+            color: $foreLight;
+        }
+        .h-sep {
+            width: 15%;
+            height: $borderMed;
+            border-radius: $roundedEnd;
+
+            background-color: $foreLight;
+
+        }
+    }
+}
+
+.post-panel {
+    position: relative;
+
+    @include flexDisplay(column, flex-start, flex-start);
+
+    width: 58%;
+
+    margin: 2vh 0;
+    margin-left: 6vh;
+    padding-left: 0.4vh;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+
+        height: 100%;
+        padding: 1vh 0;
+        width: $borderMed;
+        border-radius: $roundedEnd;
+
+        margin-left: -2.4vh;
+        background-color: $foreColor;
+    }
+}
+

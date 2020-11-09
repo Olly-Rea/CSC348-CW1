@@ -11,13 +11,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    // Define the custom primary key identifier
+    protected $primaryKey = 'userID';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -40,4 +44,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Child Model relationships
+     */
+    public function posts() {
+        return $this->hasMany("App\Models\Post", "author");
+    }
+    public function comments() {
+        return $this->hasMany("App\Models\Comment", "author");
+    }
+    public function replies() {
+        return $this->hasMany("App\Models\Reply", "author");
+    }
+
 }

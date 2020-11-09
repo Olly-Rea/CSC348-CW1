@@ -1,19 +1,55 @@
-// Body
-$body-bg: #f8fafc;
+// Fonts
+@font-face {
+    // Regular
+    font-family: "C&L Regular";
+    src: url("/fonts/ChampagneAndLimousines-7KRB.ttf") format('truetype');
+}
+@font-face {
+    // Bold
+    font-family: "C&L Bold";
+    font-weight: bold;
+    src: url("/fonts/ChampagneAndLimousinesBold-myr2.ttf") format('truetype');
+}
+@font-face {
+    // Italics
+    font-family: "C&L Italics";
+    font-style: italic;
+    src: url("/fonts/ChampagneAndLimousinesItalic-PlRZ.ttf") format('truetype');
+}
+@font-face {
+    // Bold italics
+    font-family: "C&L BoldItalics";
+    font-style: italic;
+    font-weight: bold;
+    src: url("/fonts/ChampagneAndLimousinesBoldItalic-dqex.ttf") format('truetype');
+}
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-stack: "C&L Regular";
+$font-size-base: 14pt;
+$navFontSize: 24pt;
+$line-height-base: 1.2;
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+// Borders
+$borderMed: 3px;
+$borderThick: 4px;
+$roundedEnd: 5vh;
+
+// Foreground Colors
+$foreColor: rgb(10, 10, 10);
+$foreLight: rgb(192, 192, 192);
+// // Dark Mode
+// $foreColor: rgb(190, 190, 190);
+// $foreLight: rgb(232, 232, 232);
+
+// Background Colors
+$backColor: rgb(245, 245, 245);
+$footerColor: rgb(220, 220, 220);
+$inputHighlight: rgb(240, 240, 240);
+// // Dark Mode
+// $backColor: rgb(25, 25, 25);
+// $footerColor: rgb(20, 20, 20);
+// $inputHighlight: rgb(40, 40, 40);
+
+// Accent colors
+// $accentGreen: rgb()

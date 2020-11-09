@@ -2,20 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+
+// Custom imports
 use App\Models\User;
 
-use Faker;
-
-class UserFactory extends Factory
+class PostFactory extends Factory
 {
+
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Post::class;
 
     /**
      * Define the model's default state.
@@ -24,8 +25,11 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        // Generate the created_at date...
-        $create_date = $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now');
+        // Pick a random user from the list of all Users
+        $user = User::inRandomOrder()->first();
+
+        // Generate the created_at date... (must be after parent (user) created)
+        $create_date = $this->faker->dateTimeBetween($startDate = $user->created_at, $endDate = 'now');
         // ...and (possibly) an updated_at date
         $update_date = null;
         // 50% chance of updated date
@@ -35,13 +39,11 @@ class UserFactory extends Factory
 
         // return new database record (row) to seed
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail,
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-
+            'author' => $user->userID,
+            'title' => $this->faker->sentence(5),
+            'content' => $this->faker->text(),
+            'likes' => random_int(0, 500),
+            'dislikes' => random_int(0, 500),
             // default 'Model' attributes for 'published' and 'edited'
             'created_at' => $create_date,
             'updated_at' => $update_date

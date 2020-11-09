@@ -1,0 +1,197 @@
+@font-face {
+  font-family: "C&L Regular";
+  src: url("/fonts/ChampagneAndLimousines-7KRB.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "C&L Bold";
+  font-weight: bold;
+  src: url("/fonts/ChampagneAndLimousinesBold-myr2.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "C&L Italics";
+  font-style: italic;
+  src: url("/fonts/ChampagneAndLimousinesItalic-PlRZ.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "C&L BoldItalics";
+  font-style: italic;
+  font-weight: bold;
+  src: url("/fonts/ChampagneAndLimousinesBoldItalic-dqex.ttf") format("truetype");
+}
+
+body,
+html {
+  margin: 0 !important;
+  font: 14pt "C&L Regular";
+  line-height: 1.2;
+  color: #0a0a0a;
+  background-color: whitesmoke;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: #0a0a0a;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 10vh;
+  padding: 2vh;
+  font-size: 24pt;
+}
+
+nav a {
+  margin: 2.4vh 0;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+nav a:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+nav a:active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+nav .nav-link {
+  width: 100%;
+  position: relative;
+  margin-left: 1.5vh;
+}
+
+nav .nav-link:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 100%;
+  padding: 1vh 0;
+  width: 3px;
+  border-radius: 5vh;
+  margin-left: -1.5vh;
+  background-color: #0a0a0a;
+}
+
+#screen-split {
+  top: 15vh;
+  height: 70vh;
+  width: 4px;
+  background-color: silver;
+  border-radius: 5vh;
+}
+
+main {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 8vh 0;
+  min-height: 84vh;
+  max-width: 1440px;
+  width: 100%;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 12vh;
+  background: -webkit-gradient(linear, left top, left bottom, from(whitesmoke), to(gainsboro));
+  background: linear-gradient(whitesmoke 0%, gainsboro 100%);
+}
+
+footer a {
+  font-size: 16pt;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2vh;
+  width: 56%;
+  margin-right: 10%;
+}
+
+form a {
+  margin: 2vh 0;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+input {
+  width: 100%;
+  border: none;
+  padding: 1vh;
+  margin-bottom: 2vh;
+}
+
+input:hover {
+  background-color: #f0f0f0;
+}
+
+button,
+input[type="submit"] {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding: 1.6vh 2vh;
+  border-radius: 5vh;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+/*# sourceMappingURL=global.css.map */

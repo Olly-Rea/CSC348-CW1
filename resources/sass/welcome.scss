@@ -1,0 +1,46 @@
+@import 'global';
+
+h1 {
+    width: 60%;
+    margin-right: 6%;
+
+    font-size: 68pt;
+    text-align: end;
+}
+
+main {
+    @include flexDisplay(row, center, flex-start);
+}
+
+nav,
+#screen-split {
+    position: absolute;
+    left: 66%
+}
+
+nav {
+    top: 50%;
+    transform: translateY(-50%);
+
+    margin-left: 4%;
+
+    #or-container {
+        @include flexDisplay(row, center, center);
+        width: 90%;
+        margin: 5vh 0;
+        p {
+            margin: 0 10%;
+            color: $foreLight;
+        }
+        .h-sep {
+            width: 15%;
+            height: $borderMed;
+            border-radius: $roundedEnd;
+
+            background-color: $foreLight;
+
+        }
+    }
+}
+
+

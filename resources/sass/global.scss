@@ -1,0 +1,161 @@
+// Variables
+@import 'variables';
+
+// // Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+// mixin formatting function for "display: flex"
+@mixin flexDisplay($direction, $horizontal, $vertical) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $horizontal;
+    justify-content: $vertical;
+}
+
+// Body and HTML tags formatting
+body,
+html {
+    margin: 0 !important;
+    font: $font-size-base $font-stack;
+    line-height: $line-height-base;
+    color: $foreColor;
+    background-color: $backColor;
+
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: $foreColor;
+}
+
+// Site navigation bar
+nav {
+    @include flexDisplay(column, flex-start, center);
+    height: 10vh;
+    padding: 2vh;
+
+    font-size: $navFontSize;
+
+    // nav a
+    a {
+        margin: 2.4vh 0;
+        transition: transform 0.1s ease-in-out;
+        &:hover {
+            transform: scale(1.02);
+        }
+        &:active {
+            transform: scale(1);
+        }
+    }
+
+    // nav-link containers
+    .nav-link {
+        width: 100%;
+
+        position: relative;
+
+        margin-left: 1.5vh;
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+
+            height: 100%;
+            padding: 1vh 0;
+            width: $borderMed;
+            border-radius: $roundedEnd;
+
+            margin-left: -1.5vh;
+            background-color: $foreColor;
+        }
+    }
+
+}
+
+// Screen split - position designated in welcome.scss and feed.scss per use-case
+#screen-split {
+    top: 15vh;
+
+    height: 70vh;
+    width: $borderThick;
+
+    background-color: $foreLight;
+    border-radius: $roundedEnd;
+}
+
+// Main content formatting
+main  {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 8vh 0;
+
+    min-height: 84vh;
+    max-width: 1440px;
+    width: 100%;
+}
+
+// Footer formatting
+footer {
+    @include flexDisplay(row, center, center);
+    height: 12vh;
+    background: linear-gradient($backColor 0%, $footerColor 100%);
+
+    a {
+        font-size: 16pt;
+    }
+}
+
+// Form formatting
+form {
+    @include flexDisplay(column, flex-start, center);
+
+    padding: 2vh;
+    width: 56%;
+    margin-right: 10%;
+
+    a {
+        margin: 2vh 0;
+        align-self: center;
+    }
+}
+input {
+    width: 100%;
+    border: none;
+
+    padding: 1vh;
+    margin-bottom: 2vh;
+
+    // background-color: $backColor;
+
+    &:hover {
+        background-color: $inputHighlight;
+    }
+
+    // [type]:not([type=submit]):not([type=hidden]) {
+    //     border: none;
+    // }
+}
+
+button,
+input[type="submit"] {
+    align-self: center;
+
+    padding: 1.6vh 2vh;
+    border-radius: $roundedEnd;
+    border: none;
+
+    cursor: pointer;
+
+    transition: transform 0.1s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
