@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
 
     // Define the custom primary key identifier
-    protected $primaryKey = 'postID';
+    protected $primaryKey = 'post_id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,10 +18,9 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'userID',
+        'user_id',
         'title',
         'content',
-        'tags',
         'likes',
         'dislikes'
     ];
@@ -30,14 +29,18 @@ class Post extends Model
      * Parent Model relationship
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "userID");
+        return $this->belongsTo("App\Models\User", "user_id");
+    }
+
+    public function tags() {
+        return $this->belongsToMany("App\Models\Tag", "post_id", "tag_id");
     }
 
     /**
      * Child Model relationship
      */
     public function comments() {
-        return $this->hasMany("App\Models\Comment", "postID");
+        return $this->hasMany("App\Models\Comment", "post_id");
     }
 
 }

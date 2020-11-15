@@ -10,7 +10,7 @@ class Reply extends Model
     use HasFactory;
 
     // Define the custom primary key identifier
-    protected $primaryKey = 'replyID';
+    protected $primaryKey = 'reply_id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +18,8 @@ class Reply extends Model
      * @var array
      */
     protected $fillable = [
-        'userID',
-        'commentID',
+        'user_id',
+        'comment_id',
         'content',
         'likes',
         'dislikes'
@@ -29,10 +29,10 @@ class Reply extends Model
      * Parent Model relationships
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "userID");
+        return $this->belongsTo("App\Models\User", "user_id");
     }
      public function comment() {
-        return $this->belongsTo("App\Models\Comment", "commentID");
+        return $this->belongsTo("App\Models\Comment", "comment_id");
     }
 
 }

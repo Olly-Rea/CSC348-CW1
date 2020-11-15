@@ -15,9 +15,9 @@ class CreatePostsTable extends Migration
     public function up() {
         Schema::create('posts', function (Blueprint $table) {
             // Define primary key
-            $table->id('postID');
+            $table->id('post_id');
             // Define foreign key
-            $table->foreignId('userID')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text("title");
             $table->text("content");

@@ -39,7 +39,7 @@ class PostFactory extends Factory
 
         // return new database record (row) to seed
         return [
-            'userID' => $user->userID,
+            'user_id' => $user->user_id,
             'title' => $this->faker->sentence(5),
             'content' => $this->faker->text(),
             'likes' => random_int(0, 500),

@@ -6,13 +6,20 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
 
     // Define the custom primary key identifier
-    protected $primaryKey = 'userID';
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -34,6 +41,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -46,16 +55,25 @@ class User extends Authenticatable
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
+
+    /**
      * Child Model relationships
      */
     public function posts() {
-        return $this->hasMany("App\Models\Post", "userID");
+        return $this->hasMany("App\Models\Post", "user_id");
     }
     public function comments() {
-        return $this->hasMany("App\Models\Comment", "userID");
+        return $this->hasMany("App\Models\Comment", "user_id");
     }
     public function replies() {
-        return $this->hasMany("App\Models\Reply", "userID");
+        return $this->hasMany("App\Models\Reply", "user_id");
     }
 
 }

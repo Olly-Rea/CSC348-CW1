@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
 
     // Define the custom primary key identifier
-    protected $primaryKey = 'commentID';
+    protected $primaryKey = 'comment_id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +18,8 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'userID',
-        'postID',
+        'user_id',
+        'post_id',
         'content',
         'likes',
         'dislikes'
@@ -29,17 +29,17 @@ class Comment extends Model
      * Parent Model relationships
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "userID");
+        return $this->belongsTo("App\Models\User", "user_id");
     }
      public function post() {
-        return $this->belongsTo("App\Models\Post", "postID");
+        return $this->belongsTo("App\Models\Post", "post_id");
     }
 
     /**
      * Child Model relationship
      */
     public function replies() {
-        return $this->hasMany("App\Models\Reply", "commentID");
+        return $this->hasMany("App\Models\Reply", "comment_id");
     }
 
 }

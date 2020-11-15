@@ -42,8 +42,8 @@ class CommentFactory extends Factory
 
         // return new database record (row) to seed
         return [
-            'userID' => $user->userID,
-            'postID' => $post->postID,
+            'user_id' => $user->user_id,
+            'post_id' => $post->post_id,
             'content' => $this->faker->text(),
             'likes' => random_int(0, 500),
             'dislikes' => random_int(0, 500),

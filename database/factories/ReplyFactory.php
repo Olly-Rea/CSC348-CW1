@@ -41,8 +41,8 @@ class ReplyFactory extends Factory
 
         // return new database record (row) to seed
         return [
-            'userID' => $user->userID,
-            'commentID' => $comment->commentID,
+            'user_id' => $user->user_id,
+            'comment_id' => $comment->comment_id,
             'content' => $this->faker->text(),
             'likes' => random_int(0, 500),
             'dislikes' => random_int(0, 500),

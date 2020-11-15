@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\User;
 
-use Faker;
-
 class UserFactory extends Factory
 {
     /**

@@ -12,16 +12,16 @@
 {{-- @foreach ($posts as $post) --}}
 @foreach($posts as $post)
 <div class="post-panel">
-    <p>{{ $post->user->first_name }} {{ $post->user->last_name }} • <i>{{ date("j F Y", strtotime($post->created_at)) }} • PostID: {{ $post->postID }}</i></p>
+    <p>{{ $post->user->first_name }} {{ $post->user->last_name }} • <i>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->post_id }}</i></p>
     <h1><b>{{ $post->title }}</b></h1>
     <p>{{ $post->content }}</p>
     <div class="comments-panel">
     @foreach($post->comments as $comment)
-        <p>{{ $comment->user->first_name }} {{ $comment->user->last_name }} • {{ date("j F Y", strtotime($comment->created_at)) }} • PostID: {{ $comment->postID }}</p>
-        <p>{{ $comment->content }} • CommentID: {{ $comment->commentID }} </p>
+        <p>{{ $comment->user->first_name }} {{ $comment->user->last_name }} • {{ date("j F Y", strtotime($comment->created_at)) }} • post_id: {{ $comment->post_id }}</p>
+        <p>{{ $comment->content }} • comment_id: {{ $comment->comment_id }} </p>
         <div class="replies-panel">
             @foreach($comment->replies as $reply)
-                <p>{{ $reply->user->first_name }} {{ $reply->user->last_name }} • {{ date("j F Y", strtotime($reply->created_at)) }} • CommentID: {{ $reply->commentID }}</p>
+                <p>{{ $reply->user->first_name }} {{ $reply->user->last_name }} • {{ date("j F Y", strtotime($reply->created_at)) }} • comment_id: {{ $reply->comment_id }}</p>
                 <p>{{ $reply->content }}</p>
             @endforeach
             </div>
@@ -31,7 +31,7 @@
 @endforeach
 {{-- @endforeach --}}
 
-<div id="screen-split"></div>
+<div _id="screen-split"></div>
 <nav>
 {{-- Authentication Link --}}
     <a href="#">
@@ -72,7 +72,7 @@
         </div>
     </a>
     @endif
-    <div id="or-container">
+    <div _id="or-container">
         <div class="h-sep"></div>
         <p>Or</p>
         <div class="h-sep"></div>
@@ -87,10 +87,10 @@
     {{ Auth::user()->name }}
 </a>
 <div class="nav-link" >
-    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementBy_id('logout-form').submit();">
         {{ __('Logout') }}
     </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" hidden>
+    <form _id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" h_idden>
         @csrf
     </form>
 </div>

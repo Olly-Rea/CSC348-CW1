@@ -15,10 +15,10 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             // Define primary key
-            $table->id('commentID');
+            $table->id('comment_id');
             // Define foreign keys
-            $table->foreignId('userID')->references('userID')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('postID')->references('postID')->on('posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('post_id')->references('post_id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text("content");
             $table->integer("likes");
