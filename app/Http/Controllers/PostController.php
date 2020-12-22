@@ -15,13 +15,31 @@ class PostController extends Controller
     /**
      * Method to return the post feed
      */
-    public function index() {
+    public static function index(Request $request) {
+        // Get first 30 posts
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(30);
+        // Return them in the feed view
+        return view('feed', ['posts' => $posts]);
+    }
 
-        $posts = Post::orderBy('created_at', 'DESC')->get();
-        $comments = Comment::orderBy('created_at')->get();
-        $replies = Reply::orderBy('created_at')->get();
+    /**
+     * Method to fetch the next page of paginated data
+     */
+    public function fetch(Request $request) {
+        if ($request->ajax()) {
+            // Get the next page of paginated posts
+            $posts = Post::orderBy('created_at', 'DESC')->paginate(30);
 
-        return view('feed', ['posts' => $posts, 'comments' => $comments, 'replies' => $replies]);
+            if(count($posts) == 0) {
+                return null;
+            } else {
+                // render the posts and return them to the TalentFeed
+                return view('paginations.posts', ['posts' => $posts])->render();
+            }
+        // Else return a 404 not found error
+        } else {
+            abort(404);
+        }
     }
 
 }

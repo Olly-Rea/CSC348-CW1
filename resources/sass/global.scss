@@ -4,21 +4,13 @@
 // // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
-// mixin formatting function for "display: flex"
-@mixin flexDisplay($direction, $horizontal, $vertical) {
-    display: flex;
-    flex-direction: $direction;
-    align-items: $horizontal;
-    justify-content: $vertical;
-}
-
 // Body and HTML tags formatting
 body,
 html {
     margin: 0 !important;
     font: $font-size-base $font-stack;
     line-height: $line-height-base;
-    color: $foreColor;
+    color: $fontColor;
     background-color: $backColor;
 
     scroll-behavior: smooth;
@@ -26,13 +18,37 @@ html {
 
 a {
     text-decoration: none;
-    color: $foreColor;
+    color: $fontColor;
 }
 
-// Site navigation bar
+svg {
+    user-select: none;
+}
+
+#logo {
+    position: fixed;
+    top: 2vh;
+    left: 2vh;
+
+    height: 4.2rem;
+    width: 4.2rem;
+
+    &.live {
+        transition: transform $transitionTime ease-in-out;
+        &:hover {
+            transform: scale(1.04);
+        }
+        &:active {
+            transform: scale(1);
+        }
+    }
+}
+
+// Site navigation side-bar
 nav {
-    @include flexDisplay(column, flex-start, center);
-    height: 10vh;
+    @include flexDisplay(row, center, center);
+
+    height: 100%;
     padding: 2vh;
 
     font-size: $navFontSize;
@@ -40,7 +56,7 @@ nav {
     // nav a
     a {
         margin: 2.4vh 0;
-        transition: transform 0.1s ease-in-out;
+        transition: transform $transitionTime ease-in-out;
         &:hover {
             transform: scale(1.02);
         }
@@ -49,56 +65,306 @@ nav {
         }
     }
 
-    // nav-link containers
-    .nav-link {
-        width: 100%;
+    svg {
 
+        fill: $foreLight;
+        stroke: $foreLight;
+
+        transition: transform $transitionTime ease-in-out;
+
+    }
+
+}
+
+
+// general main content formatting
+main,
+#feed-nav {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include flexDisplay(column, center, center);
+
+    min-width: 600px;
+    max-width: 1440px;
+    width: 100%;
+}
+
+.screen-split {
+    &-horizontal {
+        margin: 2vh 0;
+
+        height: $borderThick;
+        width: 90%;
+
+        background-color: $foreLight;
+        border-radius: $roundedEnd;
+    }
+    &-vertical {
+        margin: 0 2vh;
+
+        height: 90%;
+        width: $borderThick;
+
+        background-color: $foreLight;
+        border-radius: $roundedEnd;
+    }
+}
+
+// "main" tag-specific content formatting
+main {
+    min-height: 100vh;
+
+    .content-panel {
+        margin: 1rem 0;
+
+        width: 70%;
+
+        // padding: 2rem;
+        border-radius: $panelCorner;
+
+        background-color: $panelColor;
+        @include hasShadow();
+    }
+}
+
+.profile-image-container {
+    .profile-image {
         position: relative;
 
-        margin-left: 1.5vh;
+        width: 100%;
+        padding-top: 100%; // Force 1:1 Aspect Ratio (little squished for some reason, hence 99%)
+        border-radius: 50%;
 
-        &:before {
-            content: "";
+        overflow: hidden;
+
+        > img {
             position: absolute;
-            left: 0;
             top: 50%;
-            transform: translateY(-50%);
+            left: 50%;
+            transform: translate(-50%, -50%);
 
-            height: 100%;
-            padding: 1vh 0;
-            width: $borderMed;
-            border-radius: $roundedEnd;
+            padding: 0;
+            margin: 0;
 
-            margin-left: -1.5vh;
-            background-color: $foreColor;
+            height: 102%;
+
+            object-fit: cover;
+        }
+    }
+}
+
+// Form formatting
+form {
+    @include flexDisplay(column, center, flex-start);
+
+    padding: 2rem;
+
+    a,
+    button,
+    input {
+        align-self: center;
+    }
+    // a, input:not([type="submit"]) {
+    //     width: 90%;
+    // }
+    a {
+        margin: 2vh 0;
+    }
+
+}
+.form-box {
+    position: relative;
+
+    height: 4rem;
+
+    svg,
+    input {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    svg {
+        z-index: 2;
+        left: 0.9rem;
+
+        transition: transform $transitionTime ease-in-out;
+    }
+    input {
+        left: 0;
+        text-indent: 2.8rem;
+    }
+
+    &:hover {
+        svg {
+            transform: translateY(-50%) scale(1.05);
+        }
+    }
+    &:active {
+        svg {
+            transform: translateY(-50%) scale(1);
         }
     }
 
 }
 
-// Screen split - position designated in welcome.scss and feed.scss per use-case
-#screen-split {
-    top: 15vh;
-
-    height: 70vh;
-    width: $borderThick;
-
-    background-color: $foreLight;
-    border-radius: $roundedEnd;
+// Input formatting
+textarea,
+input,
+button {
+    &:focus {
+        outline: none;
+    }
 }
-
-// Main content formatting
-main  {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-
-    padding: 8vh 0;
-
-    min-height: 84vh;
-    max-width: 1440px;
+textarea,
+input:not([type="checkbox"]) {
     width: 100%;
+    border: none;
+
+    padding: 1vh;
+    margin-bottom: 2vh;
+
+    font-size: 1.32rem;
+
+    color: inherit;
+    font-family: inherit;
+    // background-color: $backColor;
+
+    border: none;
+    border-radius: $inputCorner;
+
+    &:hover {
+        background-color: $inputHighlight;
+    }
+
+
 }
+button,
+input[type="submit"] {
+    min-width: 8rem;
+
+    padding: 1vh 2vh;
+    margin: 0 0.5vh;
+
+    border: none;
+    border-radius: $roundedEnd;
+
+    // background-color: $panelColor;
+    background-color: $appGreen;
+
+    color: inherit;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all $transitionTime ease-in-out;
+
+    &:hover {
+        transform: scale(1.04);
+    }
+    &:active {
+        background-color: $appGreenDark;
+        transform: scale(1);
+    }
+}
+
+
+// Checkbox formatting
+label {
+    margin-bottom: 0.2rem;
+
+    // Locked form properties
+    &.locked {
+        color: gray !important;
+    }
+
+    // Checkbox formatting
+    &.checkOption,
+    &.subOption {
+        display: block;
+        position: relative;
+        margin: 0;
+        margin-bottom: 0.6vh;
+
+        height: 1.4rem;
+        width: 0;
+
+        font-weight: normal;
+        color: inherit;
+        white-space: nowrap;
+
+        user-select: none;
+        cursor: pointer;
+
+        input {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            height: 0;
+            width: 0;
+
+            opacity: 0;
+
+            cursor: pointer;
+
+            // label.check/subOption input:checked ~ .checkbox,
+            &:checked {
+                ~ .checkbox,
+                ~ .checkbox {
+                    background-color: $appGreen;
+                }
+            }
+        }
+
+        &:hover {
+            input {
+                // label.check/subOption:hover input ~ .checkbox,
+                ~ .checkbox,
+                ~ .checkbox {
+                    background-color: $appGreenDark;
+                    transition: background-color $transitionTime ease-in-out;
+                }
+                // label.check/subOption:hover input:checked ~ .checkbox,
+                &:checked {
+                    ~ .checkbox,
+                    ~ .checkbox {
+                        background-color: $appGreenDark;
+                        transition: background-color $transitionTime ease-in-out;
+                    }
+                }
+            }
+        }
+    }
+
+    &.subOption {
+        transform: translate(3.4vh);
+    }
+
+}
+.checkbox {
+    position: absolute;
+    top: -0.5vh;
+    left: 0;
+
+    background-color: $backColor;
+    border-radius: 0.2rem;
+
+    height: 1.2rem;
+    width: 1.2rem;
+
+    text-indent: 1.4rem;
+}
+input[type="checkbox"] {
+    user-select: none;
+}
+
+
+
 
 // Footer formatting
 footer {
@@ -110,52 +376,3 @@ footer {
         font-size: 16pt;
     }
 }
-
-// Form formatting
-form {
-    @include flexDisplay(column, flex-start, center);
-
-    padding: 2vh;
-    width: 56%;
-    margin-right: 10%;
-
-    a {
-        margin: 2vh 0;
-        align-self: center;
-    }
-}
-input {
-    width: 100%;
-    border: none;
-
-    padding: 1vh;
-    margin-bottom: 2vh;
-
-    // background-color: $backColor;
-
-    &:hover {
-        background-color: $inputHighlight;
-    }
-
-    // [type]:not([type=submit]):not([type=hidden]) {
-    //     border: none;
-    // }
-}
-
-button,
-input[type="submit"] {
-    align-self: center;
-
-    padding: 1.6vh 2vh;
-    border-radius: $roundedEnd;
-    border: none;
-
-    cursor: pointer;
-
-    transition: transform 0.1s ease-in-out;
-
-    &:hover {
-        transform: scale(1.05);
-    }
-}
-

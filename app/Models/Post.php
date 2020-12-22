@@ -40,7 +40,7 @@ class Post extends Model
      * Child Model relationship
      */
     public function comments() {
-        return $this->hasMany("App\Models\Comment", "post_id");
+        return $this->hasMany("App\Models\Comment", "post_id")->orderBy('created_at', 'DESC');
     }
 
 }
