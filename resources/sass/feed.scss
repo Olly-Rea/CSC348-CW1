@@ -3,6 +3,8 @@
 
 // feed navigation top-bar
 #feed-nav {
+    flex-wrap: wrap;
+
     position: fixed;
     z-index: 1;
     top: 0;
@@ -300,7 +302,8 @@ main {
 
             transition: opacity 0.1s ease-in-out;
 
-            button {
+            button,
+            input[type="submit"] {
                 position: absolute;
 
                 bottom: 4rem;
@@ -316,6 +319,12 @@ main {
             }
         }
 
+    }
+
+    svg.loading-graphic {
+        margin-top: 2rem;
+        height: 5rem;
+        width: 5rem;
     }
 
     > p {

@@ -77,6 +77,64 @@ nav {
 }
 
 
+// Loading screen formatting
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    @include flexDisplay(column, center, center);
+
+    height: 100vh;
+    width: 100vw;
+
+    svg.loading-graphic {
+        height: 12rem;
+        width: 12rem;
+    }
+
+}
+
+// Loading graphic formatting and animation
+svg.loading-graphic {
+    .elem {
+        fill: $logoLight;
+
+        transform: scale(0.88);
+        transform-origin: center;
+
+        &:nth-child(1) {
+            animation: pulse1 1.4s ease infinite;
+        }
+        &:nth-child(2) {
+            animation: pulse2 1.4s ease infinite;
+            animation-delay: 0.2s;
+        }
+        &:nth-child(3) {
+            animation: pulse3 1.4s ease infinite;
+            animation-delay: 0.4s;
+        }
+    }
+}
+@keyframes pulse1 {
+    50% {
+        transform: scale(1);
+        fill: $appGreen;
+    }
+}
+@keyframes pulse2 {
+    50% {
+        transform: scale(1);
+        fill: $appGreenDark;
+    }
+}
+@keyframes pulse3 {
+    50% {
+        transform: scale(1);
+    }
+}
+
+
 // general main content formatting
 main,
 #feed-nav {
@@ -86,7 +144,7 @@ main,
 
     @include flexDisplay(column, center, center);
 
-    min-width: 600px;
+    // min-width: 600px;
     max-width: 1440px;
     width: 100%;
 }
@@ -241,6 +299,7 @@ input:not([type="checkbox"]) {
 
 
 }
+
 button,
 input[type="submit"] {
     min-width: 8rem;
@@ -264,9 +323,13 @@ input[type="submit"] {
     transition: all $transitionTime ease-in-out;
 
     &:hover {
+        box-shadow: 0 0 0.4rem 0 $shdwClr;
+
         transform: scale(1.04);
     }
     &:active {
+        box-shadow: 0 0 0.4rem 0 $shdwClr;
+
         background-color: $appGreenDark;
         transform: scale(1);
     }
@@ -364,8 +427,6 @@ input[type="checkbox"] {
 }
 
 
-
-
 // Footer formatting
 footer {
     @include flexDisplay(row, center, center);
@@ -375,4 +436,12 @@ footer {
     a {
         font-size: 16pt;
     }
+}
+
+
+// Maximum aspect ratio - mobile/portrait browsers
+@media (max-aspect-ratio: 12/10) {
+
+
+
 }

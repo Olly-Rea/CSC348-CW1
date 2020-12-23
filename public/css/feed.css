@@ -115,6 +115,105 @@ nav svg {
   transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+#loading-screen svg.loading-graphic {
+  height: 12rem;
+  width: 12rem;
+}
+
+svg.loading-graphic .elem {
+  fill: #e9e9e9;
+  -webkit-transform: scale(0.88);
+          transform: scale(0.88);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+
+svg.loading-graphic .elem:nth-child(1) {
+  -webkit-animation: pulse1 1.4s ease infinite;
+          animation: pulse1 1.4s ease infinite;
+}
+
+svg.loading-graphic .elem:nth-child(2) {
+  -webkit-animation: pulse2 1.4s ease infinite;
+          animation: pulse2 1.4s ease infinite;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+svg.loading-graphic .elem:nth-child(3) {
+  -webkit-animation: pulse3 1.4s ease infinite;
+          animation: pulse3 1.4s ease infinite;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+@-webkit-keyframes pulse1 {
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    fill: #4be4a9;
+  }
+}
+
+@keyframes pulse1 {
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    fill: #4be4a9;
+  }
+}
+
+@-webkit-keyframes pulse2 {
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    fill: #40c894;
+  }
+}
+
+@keyframes pulse2 {
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    fill: #40c894;
+  }
+}
+
+@-webkit-keyframes pulse3 {
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes pulse3 {
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
 main,
 #feed-nav {
   position: relative;
@@ -134,7 +233,6 @@ main,
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  min-width: 600px;
   max-width: 1440px;
   width: 100%;
 }
@@ -298,12 +396,16 @@ input[type="submit"] {
 
 button:hover,
 input[type="submit"]:hover {
+  -webkit-box-shadow: 0 0 0.4rem 0 #8c8c8c;
+          box-shadow: 0 0 0.4rem 0 #8c8c8c;
   -webkit-transform: scale(1.04);
           transform: scale(1.04);
 }
 
 button:active,
 input[type="submit"]:active {
+  -webkit-box-shadow: 0 0 0.4rem 0 #8c8c8c;
+          box-shadow: 0 0 0.4rem 0 #8c8c8c;
   background-color: #40c894;
   -webkit-transform: scale(1);
           transform: scale(1);
@@ -413,6 +515,8 @@ footer a {
 }
 
 #feed-nav {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -755,7 +859,8 @@ main .content-panel .overlay {
   transition: opacity 0.1s ease-in-out;
 }
 
-main .content-panel .overlay button {
+main .content-panel .overlay button,
+main .content-panel .overlay input[type="submit"] {
   position: absolute;
   bottom: 4rem;
   left: 50%;
@@ -765,6 +870,12 @@ main .content-panel .overlay button {
 
 main .content-panel:hover .overlay {
   opacity: 1;
+}
+
+main svg.loading-graphic {
+  margin-top: 2rem;
+  height: 5rem;
+  width: 5rem;
 }
 
 main > p {

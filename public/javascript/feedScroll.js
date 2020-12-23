@@ -5,9 +5,15 @@
 // Scroll variables
 var scrollMax = 0.7;
 var paginatePage = 2;
+var $loadingGraphic;
 
 // Methods to be called on and/or added to elements on page load/pageshow
 $(window).on("load, pageshow", function() {
+
+    $loadingGraphic = $("main svg.loading-graphic");
+
+    console.log($loadingGraphic);
+
     // If the number of returned profiles are < 30...
     if($("main").children().length < 30) {
         // ...show the "end of feed" message
@@ -18,7 +24,6 @@ $(window).on("load, pageshow", function() {
             scrollFunc();
         });
     }
-
 });
 
 // Method to call on onscroll
@@ -32,9 +37,6 @@ function scrollFunc() {
         if (scrollMax < 0.9) {
             scrollMax+=0.05;
         }
-
-        // TODO Add loading graphic at bottom of feed (unless the end of feed has been reached)
-
         // Fetch the next load of paginated data
         fetch_data();
     }
@@ -48,14 +50,23 @@ function fetch_data() {
         data:{page:paginatePage++},
         success:function(data) {
             if(data != null && data.length > 0) {
+                // Add the data to main
                 $("main").append(data);
+                // Move the "loading" graphic to the end of main
+                $loadingGraphic.appendTo("main");
                 // Re-enable scroll functionality
                 setTimeout(function () {
                     $(window).on("scroll", function() {
                         scrollFunc();
                     });
                 }, 400);
+                if(data.length < 30) {
+                    $loadingGraphic.fadeOut(200);
+                }
             } else {
+                if($loadingGraphic.is(":visible")) {
+                    $loadingGraphic.fadeOut(200);
+                }
                 // Output an "end of feed" message
                 $("main").append("<p>That's all folks!</p>");
             }
