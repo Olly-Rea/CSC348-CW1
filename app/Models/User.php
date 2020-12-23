@@ -18,9 +18,6 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    // Define the custom primary key identifier
-    protected $primaryKey = 'user_id';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -67,13 +64,12 @@ class User extends Authenticatable
      * Child Model relationships
      */
     public function posts() {
-        return $this->hasMany("App\Models\Post", "user_id");
+        return $this->hasMany("App\Models\Post");
     }
     public function comments() {
-        return $this->hasMany("App\Models\Comment", "user_id");
+        return $this->hasMany("App\Models\Comment");
     }
-    public function replies() {
-        return $this->hasMany("App\Models\Reply", "user_id");
+    public function likes() {
+        return $this->hasMany("App\Models\Likes");
     }
-
 }

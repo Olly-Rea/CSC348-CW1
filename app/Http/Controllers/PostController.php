@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 // Custom imports
-use App\Models\Comment;
 use App\Models\Post;
-use App\Models\Reply;
 
 class PostController extends Controller
 {
@@ -15,7 +13,7 @@ class PostController extends Controller
     /**
      * Method to return the post feed
      */
-    public static function index(Request $request) {
+    public static function index() {
         // Get first 30 posts
         $posts = Post::orderBy('created_at', 'DESC')->paginate(30);
         // Return them in the feed view
@@ -42,4 +40,13 @@ class PostController extends Controller
         }
     }
 
+    /**
+     * Method to return the post feed
+     */
+    public static function show(Post $post) {
+        // Return them in the feed view
+        return view('blog', ['post' => $post]);
+    }
+
 }
+

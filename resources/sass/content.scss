@@ -1,0 +1,57 @@
+@import 'global';
+
+// feed navigation top-bar
+#feed-nav {
+    flex-wrap: wrap;
+
+    position: fixed;
+    z-index: 1;
+    top: 0;
+
+    padding-top: 2vh;
+
+    background-color: $backColor;
+
+    #nav-top,
+    #nav-bottom {
+        width: 86%;
+    }
+
+    #nav-top {
+        @include flexDisplay(row, space-between, center);
+        flex-wrap: wrap;
+
+        #search-box {
+            width: 40%;
+
+            #search-icon {
+                height: 2rem;
+                width: 2rem;
+
+                fill: $graphicColor;
+                stroke: $graphicColor;
+
+                cursor: pointer;
+            }
+
+            #search-bar {
+                margin: 0;
+
+                width: 100%;
+            }
+        }
+    }
+
+}
+
+// general content formatting
+main,
+#feed-nav {
+    @include flexDisplay(column, flex-start, center);
+}
+
+main {
+    min-height: 92vh;
+    padding-top: 8vh;
+}
+

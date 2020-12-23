@@ -15,15 +15,11 @@ class CreatePostsTable extends Migration
     public function up() {
         Schema::create('posts', function (Blueprint $table) {
             // Define primary key
-            $table->id('post_id');
+            $table->id();
             // Define foreign key
-            $table->foreignId('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text("title");
-            $table->text("content");
-            $table->string("tags")->nullable();
-            $table->integer("likes");
-            $table->integer("dislikes");
             // Add created_at & updated_at attributes
             $table->timestamps();
         });

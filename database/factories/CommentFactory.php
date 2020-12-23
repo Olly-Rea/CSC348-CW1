@@ -28,11 +28,20 @@ class CommentFactory extends Factory
     {
         // Pick a random User from the list of all Users
         $user = User::inRandomOrder()->first();
-        // Pick a random Post from the list of all Posts
-        $post = Post::inRandomOrder()->first();
+        
+        // Add the comment to either a post or another comment (as a 'reply'); the first run of this class 
+        // creates no replies, hence the structure of this code (and that this factory is called twice).
+        $commentable = Comment::inRandomOrder()->first();
+        // If no comments exist to reply to, create another post comment,
+        if($commentable == null) {
+            $commentable = Post::inRandomOrder()->first();
+        }
 
-        // Generate the created_at date... (must be after parent (post) created)
-        $create_date = $this->faker->dateTimeBetween($startDate = $post->created_at, $endDate = 'now');
+        // get the class type of the 'commentable' object
+        $type = get_class($commentable);
+
+        // Generate the created_at date... (must be after the parent was created)
+        $create_date = $this->faker->dateTimeBetween($startDate = $commentable->created_at, $endDate = 'now');
         // ...and (possibly) an updated_at date
         $update_date = null;
         // 50% chance of updated date
@@ -42,11 +51,10 @@ class CommentFactory extends Factory
 
         // return new database record (row) to seed
         return [
-            'user_id' => $user->user_id,
-            'post_id' => $post->post_id,
+            'user_id' => $user->id,
+            'commentable_id' => $commentable->id,
+            'commentable_type' => $type,
             'content' => $this->faker->text(),
-            'likes' => random_int(0, 500),
-            'dislikes' => random_int(0, 500),
             // default 'Model' attributes for 'published' and 'edited'
             'created_at' => $create_date,
             'updated_at' => $update_date

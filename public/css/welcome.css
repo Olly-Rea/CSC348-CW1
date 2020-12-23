@@ -220,26 +220,13 @@ main,
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   max-width: 1440px;
   width: 100%;
 }
 
 .screen-split-horizontal {
   margin: 2vh 0;
-  height: 4px;
+  height: 2px;
   width: 90%;
   background-color: silver;
   border-radius: 10rem;
@@ -248,13 +235,9 @@ main,
 .screen-split-vertical {
   margin: 0 2vh;
   height: 90%;
-  width: 4px;
+  width: 3px;
   background-color: silver;
   border-radius: 10rem;
-}
-
-main {
-  min-height: 100vh;
 }
 
 main .content-panel {
@@ -301,7 +284,6 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 2rem;
 }
 
 form a,
@@ -316,20 +298,21 @@ form a {
   margin: 2vh 0;
 }
 
-.form-box {
+form .form-box {
   position: relative;
   height: 4rem;
+  width: 100%;
 }
 
-.form-box svg,
-.form-box input {
+form .form-box svg,
+form .form-box input {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
 
-.form-box svg {
+form .form-box svg {
   z-index: 2;
   left: 0.9rem;
   -webkit-transition: -webkit-transform 0.1s ease-in-out;
@@ -338,17 +321,17 @@ form a {
   transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-.form-box input {
+form .form-box input {
   left: 0;
   text-indent: 2.8rem;
 }
 
-.form-box:hover svg {
+form .form-box:hover svg {
   -webkit-transform: translateY(-50%) scale(1.05);
           transform: translateY(-50%) scale(1.05);
 }
 
-.form-box:active svg {
+form .form-box:active svg {
   -webkit-transform: translateY(-50%) scale(1);
           transform: translateY(-50%) scale(1);
 }
@@ -552,6 +535,10 @@ main .content-panel {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+
+main .content-panel form {
+  padding: 2rem;
 }
 
 #demo-content {

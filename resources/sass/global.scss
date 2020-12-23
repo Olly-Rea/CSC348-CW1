@@ -142,9 +142,6 @@ main,
     left: 50%;
     transform: translateX(-50%);
 
-    @include flexDisplay(column, center, center);
-
-    // min-width: 600px;
     max-width: 1440px;
     width: 100%;
 }
@@ -153,7 +150,7 @@ main,
     &-horizontal {
         margin: 2vh 0;
 
-        height: $borderThick;
+        height: $borderMed;
         width: 90%;
 
         background-color: $foreLight;
@@ -172,14 +169,10 @@ main,
 
 // "main" tag-specific content formatting
 main {
-    min-height: 100vh;
-
     .content-panel {
         margin: 1rem 0;
 
         width: 70%;
-
-        // padding: 2rem;
         border-radius: $panelCorner;
 
         background-color: $panelColor;
@@ -217,8 +210,6 @@ main {
 form {
     @include flexDisplay(column, center, flex-start);
 
-    padding: 2rem;
-
     a,
     button,
     input {
@@ -231,42 +222,44 @@ form {
         margin: 2vh 0;
     }
 
-}
-.form-box {
-    position: relative;
+    .form-box {
+        position: relative;
 
-    height: 4rem;
+        height: 4rem;
+        width: 100%;
 
-    svg,
-    input {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    svg {
-        z-index: 2;
-        left: 0.9rem;
-
-        transition: transform $transitionTime ease-in-out;
-    }
-    input {
-        left: 0;
-        text-indent: 2.8rem;
-    }
-
-    &:hover {
-        svg {
-            transform: translateY(-50%) scale(1.05);
+        svg,
+        input {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }
-    }
-    &:active {
-        svg {
-            transform: translateY(-50%) scale(1);
-        }
-    }
 
+        svg {
+            z-index: 2;
+            left: 0.9rem;
+
+            transition: transform $transitionTime ease-in-out;
+        }
+        input {
+            left: 0;
+            text-indent: 2.8rem;
+        }
+
+        &:hover {
+            svg {
+                transform: translateY(-50%) scale(1.05);
+            }
+        }
+        &:active {
+            svg {
+                transform: translateY(-50%) scale(1);
+            }
+        }
+
+    }
 }
+
 
 // Input formatting
 textarea,

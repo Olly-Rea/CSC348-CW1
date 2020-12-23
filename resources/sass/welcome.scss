@@ -19,6 +19,11 @@ main {
 
     .content-panel {
         user-select: none;
+
+        form {
+            padding: 2rem;
+        }
+
     }
 }
 

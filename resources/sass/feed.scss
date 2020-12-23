@@ -1,46 +1,7 @@
-@import 'global';
-
+@import 'content';
 
 // feed navigation top-bar
 #feed-nav {
-    flex-wrap: wrap;
-
-    position: fixed;
-    z-index: 1;
-    top: 0;
-
-    padding-top: 2vh;
-    background-color: $backColor;
-
-    #nav-top,
-    #nav-bottom {
-        width: 86%;
-    }
-
-    #nav-top {
-        @include flexDisplay(row, space-between, center);
-        flex-wrap: wrap;
-
-        #search-box {
-            width: 40%;
-
-            #search-icon {
-                height: 2rem;
-                width: 2rem;
-
-                fill: $graphicColor;
-                stroke: $graphicColor;
-
-                cursor: pointer;
-            }
-
-            #search-bar {
-                margin: 0;
-
-                width: 100%;
-            }
-        }
-    }
 
     #nav-bottom {
         @include flexDisplay(row, center, center);
@@ -50,7 +11,7 @@
         div, h1 {
             user-select: none;
 
-            transition: all 0.1s ease-in-out;
+            transition: all $transitionTime ease-in-out;
         }
 
         div {
@@ -219,6 +180,58 @@ main {
 
         overflow: hidden;
 
+        .thumb-container {
+            @include flexDisplay(column, center, center);
+
+            position: absolute;
+            top: 1.4rem;
+            right: 2rem;
+
+            user-select: none;
+            cursor: pointer;
+
+            transition: scale $transitionTime ease-in-out;
+            .like-thumb,
+            h3 {
+                transition: all $transitionTime ease-in-out;
+            }
+            .like-thumb {
+                height: 3.2rem;
+                width: 3.2rem;
+
+                fill: $foreLight;
+
+            }
+            h3 {
+                margin: 0;
+                margin-top: 0.2rem;
+                color: $foreLight;
+            }
+
+            &:hover {
+                transform: scale(1.08);
+
+                .like-thumb {
+                    fill: $appGreenLight;
+                }
+                h3 {
+                    color: $appGreenLight;
+                }
+            }
+            &:active {
+                transform: scale(1);
+
+                .like-thumb {
+                    fill: $appGreenDark;
+                }
+                h3 {
+                    color: $appGreenDark;
+                }
+            }
+
+        }
+
+
         .author-info {
             @include flexDisplay(row, flex-start, center);
 
@@ -246,15 +259,23 @@ main {
         .tag-container {
             @include flexDisplay(row, flex-start, center);
             margin-left: -0.2rem;
-            a {
-                margin: 0 0.2rem;
+
+            p, a {
+
+                margin: 0.2rem;
+                margin-top: 0;
+
                 padding: 0.2rem 0.4rem;
                 border-radius: 0.32rem;
 
                 font-weight: bold;
-
+            }
+            p {
+                background-color: $backColor;
+            }
+            a {
                 &.home {
-                    background-color: $appYellowDark;
+                    background-color: $appYellow;
                 }
                 &.technology {
                     background-color: $appBlueLight;
@@ -262,7 +283,27 @@ main {
                 &.work {
                     background-color: $appGreen;
                 }
-
+                &.leisure {
+                    // color: $backColor;
+                    background-color: $appBlue;
+                }
+                &.diy {
+                    // color: $backColor;
+                    background-color: $appRed;
+                }
+                &.health {
+                    background-color: $appRedlight;
+                }
+                &.cooking {
+                    background-color: $backColor;
+                }
+                &.gaming {
+                    background-color: $backColor
+                }
+                &.nsfw {
+                    color: $backColor;
+                    background-color: $fontColor;
+                }
             }
         }
         .comment-container {
@@ -279,7 +320,6 @@ main {
                 margin-left: 1.4rem;
                 margin-bottom: -0.6rem;
             }
-
             .comment {
                 padding: 1.4rem;
                 margin: 1rem 0;
@@ -291,16 +331,16 @@ main {
         .overlay {
             position: absolute;
             z-index: 2;
-            top: 0;
+            bottom: 0;
             left: 0;
 
-            height: 100%;
+            height: 60%;
             width: 100%;
 
             background: linear-gradient(rgba(0,0,0,0) 0%, $overlayColor 100%);
             opacity: 0;
 
-            transition: opacity 0.1s ease-in-out;
+            transition: opacity $transitionTime ease-in-out;
 
             button,
             input[type="submit"] {

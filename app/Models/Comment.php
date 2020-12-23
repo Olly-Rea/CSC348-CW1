@@ -9,9 +9,6 @@ class Comment extends Model
 {
     use HasFactory;
 
-    // Define the custom primary key identifier
-    protected $primaryKey = 'comment_id';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -22,24 +19,34 @@ class Comment extends Model
         'post_id',
         'content',
         'likes',
-        'dislikes'
     ];
 
     /**
      * Parent Model relationships
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "user_id");
+        return $this->belongsTo("App\Models\User");
     }
      public function post() {
-        return $this->belongsTo("App\Models\Post", "post_id");
+        return $this->belongsTo("App\Models\Post");
     }
 
     /**
-     * Child Model relationship
+     * Polymorphic Child Model relationships
      */
-    public function replies() {
-        return $this->hasMany("App\Models\Reply", "comment_id");
+    public function commentable() {
+        return $this->morphTo();
     }
+    public function replies() {
+        return $this->morphMany("App\Models\Comment", "commentable");
+    }
+
+    /**
+     * 'Likes' model relationship
+     */
+    public function likes() {
+        return $this->morphMany('App\Models\Likes', 'likeable');
+    }
+
 
 }

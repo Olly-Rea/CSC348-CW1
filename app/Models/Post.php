@@ -9,9 +9,6 @@ class Post extends Model
 {
     use HasFactory;
 
-    // Define the custom primary key identifier
-    protected $primaryKey = 'post_id';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -20,27 +17,40 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'content',
-        'likes',
-        'dislikes'
     ];
 
     /**
-     * Parent Model relationship
+     * Parent User Model relationship
      */
     public function user() {
-        return $this->belongsTo("App\Models\User", "user_id");
+        return $this->belongsTo('App\Models\User');
     }
 
+    /**
+     * Tag model relationship
+     */
     public function tags() {
-        return $this->belongsToMany("App\Models\Tag", "post_id", "tag_id");
+        return $this->belongsToMany('App\Models\Tag', 'post_tags');
+    }
+    /**
+     * 'Likes' model relationship
+     */
+    public function likes() {
+        return $this->morphMany('App\Models\Likes', 'likeable');
+    }
+
+    /**
+     * Morph toMany relationship for 'postable' content (text and imagery)
+     */
+    public function content() {
+        return $this->morphMany('App\Models\Content', 'postable');
     }
 
     /**
      * Child Model relationship
      */
     public function comments() {
-        return $this->hasMany("App\Models\Comment", "post_id")->orderBy('created_at', 'DESC');
+        return $this->morphMany('App\Models\Comment', 'commentable');
     }
 
 }

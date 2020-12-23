@@ -24,3 +24,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/feed', 'PostController@index')->name('feed');
 Route::post('/feed/fetch', 'PostController@fetch');
+
+Route::get('/post/{post}', 'PostController@show')->name('post');

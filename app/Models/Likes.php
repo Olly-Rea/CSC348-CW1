@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Likes extends Model
 {
     use HasFactory;
 
@@ -18,14 +18,21 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'user_id',
+        'post_id'
     ];
 
     /**
-     * Post Model relationships
+     * User model relationship
      */
-    public function posts() {
-        return $this->belongsToMany("App\Models\Post", "post_tags");
+    public function user() {
+        return $this->belongsTo("App\Models\User");
+    }
+    /**
+     * Post model relationship
+     */
+    public function likeable() {
+        return $this->morphTo();
     }
 
 }

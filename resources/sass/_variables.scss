@@ -30,9 +30,9 @@ $font-size-base: 1rem;
 $navFontSize: 24pt;
 $line-height-base: 1.2;
 // Borders
-$borderThin: 2px;
-$borderMed: 3px;
-$borderThick: 4px;
+$borderThin: 1px;
+$borderMed: 2px;
+$borderThick: 3px;
 $inputCorner: 1rem;
 $panelCorner: 2rem;
 $roundedEnd: 10rem;
@@ -40,7 +40,6 @@ $roundedEnd: 10rem;
 // Timings
 $transitionTime: 0.1s;
 
-// Colours
 
 // Foreground Colours
 $fontColor: rgb(66, 66, 66);
@@ -48,34 +47,38 @@ $foreLight: rgb(192, 192, 192);
 $graphicColor: rgb(218, 218, 218);
 
 // Panel background Colour
-$panelColor: rgb(237,237,237);
+$panelColor: rgb(237, 237, 237);
 // Input stuff
 $inputHighlight: rgb(240, 240, 240);
 
 // Window background Colour
 $backColor: rgb(250, 250, 250);
 // Overlay background colour
-$overlayColor: rgba(10,10,10,0.5);
+$overlayColor: rgba(10, 10, 10, 0.5);
 // Footer transition colour
 $footerColor: rgb(220, 220, 220);
 
 // Accent Colours
-$logoLight: rgb(233, 233, 233);
-
 $appRedlight: rgb(248, 95, 189);
 $appRed: rgb(228, 75, 169);
 $appRedDark: rgb(208, 55, 149);
 
-// $appGreenLight: rgb();
+$appGreenLight: rgb(95, 248, 189);
 $appGreen: rgb(75, 228, 169);
 $appGreenDark: rgb(64, 200, 148);
 
-$appBlueLight: rgb(75,199,228);
+$appBlueLight: rgb(75, 199, 228);
 $appBlue: rgb(75, 169, 228);
 $appBlueDark: rgb(55, 149, 208);
 
-$appYellow: rgb(228,199,75);
-$appYellowDark: rgb(208,179,55);
+$appYellowLight: rgb(248, 219, 95);
+$appYellow: rgb(228, 199, 75);
+$appYellowDark: rgb(208, 179, 55);
+
+$appPurple: rgb(200, 200, 200);
+
+// Logo colour stuff
+$logoLight: rgb(233, 233, 233);
 
 // // Dark Mode
 // $foreColor: rgb(190, 190, 190);

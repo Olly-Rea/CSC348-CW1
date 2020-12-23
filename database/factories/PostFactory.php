@@ -39,11 +39,8 @@ class PostFactory extends Factory
 
         // return new database record (row) to seed
         return [
-            'user_id' => $user->user_id,
+            'user_id' => $user->id,
             'title' => $this->faker->sentence(5),
-            'content' => $this->faker->text(),
-            'likes' => random_int(0, 500),
-            'dislikes' => random_int(0, 500),
             // default 'Model' attributes for 'published' and 'edited'
             'created_at' => $create_date,
             'updated_at' => $update_date
