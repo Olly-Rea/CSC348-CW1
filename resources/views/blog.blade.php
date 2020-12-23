@@ -97,7 +97,7 @@
 
 <form action="">
     <div class="form-box">
-        <input id="search-bar" type="text" name="search" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" />
+        <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" />
     </div>
 </form>
 
