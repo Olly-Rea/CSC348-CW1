@@ -243,7 +243,7 @@ main,
 main .content-panel {
   margin: 1rem 0;
   width: 70%;
-  border-radius: 2rem;
+  border-radius: 1.6rem;
   background-color: #ededed;
   -webkit-box-shadow: 0 0 0.6rem 0 #8c8c8c;
           box-shadow: 0 0 0.6rem 0 #8c8c8c;
@@ -271,6 +271,7 @@ main .content-panel {
 }
 
 form {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -315,15 +316,17 @@ form .form-box input {
 form .form-box svg {
   z-index: 2;
   left: 0.9rem;
+  height: 1.8rem;
+  width: 1.8rem;
   -webkit-transition: -webkit-transform 0.1s ease-in-out;
   transition: -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-form .form-box input {
+form .form-box input:not([type="checkbox"]) {
   left: 0;
-  text-indent: 2.8rem;
+  text-indent: 3.4rem;
 }
 
 form .form-box:hover svg {
@@ -345,10 +348,9 @@ button:focus {
 textarea,
 input:not([type="checkbox"]) {
   width: 100%;
-  border: none;
-  padding: 1vh;
+  padding: 0.72rem 0;
   margin-bottom: 2vh;
-  font-size: 1.32rem;
+  font-size: 1.28rem;
   color: inherit;
   font-family: inherit;
   border: none;

@@ -92,28 +92,34 @@
     {{-- <p>{{ $post->content()->first() }}</p> --}}
     <div class="comment-container">
     @if($post->comments()->count() > 0)
-    <h3>Top Comment:</h3>
-    @php
-        $topComment = $post->comments()->withCount('likes')->orderBy('likes_count')->first();
-    @endphp
-    <div class="comment">
-        <div class="author-info">
-            <div class="profile-image-container">
-                <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.png') }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
+        <h3>Top Comment:</h3>
+        @php
+            $topComment = $post->comments()->withCount('likes')->orderBy('likes_count', 'DESC')->first();
+        @endphp
+        <div class="comment">
+            <div class="author-info">
+                <div class="profile-image-container">
+                    <div class="profile-image">
+                        <img src="{{ asset('images/profile-default.png') }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
+                    </div>
+                </div>
+                <div>
+                    <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
+                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • post_id: {{ $topComment->commentable->id }}</p>
                 </div>
             </div>
-            <div>
-                <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
-                <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • post_id: {{ $topComment->id }}</p>
+            <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }} </p>
+            <div class="thumb-container">
+                <svg class="like-thumb">
+                    <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                </svg>
+                <h4>{{ count($topComment->likes) }}</h4>
             </div>
         </div>
-        <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }} </p>
-    </div>
     @else
-    <div class="comment">
-        <p><i>This post has no comments yet!</i></p>
-    </div>
+        <div class="comment">
+            <p><i>This post has no comments yet!</i></p>
+        </div>
     @endif
     </div>
 </div>

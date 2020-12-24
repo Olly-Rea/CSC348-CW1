@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// Custom imports
+// Custom import
 use App\Models\Post;
 
 class PostController extends Controller

@@ -208,6 +208,8 @@ main {
 
 // Form formatting
 form {
+    position: relative;
+
     @include flexDisplay(column, center, flex-start);
 
     a,
@@ -239,11 +241,15 @@ form {
             z-index: 2;
             left: 0.9rem;
 
+            height: 1.8rem;
+            width: 1.8rem;
+
             transition: transform $transitionTime ease-in-out;
         }
-        input {
+
+        input:not([type="checkbox"]) {
             left: 0;
-            text-indent: 2.8rem;
+            text-indent: 3.4rem;
         }
 
         &:hover {
@@ -272,12 +278,11 @@ button {
 textarea,
 input:not([type="checkbox"]) {
     width: 100%;
-    border: none;
 
-    padding: 1vh;
+    padding: 0.72rem 0;
     margin-bottom: 2vh;
 
-    font-size: 1.32rem;
+    font-size: 1.28rem;
 
     color: inherit;
     font-family: inherit;

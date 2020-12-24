@@ -33,7 +33,7 @@
     @if($post->comments()->count() > 0)
         <h3>Top Comment:</h3>
         @php
-        $topComment = $post->comments()->withCount('likes')->orderBy('likes_count')->first();
+            $topComment = $post->comments()->withCount('likes')->orderBy('likes_count', 'DESC')->first();
         @endphp
         <div class="comment">
             <div class="author-info">
@@ -44,10 +44,16 @@
                 </div>
                 <div>
                     <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
-                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • post_id: {{ $topComment->id }}</p>
+                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • post_id: {{ $topComment->commentable->id }}</p>
                 </div>
             </div>
             <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }} </p>
+            <div class="thumb-container">
+                <svg class="like-thumb">
+                    <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                </svg>
+                <h4>{{ count($topComment->likes) }}</h4>
+            </div>
         </div>
     @else
         <div class="comment">

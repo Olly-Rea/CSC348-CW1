@@ -243,7 +243,7 @@ main,
 main .content-panel {
   margin: 1rem 0;
   width: 70%;
-  border-radius: 2rem;
+  border-radius: 1.6rem;
   background-color: #ededed;
   -webkit-box-shadow: 0 0 0.6rem 0 #8c8c8c;
           box-shadow: 0 0 0.6rem 0 #8c8c8c;
@@ -271,6 +271,7 @@ main .content-panel {
 }
 
 form {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -315,15 +316,17 @@ form .form-box input {
 form .form-box svg {
   z-index: 2;
   left: 0.9rem;
+  height: 1.8rem;
+  width: 1.8rem;
   -webkit-transition: -webkit-transform 0.1s ease-in-out;
   transition: -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-form .form-box input {
+form .form-box input:not([type="checkbox"]) {
   left: 0;
-  text-indent: 2.8rem;
+  text-indent: 3.4rem;
 }
 
 form .form-box:hover svg {
@@ -345,10 +348,9 @@ button:focus {
 textarea,
 input:not([type="checkbox"]) {
   width: 100%;
-  border: none;
-  padding: 1vh;
+  padding: 0.72rem 0;
   margin-bottom: 2vh;
-  font-size: 1.32rem;
+  font-size: 1.28rem;
   color: inherit;
   font-family: inherit;
   border: none;
@@ -535,8 +537,6 @@ footer a {
 }
 
 #feed-nav #nav-top #search-box #search-icon {
-  height: 2rem;
-  width: 2rem;
   fill: #dadada;
   stroke: #dadada;
   cursor: pointer;
@@ -567,5 +567,245 @@ main,
 main {
   min-height: 92vh;
   padding-top: 8vh;
+}
+
+main .content-panel,
+main .comment {
+  position: relative;
+}
+
+main .content-panel .author-info,
+main .comment .author-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+main .content-panel .author-info .profile-image-container,
+main .comment .author-info .profile-image-container {
+  margin: 0;
+  margin-right: 1.2rem;
+  width: 4.2rem;
+}
+
+main .content-panel .author-info h3,
+main .comment .author-info h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  margin-bottom: 0.24rem;
+}
+
+main .content-panel .author-info p,
+main .comment .author-info p {
+  margin: 0;
+}
+
+main .content-panel .author-info div,
+main .comment .author-info div {
+  width: 90%;
+}
+
+main .content-panel .thumb-container,
+main .comment .thumb-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  top: 1.4rem;
+  right: 2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+main .content-panel .thumb-container .like-thumb,
+main .content-panel .thumb-container h3,
+main .content-panel .thumb-container h4,
+main .comment .thumb-container .like-thumb,
+main .comment .thumb-container h3,
+main .comment .thumb-container h4 {
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+main .content-panel .thumb-container:hover,
+main .comment .thumb-container:hover {
+  -webkit-transform: scale(1.08);
+          transform: scale(1.08);
+}
+
+main .content-panel .thumb-container:hover .like-thumb,
+main .comment .thumb-container:hover .like-thumb {
+  fill: #5ff8bd;
+}
+
+main .content-panel .thumb-container:hover h3,
+main .content-panel .thumb-container:hover h4,
+main .comment .thumb-container:hover h3,
+main .comment .thumb-container:hover h4 {
+  color: #5ff8bd;
+}
+
+main .content-panel .thumb-container:active,
+main .comment .thumb-container:active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+main .content-panel .thumb-container:active .like-thumb,
+main .comment .thumb-container:active .like-thumb {
+  fill: #40c894;
+}
+
+main .content-panel .thumb-container:active h3,
+main .content-panel .thumb-container:active h4,
+main .comment .thumb-container:active h3,
+main .comment .thumb-container:active h4 {
+  color: #40c894;
+}
+
+main .content-panel {
+  padding: 2.4rem;
+  padding-bottom: 1.4rem;
+  overflow: hidden;
+}
+
+main .content-panel h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.6rem;
+}
+
+main .content-panel .tag-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-left: -0.2rem;
+}
+
+main .content-panel .tag-container p, main .content-panel .tag-container a {
+  margin: 0.2rem;
+  margin-top: 0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.32rem;
+  font-weight: bold;
+}
+
+main .content-panel .tag-container p {
+  background-color: #fafafa;
+}
+
+main .content-panel .tag-container a.home {
+  background-color: #e4c74b;
+}
+
+main .content-panel .tag-container a.technology {
+  background-color: #4bc7e4;
+}
+
+main .content-panel .tag-container a.work {
+  background-color: #4be4a9;
+}
+
+main .content-panel .tag-container a.leisure {
+  background-color: #4ba9e4;
+}
+
+main .content-panel .tag-container a.diy {
+  background-color: #e44ba9;
+}
+
+main .content-panel .tag-container a.health {
+  background-color: #f85fbd;
+}
+
+main .content-panel .tag-container a.cooking {
+  background-color: #fafafa;
+}
+
+main .content-panel .tag-container a.gaming {
+  background-color: #fafafa;
+}
+
+main .content-panel .tag-container a.nsfw {
+  color: #fafafa;
+  background-color: #424242;
+}
+
+main .content-panel .thumb-container .like-thumb {
+  height: 3.2rem;
+  width: 3.2rem;
+  fill: silver;
+}
+
+main .content-panel .thumb-container h3 {
+  margin: 0;
+  margin-top: 0.2rem;
+  color: silver;
+}
+
+main .comment {
+  padding: 1rem;
+}
+
+main .comment .author-info {
+  margin-bottom: 0.8rem;
+}
+
+main .comment .thumb-container .like-thumb {
+  height: 2.2rem;
+  width: 2.2rem;
+  fill: silver;
+}
+
+main .comment .thumb-container h4 {
+  margin: 0;
+  margin-top: 0.2rem;
+  color: silver;
+}
+
+main .comment p {
+  margin: 0;
+}
+
+main svg.loading-graphic {
+  margin-top: 2rem;
+  height: 5rem;
+  width: 5rem;
 }
 /*# sourceMappingURL=content.css.map */

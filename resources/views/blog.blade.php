@@ -79,16 +79,53 @@
             </div>
             <div>
                 <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
-                <p>{{ date("j F Y", strtotime($comment->created_at)) }} • post_id: {{ $comment->id }}</p>
+                <p>{{ date("j F Y", strtotime($comment->created_at)) }} • post_id: {{ $comment->commentable->id }}</p>
             </div>
         </div>
         <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p>
+        <div class="thumb-container">
+            <svg class="like-thumb">
+                <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+            </svg>
+            <h4>{{ count($comment->likes) }}</h4>
+        </div>
     </div>
-    <div class="replies-panel">
-        @foreach($comment->replies as $reply)
-            <p>{{ $reply->user->first_name }} {{ $reply->user->last_name }} • {{ date("j F Y", strtotime($reply->created_at)) }} • comment_id: {{ $reply->id }}</p>
-            <p>{{ $reply->content }}</p>
-        @endforeach
+    <div class="reply-button">
+        <svg>
+            <use xlink:href="{{ asset('images/graphics/reply.svg#icon') }}"></use>
+        </svg>
+        <h3>Show replies</h3>
+    </div>
+    <div class="reply-container" style="display: none">
+        <svg class="loading-graphic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82.1853 82.8107">
+            <g fill-rule="evenodd">
+                <path class="elem" d="M57.12 25.724c0-2.412 1.9547-4.3666 4.3667-4.3666H77.151c2.412 0 4.366 1.9546 4.366 4.3666v15.6654c0 2.412-1.954 4.3666-4.366 4.3666H61.4867c-2.412 0-4.3667-1.9546-4.3667-4.3666z"/>
+                <path class="elem" d="M.6653 5.084C.6653 2.644 2.644.6654 5.084.6654h43.2587c2.44 0 4.4186 1.9786 4.4186 4.4186v20.6174c0 2.44-1.9786 4.4186-4.4186 4.4186H5.084c-2.44 0-4.4187-1.9786-4.4187-4.4186z"/>
+                <path class="elem" d="M13.992 63.948c-2.5107-2.508-2.5107-6.576 0-9.0866l16.2973-16.296c2.5107-2.5107 6.5787-2.5107 9.0867 0L55.6773 54.864c2.508 2.508 2.508 6.5787 0 9.0867l-16.3 16.299c-2.508 2.508-6.5773 2.508-9.0853 0z"/>
+            </g>
+        </svg>
+        {{-- @foreach($comment->replies as $reply)
+            <div class="comment">
+                <div class="author-info">
+                    <div class="profile-image-container">
+                        <div class="profile-image">
+                            <img src="{{ asset('images/profile-default.png') }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>{{ $reply->user->first_name }} {{ $reply->user->last_name }}</h3>
+                        <p>{{ date("j F Y", strtotime($reply->created_at)) }} • post_id: {{ $reply->commentable->id }}</p>
+                    </div>
+                </div>
+                <p>{{ $reply->content }} • comment_id: {{ $reply->id }} </p>
+                <div class="thumb-container">
+                    <svg class="like-thumb">
+                        <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                    </svg>
+                    <h4>{{ count($reply->likes) }}</h4>
+                </div>
+            </div>
+        @endforeach --}}
     </div>
     @endforeach
 @else
@@ -97,6 +134,9 @@
 
 <form action="">
     <div class="form-box">
+        <svg>
+            <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+        </svg>
         <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" />
     </div>
 </form>

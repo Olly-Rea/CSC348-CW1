@@ -19,7 +19,8 @@ class Likes extends Model
      */
     protected $fillable = [
         'user_id',
-        'post_id'
+        'likeable_id',
+        'likeable_type',  
     ];
 
     /**

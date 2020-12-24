@@ -1,127 +1,88 @@
 @import 'content';
 
 main {
+    padding-top: 10rem;
 
-    .content-panel {
-        position: relative;
+    .comment-container,
+    .reply-container {
 
-        padding: 2.4rem;
-        padding-bottom: 1.4rem;
+        .comment {
+            padding: 1.4rem;
+            margin: 1rem 0;
 
-        overflow: hidden;
-    }
+            background-color: $inputHighlight;
+            border-radius: $panelCorner;
 
-    .thumb-container {
-        @include flexDisplay(column, center, center);
+            width: calc(100% - 2.8rem);
 
-        position: absolute;
-        top: 1.4rem;
-        right: 2rem;
-
-        user-select: none;
-        cursor: pointer;
-
-        transition: scale $transitionTime ease-in-out;
-        .like-thumb,
-        h3 {
-            transition: all $transitionTime ease-in-out;
-        }
-        .like-thumb {
-            height: 3.2rem;
-            width: 3.2rem;
-
-            fill: $foreLight;
-
-        }
-        h3 {
-            margin: 0;
-            margin-top: 0.2rem;
-            color: $foreLight;
-        }
-
-        &:hover {
-            transform: scale(1.08);
-
-            .like-thumb {
-                fill: $appGreenLight;
-            }
-            h3 {
-                color: $appGreenLight;
-            }
-        }
-        &:active {
-            transform: scale(1);
-
-            .like-thumb {
-                fill: $appGreenDark;
-            }
-            h3 {
-                color: $appGreenDark;
-            }
-        }
-
-    }
-
-
-    .author-info {
-        @include flexDisplay(row, flex-start, center);
-
-        .profile-image-container {
-            margin: 0;
-            margin-right: 1.2rem;
-            width: 4.2rem;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin: 0;
-            margin-bottom: 0.24rem;
-        }
-        p {
-            margin: 0;
-        }
-
-    }
-
-    h1 {
-        font-size: 2.4rem;
-        margin-bottom: 0.6rem
-    }
-    .tag-container {
-        @include flexDisplay(row, flex-start, center);
-        margin-left: -0.2rem;
-        a {
-            margin: 0 0.2rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.32rem;
-
-            font-weight: bold;
-
-            &.home {
-                background-color: $appYellowDark;
-            }
-            &.technology {
-                background-color: $appBlueLight;
-            }
-            &.work {
-                background-color: $appGreen;
+            p {
+                width: 90%;
             }
 
         }
     }
     .comment-container {
+        width: 80%;
+
+        @include flexDisplay(column, flex-start, flex-end);
 
         > h3 {
             margin: 0;
             margin-left: 1.4rem;
             margin-bottom: -0.6rem;
         }
-        .comment {
-            padding: 1.4rem;
-            margin: 1rem 0;
-            background-color: $inputHighlight;
-            border-radius: $panelCorner;
+    }
+    .reply-container {
+        margin-left: 10%;
+        width: 90%;
+    }
+
+    .reply-button {
+        position: relative;
+
+        height: 3rem;
+        width: 12rem;
+
+        margin-top: -0.8rem;
+
+        transition: transform $transitionTime ease-in-out;
+
+        cursor: pointer;
+        user-select: none;
+
+        svg,
+        h3 {
+            position: absolute;
         }
+
+        svg,
+        h3 {
+            top: 50%;
+            left: 50%;
+        }
+
+        svg {
+            transform: translate(-140%, -44%);
+
+            height: 2.4rem;
+            width: 2.4rem;
+        }
+        h3 {
+            transform: translate(-36%, -88%);
+        }
+
+        &:hover {
+            transform: scale(1.04);
+        }
+        &:active {
+            transform: scale(1);
+        }
+
+    }
+
+    form {
+        width: 100%;
+        margin: 3rem 0;
     }
 
 }

@@ -9,11 +9,8 @@ var $loadingGraphic;
 
 // Methods to be called on and/or added to elements on page load/pageshow
 $(window).on("load, pageshow", function() {
-
+    // Find and set the loadingGraphic
     $loadingGraphic = $("main svg.loading-graphic");
-
-    console.log($loadingGraphic);
-
     // If the number of returned profiles are < 30...
     if($("main").children().length < 30) {
         // ...show the "end of feed" message
