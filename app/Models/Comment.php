@@ -35,7 +35,7 @@ class Comment extends Model
         return $this->morphTo();
     }
     public function replies() {
-        return $this->morphMany("App\Models\Comment", "commentable");
+        return $this->morphMany("App\Models\Comment", "commentable")->orderBy('created_at', 'DESC');
     }
 
     /**

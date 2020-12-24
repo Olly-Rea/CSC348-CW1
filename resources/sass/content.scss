@@ -72,8 +72,8 @@ main {
             p {
                 margin: 0;
             }
-            div {
-                width: 90%;
+            div:not(.profile-image-container):not(.profile-image) {
+                width: 60%;
             }
 
         }

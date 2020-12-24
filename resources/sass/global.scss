@@ -160,7 +160,7 @@ main,
         margin: 0 2vh;
 
         height: 90%;
-        width: $borderThick;
+        width: $borderMed;
 
         background-color: $foreLight;
         border-radius: $roundedEnd;
@@ -286,15 +286,20 @@ input:not([type="checkbox"]) {
 
     color: inherit;
     font-family: inherit;
-    // background-color: $backColor;
+    background-color: $inputColor;
+
+    // @include hasShadow();
+    box-shadow: 0 0 0.1rem 0 $shdwClr;
 
     border: none;
     border-radius: $inputCorner;
 
-    &:hover {
-        background-color: $inputHighlight;
-    }
+    transition: all $transitionTime ease-in-out;
 
+    &:hover {
+        // background-color: $offBack;
+        box-shadow: 0 0 0.2rem 0 $shdwClr;
+    }
 
 }
 
@@ -310,6 +315,7 @@ input[type="submit"] {
 
     // background-color: $panelColor;
     background-color: $appGreen;
+    @include hasShadow();
 
     color: inherit;
     font-family: inherit;
@@ -332,7 +338,6 @@ input[type="submit"] {
         transform: scale(1);
     }
 }
-
 
 // Checkbox formatting
 label {

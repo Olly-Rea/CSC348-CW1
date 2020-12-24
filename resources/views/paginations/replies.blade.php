@@ -8,7 +8,7 @@
         </div>
         <div>
             <h3>{{ $reply->user->first_name }} {{ $reply->user->last_name }}</h3>
-            <p>{{ date("j F Y", strtotime($reply->created_at)) }} • post_id: {{ $reply->commentable->id }}</p>
+            <p>{{ date("j F Y", strtotime($reply->created_at)) }} • commentable_id: {{ $reply->commentable->id }}</p>
         </div>
     </div>
     <p>{{ $reply->content }} • comment_id: {{ $reply->id }} </p>

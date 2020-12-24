@@ -26,3 +26,4 @@ Route::get('/feed', 'PostController@index')->name('feed');
 Route::post('/feed/fetch', 'PostController@fetch');
 
 Route::get('/post/{post}', 'PostController@show')->name('post');
+Route::post('/reply/fetch', 'CommentController@fetch');

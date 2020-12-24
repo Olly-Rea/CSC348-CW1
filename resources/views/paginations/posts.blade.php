@@ -44,7 +44,7 @@
                 </div>
                 <div>
                     <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
-                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • post_id: {{ $topComment->commentable->id }}</p>
+                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • commentable_id: {{ $topComment->commentable->id }}</p>
                 </div>
             </div>
             <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }} </p>

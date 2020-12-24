@@ -235,7 +235,7 @@ main,
 .screen-split-vertical {
   margin: 0 2vh;
   height: 90%;
-  width: 3px;
+  width: 2px;
   background-color: silver;
   border-radius: 10rem;
 }
@@ -244,9 +244,9 @@ main .content-panel {
   margin: 1rem 0;
   width: 70%;
   border-radius: 1.6rem;
-  background-color: #ededed;
-  -webkit-box-shadow: 0 0 0.6rem 0 #8c8c8c;
-          box-shadow: 0 0 0.6rem 0 #8c8c8c;
+  background-color: #f2f2f2;
+  -webkit-box-shadow: 0 0 0.2rem 0 #8c8c8c;
+          box-shadow: 0 0 0.2rem 0 #8c8c8c;
 }
 
 .profile-image-container .profile-image {
@@ -353,13 +353,19 @@ input:not([type="checkbox"]) {
   font-size: 1.28rem;
   color: inherit;
   font-family: inherit;
+  background-color: #fcfcfc;
+  -webkit-box-shadow: 0 0 0.1rem 0 #8c8c8c;
+          box-shadow: 0 0 0.1rem 0 #8c8c8c;
   border: none;
   border-radius: 1rem;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 textarea:hover,
 input:not([type="checkbox"]):hover {
-  background-color: #f0f0f0;
+  -webkit-box-shadow: 0 0 0.2rem 0 #8c8c8c;
+          box-shadow: 0 0 0.2rem 0 #8c8c8c;
 }
 
 button,
@@ -370,6 +376,8 @@ input[type="submit"] {
   border: none;
   border-radius: 10rem;
   background-color: #4be4a9;
+  -webkit-box-shadow: 0 0 0.2rem 0 #8c8c8c;
+          box-shadow: 0 0 0.2rem 0 #8c8c8c;
   color: inherit;
   font-family: inherit;
   font-size: 1.5rem;
@@ -537,6 +545,8 @@ main .content-panel {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  -webkit-box-shadow: 0 0 0.6rem 0 #8c8c8c;
+          box-shadow: 0 0 0.6rem 0 #8c8c8c;
 }
 
 main .content-panel form {
@@ -546,7 +556,7 @@ main .content-panel form {
 #demo-content {
   position: relative;
   height: 100%;
-  width: 44%;
+  width: 42%;
 }
 
 #demo-content .content-panel {
@@ -592,7 +602,7 @@ main .content-panel form {
 }
 
 #greeting {
-  width: 60%;
+  width: 58%;
 }
 
 #guest-links {

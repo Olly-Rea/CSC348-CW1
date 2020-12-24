@@ -50,7 +50,7 @@ class Post extends Model
      * Child Model relationship
      */
     public function comments() {
-        return $this->morphMany('App\Models\Comment', 'commentable');
+        return $this->morphMany('App\Models\Comment', 'commentable')->orderBy('created_at', 'DESC');
     }
 
 }

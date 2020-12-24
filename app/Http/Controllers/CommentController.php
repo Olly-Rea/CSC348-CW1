@@ -16,7 +16,12 @@ class CommentController extends Controller
     public function fetch(Request $request) {
         if ($request->ajax()) {
             // Get the next page of paginated replies
-            $replies = Comment::where('id', '=', $request->id)->orderBy('created_at', 'DESC')->paginate(30);
+
+            $replies = Comment::find($request->id)->replies;//()->orderBy('created_at', 'DESC')->paginate(30);
+
+            // $replies = $replies->orderBy('created_at', 'DESC')->paginate(30);
+
+            // $replies = Comment::where('commentable_type', 'App\Models\Comment')->where('commentable_id', $request->id)->orderBy('created_at', 'DESC')->paginate(30);
 
             if(count($replies) == 0) {
                 return null;

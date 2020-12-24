@@ -20,6 +20,8 @@ main {
     .content-panel {
         user-select: none;
 
+        box-shadow: 0 0 0.6rem 0 $shdwClr;
+
         form {
             padding: 2rem;
         }
@@ -30,7 +32,7 @@ main {
 #demo-content {
     position: relative;
     height: 100%;
-    width: 44%;
+    width: 42%;
 
     .content-panel {
         position: absolute;
@@ -63,7 +65,7 @@ main {
     @include flexDisplay(column, flex-start, center);
 }
 #greeting {
-    width: 60%;
+    width: 58%;
 }
 
 #guest-links {

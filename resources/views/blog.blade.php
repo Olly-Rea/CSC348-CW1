@@ -4,9 +4,9 @@
 <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 @endsection
 
-{{-- @section("scripts")
-<script src="{{ asset('javascript/blog.js') }}" defer></script>
-@endsection --}}
+@section("scripts")
+<script src="{{ asset('javascript/replies.js') }}" defer></script>
+@endsection
 
 @section('title')
 <title>{{ config('app.name', 'Laravel') }}</title>
@@ -69,7 +69,7 @@
 
 <div class="comment-container">
 @if($post->comments()->count() > 0)
-    @foreach($post->comments()->orderBy('created_at', 'DESC')->get() as $comment)
+    @foreach($post->comments as $comment)
     <div class="comment">
         <div class="author-info">
             <div class="profile-image-container">
@@ -79,7 +79,7 @@
             </div>
             <div>
                 <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
-                <p>{{ date("j F Y", strtotime($comment->created_at)) }} • post_id: {{ $comment->commentable->id }}</p>
+                <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p>
             </div>
         </div>
         <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p>
@@ -96,7 +96,7 @@
         </svg>
         <h3>Show replies</h3>
     </div>
-    <div class="reply-container" style="display: none">
+    <div id="comment-{{ $comment->id }}" class="reply-container" style="display: none">
         <svg class="loading-graphic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82.1853 82.8107">
             <g fill-rule="evenodd">
                 <path class="elem" d="M57.12 25.724c0-2.412 1.9547-4.3666 4.3667-4.3666H77.151c2.412 0 4.366 1.9546 4.366 4.3666v15.6654c0 2.412-1.954 4.3666-4.366 4.3666H61.4867c-2.412 0-4.3667-1.9546-4.3667-4.3666z"/>
@@ -126,12 +126,20 @@
                 </div>
             </div>
         @endforeach --}}
+        <form action="" style="display: none">
+            <div class="form-box">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                </svg>
+                <input type="text" name="reply" placeholder="Type your reply here!" onfocusout="this.placeholder = 'Type your reply here!'" />
+            </div>
+        </form>
     </div>
     @endforeach
 @else
-    <p><i>This post has no comments yet!</i></p>
+    <p>This post has no comments yet!</p>
 @endif
-
+</div>
 <form action="">
     <div class="form-box">
         <svg>
@@ -140,6 +148,4 @@
         <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" />
     </div>
 </form>
-
-</div>
 @endsection

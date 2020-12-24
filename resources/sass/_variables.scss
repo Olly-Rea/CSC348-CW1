@@ -46,12 +46,16 @@ $foreLight: rgb(192, 192, 192);
 $graphicColor: rgb(218, 218, 218);
 
 // Panel background Colour
-$panelColor: rgb(237, 237, 237);
+$panelColor: rgb(242, 242, 242);
+$panelAccent: rgb(244, 244, 244);
+
 // Input stuff
-$inputHighlight: rgb(240, 240, 240);
+$inputColor: rgb(252, 252, 252);
 
 // Window background Colour
 $backColor: rgb(250, 250, 250);
+$offBack: rgb(248, 248, 248);
+
 // Overlay background colour
 $overlayColor: rgba(10, 10, 10, 0.5);
 // Footer transition colour
@@ -90,7 +94,7 @@ $logoLight: rgb(233, 233, 233);
 // Shadow stuff
 $shdwClr: rgb(140, 140, 140);
 @mixin hasShadow() {
-    box-shadow: 0 0 0.6rem 0 $shdwClr;
+    box-shadow: 0 0 0.2rem 0 $shdwClr;
 }
 
 // mixin formatting function for "display: flex"

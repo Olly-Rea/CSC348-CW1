@@ -36,6 +36,9 @@ function scrollFunc() {
         }
         // Fetch the next load of paginated data
         fetch_data();
+
+        // TODO When loadingGraphic is visible in viewport
+        // (catch-all if onscroll doesn't fire)
     }
 }
 
@@ -45,7 +48,7 @@ function fetch_data() {
         url:"/feed/fetch",
         method:"POST",
         data:{page:paginatePage++},
-        success:function(data) {
+        success: function(data) {
             if(data != null && data.length > 0) {
                 // Add the data to main
                 $("main").append(data);
@@ -58,11 +61,11 @@ function fetch_data() {
                     });
                 }, 400);
                 if(data.length < 30) {
-                    $loadingGraphic.fadeOut(200);
+                    $loadingGraphic.fadeOut();
                 }
             } else {
                 if($loadingGraphic.is(":visible")) {
-                    $loadingGraphic.fadeOut(200);
+                    $loadingGraphic.fadeOut();
                 }
                 // Output an "end of feed" message
                 $("main").append("<p>That's all folks!</p>");
