@@ -40,10 +40,10 @@ class Post extends Model
     }
 
     /**
-     * Morph toMany relationship for 'postable' content (text and imagery)
+     * Child relationship for post content (text and imagery)
      */
     public function content() {
-        return $this->morphMany('App\Models\Content', 'postable');
+        return $this->hasMany('App\Models\Content');
     }
 
     /**

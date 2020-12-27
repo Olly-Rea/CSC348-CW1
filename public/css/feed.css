@@ -326,7 +326,7 @@ form .form-box svg {
 
 form .form-box input:not([type="checkbox"]) {
   left: 0;
-  text-indent: 3.4rem;
+  text-indent: 2.7rem;
 }
 
 form .form-box:hover svg {
@@ -347,8 +347,8 @@ button:focus {
 
 textarea,
 input:not([type="checkbox"]) {
-  width: 100%;
-  padding: 0.72rem 0;
+  width: calc(100% - 1.44rem);
+  padding: 0.72rem;
   margin-bottom: 2vh;
   font-size: 1.28rem;
   color: inherit;

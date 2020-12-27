@@ -23,9 +23,11 @@ class LikesSeeder extends Seeder
         $userNum = count(User::get());
         $postNum = count(Post::get());
         $commentNum = count(Comment::get());
+        // percentage of the total calculated number to use
+        $percent_val = 0.9;
 
         // Use whichever of the two values is smaller
-        $likesNum = ($userNum*$postNum)*0.8 < ($userNum*$commentNum)*0.8 ? round(($userNum*$postNum)*0.8) : round(($userNum*$commentNum)*0.8);
+        $likesNum = ($userNum*$postNum)*$percent_val < ($userNum*$commentNum)*$percent_val ? round(($userNum*$postNum)*$percent_val) : round(($userNum*$commentNum)*$percent_val);
 
         // Call Comment factory
         Likes::factory($likesNum)->create();

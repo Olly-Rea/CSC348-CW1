@@ -18,11 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         // Call on 'Post' Seeder
         $this->call(PostSeeder::class);
+        // Call on Post 'Content' Seeder
+        $this->call(ContentSeeder::class);
         // Call on 'Tag' Seeder
         $this->call(TagSeeder::class);
         // Call on 'Comment' Seeder
         $this->call(CommentSeeder::class);
-        // Call on 'Comment' Seeder again; to now include existing comments (create 'replies')
+        // Call on 'Comment' Seeder again; now including existing comments (create 'replies')
         $this->call(CommentSeeder::class);
         // Call on 'Likes' Seeder
         $this->call(LikesSeeder::class);

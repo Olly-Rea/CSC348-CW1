@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 // Custom import
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -14,6 +15,9 @@ class PostController extends Controller
      * Method to return the post feed
      */
     public static function index() {
+
+        dd(Storage::disk('local')->allDirectories('/public'));
+
         // Get first 30 posts
         $posts = Post::orderBy('created_at', 'DESC')->paginate(30);
         // Return them in the feed view
