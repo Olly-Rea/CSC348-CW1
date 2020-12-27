@@ -6,18 +6,28 @@ use Illuminate\Http\Request;
 
 // Custom import
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
 
     /**
+     * Method to load images for image-type 'Content'
+     */
+    public static function loadImage($path) {
+        $imagePath = 'storage'.DIRECTORY_SEPARATOR.$path;
+        // Check the file exists, and if so, output it, otherwise, return the image placeholder
+        if (file_exists(public_path().DIRECTORY_SEPARATOR.$imagePath)) {
+            return asset($imagePath);
+        } else {
+            clearstatcache();
+            return asset('/images/graphics/image.svg');
+        }
+    }
+
+    /**
      * Method to return the post feed
      */
     public static function index() {
-
-        dd(Storage::disk('local')->allDirectories('/public'));
-
         // Get first 30 posts
         $posts = Post::orderBy('created_at', 'DESC')->paginate(30);
         // Return them in the feed view

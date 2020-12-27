@@ -16,10 +16,8 @@ class DatabaseSeeder extends Seeder
         echo("\n");
         // Call on 'User' Seeder
         $this->call(UserSeeder::class);
-        // Call on 'Post' Seeder
+        // Call on 'Post' Seeder (includes 'Content' seeding)
         $this->call(PostSeeder::class);
-        // Call on Post 'Content' Seeder
-        $this->call(ContentSeeder::class);
         // Call on 'Tag' Seeder
         $this->call(TagSeeder::class);
         // Call on 'Comment' Seeder

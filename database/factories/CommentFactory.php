@@ -28,8 +28,8 @@ class CommentFactory extends Factory
     {
         // Pick a random User from the list of all Users
         $user = User::inRandomOrder()->first();
-        
-        // Add the comment to either a post or another comment (as a 'reply'); the first run of this class 
+
+        // Add the comment to either a post or another comment (as a 'reply'); the first run of this class
         // creates no replies, hence the structure of this code (and that this factory is called twice).
         $commentable = Comment::inRandomOrder()->first();
         // If no comments exist to reply to, create another post comment,
@@ -54,7 +54,7 @@ class CommentFactory extends Factory
             'user_id' => $user->id,
             'commentable_id' => $commentable->id,
             'commentable_type' => $type,
-            'content' => $this->faker->text(),
+            'content' => $this->faker->text($maxNbChars = rand(120, 400)),
             // default 'Model' attributes for 'published' and 'edited'
             'created_at' => $create_date,
             'updated_at' => $update_date

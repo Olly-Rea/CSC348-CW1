@@ -89,7 +89,20 @@
         <p>No Tags!</p>
         @endforelse
     </div>
-    {{-- <p>{{ $post->content()->first() }}</p> --}}
+    <div class="content-preview">
+    @php
+        $firstContent = $post->content->first();
+    @endphp
+    @if($firstContent->type == 'text')
+        <p>{{ $firstContent->content }}</p>
+    @endif
+    @if($firstContent->type == 'image')
+        <div class="image-container">
+            <img src="{{ $firstContent->loadImage() }}" alt="">
+        </div>
+    @endif
+        <div class="content-fadeout"></div>
+    </div>
     <div class="comment-container">
     @if($post->comments()->count() > 0)
         <h3>Top Comment:</h3>

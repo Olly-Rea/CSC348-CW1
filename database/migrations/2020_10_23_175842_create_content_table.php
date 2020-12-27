@@ -14,12 +14,16 @@ class CreateContentTable extends Migration
     public function up()
     {
         Schema::create('content', function (Blueprint $table) {
-            $table->id();
             // Define foreign key
             $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
+            // Define content position in post
+            $table->integer('position');
+            // Make the pairing unique
+            $table->primary(['post_id', 'position']);
             // Define table contents
-            $table->text("title");
-
+            $table->string('type');
+            $table->text("content");
+            $table->text("sub_content")->nullable();
         });
     }
 

@@ -40,7 +40,8 @@ class PostFactory extends Factory
         // return new database record (row) to seed
         return [
             'user_id' => $user->id,
-            'title' => $this->faker->sentence(5),
+            'published' => true,
+            'title' => $this->faker->sentence(rand(4,10)),
             // default 'Model' attributes for 'published' and 'edited'
             'created_at' => $create_date,
             'updated_at' => $update_date

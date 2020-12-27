@@ -28,6 +28,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'site_admin',
     ];
 
     /**
@@ -72,4 +73,9 @@ class User extends Authenticatable
     public function likes() {
         return $this->hasMany("App\Models\Likes");
     }
+
+    // // Function to call on the profile loadImage method
+    // public function profileImage() {
+    //     return UserController::loadImage($this->profile->profile_id);
+    // }
 }

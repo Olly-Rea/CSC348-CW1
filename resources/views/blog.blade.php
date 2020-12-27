@@ -59,10 +59,27 @@
         <p>No Tags!</p>
         @endforelse
     </div>
-    {{-- <p>{{ $post->content()->first() }}</p> --}}
-
 </div>
-
+@foreach($post->content as $content)
+@if($content->type == 'text')
+<div class="content-panel">
+    <p>{{ $content->content }}</p>
+    @if($content->sub_content != null)
+    <p>{{ $content->sub_content }}</p>
+    @endif
+</div>
+@endif
+@if($content->type == 'image')
+<div class="image-panel">
+    <img src="{{ $content->loadImage() }}" alt="">
+    @if($content->sub_content != null)
+    <div class="image-caption">
+        <p>{{ $content->sub_content }}</p>
+    </div>
+    @endif
+</div>
+@endif
+@endforeach
 
 {{-- <div class="screen-split-vertical"></div> --}}
 <div class="screen-split-horizontal"></div>

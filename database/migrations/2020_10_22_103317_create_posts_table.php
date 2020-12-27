@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             // Define foreign key
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
+            $table->boolean('published');
             $table->text("title");
             // Add created_at & updated_at attributes
             $table->timestamps();

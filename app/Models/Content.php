@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\PostController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,16 @@ class Content extends Model
 
     // Disable timestamps
     public $timestamps = false;
+    // Set custom primary key
+    protected $primaryKey = ['user_id', 'stock_id'];
+    public $incrementing = false;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'content';
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +31,9 @@ class Content extends Model
     protected $fillable = [
         'post_id',
         'position',
-        'content_type',
+        'type',
         'content',
+        'sub_content',
     ];
 
     /**
@@ -29,6 +41,11 @@ class Content extends Model
      */
     public function user() {
         return $this->belongsTo('App\Models\Post');
+    }
+
+    // Function to call on the content loadImage method
+    public function loadImage() {
+        return PostController::loadImage($this->content);
     }
 
 }

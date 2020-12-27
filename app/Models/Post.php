@@ -16,6 +16,7 @@ class Post extends Model
      */
     protected $fillable = [
         'user_id',
+        'published',
         'title',
     ];
 
@@ -43,7 +44,7 @@ class Post extends Model
      * Child relationship for post content (text and imagery)
      */
     public function content() {
-        return $this->hasMany('App\Models\Content');
+        return $this->hasMany('App\Models\Content');//->orderBy('position');
     }
 
     /**

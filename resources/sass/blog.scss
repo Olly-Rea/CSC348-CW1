@@ -3,6 +3,51 @@
 main {
     padding-top: 10rem;
 
+    .image-panel {
+        display: inline-block;
+
+        position: relative;
+
+        width: calc(70% + 4.8rem);
+        padding-top: 56.25%; // Force 16:9 Aspect Ratio
+
+        overflow: hidden;
+
+        img,
+        p {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            padding: 0;
+            margin: 0;
+        }
+        img {
+            width: 100%;
+            // max-height: 100.6%;
+            // max-width: 100.6%;
+
+            object-fit: contain;
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: calc(100% - 2rem);
+            min-height: 4rem;
+            border-radius: $panelCorner;
+            color: $panelColor;
+
+            background-color: $overlayColor;
+        }
+
+    }
+
     .comment-container,
     .reply-container {
 

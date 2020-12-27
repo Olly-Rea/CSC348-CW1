@@ -169,14 +169,17 @@ main,
 
 // "main" tag-specific content formatting
 main {
-    .content-panel {
+    .content-panel,
+    .image-panel {
         margin: 1rem 0;
 
-        width: 70%;
         border-radius: $panelCorner;
 
-        background-color: $panelColor;
         @include hasShadow();
+    }
+    .content-panel {
+        width: 70%;
+        background-color: $panelColor;
     }
 }
 
