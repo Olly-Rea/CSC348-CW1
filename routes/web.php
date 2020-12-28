@@ -13,17 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Routes and controller functions to display feed elements
 Route::get('/feed', 'PostController@index')->name('feed');
+Route::get('/feed/blogs', 'PostController@index')->name('blogs');
+Route::get('/feed/news', 'PostController@index')->name('news');
 Route::post('/feed/fetch', 'PostController@fetch');
 
+// Routes and controller to display a post
 Route::get('/post/{post}', 'PostController@show')->name('post');
 Route::post('/reply/fetch', 'CommentController@fetch');
+
+// Route to display site users' profiles
+Route::get('/profile/{user}', 'ProfileController@show');
+
+// Routes that can only be used by Auth users
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Routes to display and edit the Auth user profile
+    Route::get('/Me', 'ProfileController@me')->name('me');
+    Route::get('/Me/edit', 'ProfileController@edit')->name('me.edit');
+    // Route to create new posts
+    Route::get('/post/create', 'PostController@create')->name('post.create');
+});

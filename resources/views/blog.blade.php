@@ -12,26 +12,6 @@
 <title>{{ config('app.name', 'Laravel') }}</title>
 @endsection
 
-@section('pre-main')
-<div id="feed-nav" style="display: none">
-    <div id="nav-top">
-        {{-- Search bar --}}
-        <form id="search-box" action="">
-            <div class="form-box">
-                <svg id="search-icon">
-                    <use xlink:href="{{ asset('images/graphics/search.svg#icon') }}"></use>
-                </svg>
-                <input id="search-bar" type="text" name="search" placeholder="I'm looking for..." onfocus="this.placeholder = ''" onfocusout="this.placeholder = 'I\'m looking for...'" />
-            </div>
-        </form>
-        <div id="user-buttons">
-            <button onclick="window.location.href='{{ route('login') }}'">Login</button>
-            <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
-        </div>
-    </div>
-    <div class="screen-split-horizontal"></div>
-</div>
-@endsection
 @section('content')
 <div class="content-panel">
     <div class="thumb-container">
@@ -40,17 +20,17 @@
         </svg>
         <h3>{{ count($post->likes) }}</h3>
     </div>
-    <div class="author-info">
+    <a href="/profile/{{ $post->user->id }}" class="author-info">
         <div class="profile-image-container">
             <div class="profile-image">
-                <img src="{{ asset('images/profile-default.png') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
+                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
             </div>
         </div>
         <div>
             <h3>{{ $post->user->first_name }} {{ $post->user->last_name }}</h3>
             <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p>
         </div>
-    </div>
+    </a>
     <h1><b>{{ $post->title }}</b></h1>
     <div class="tag-container">
         @forelse($post->tags as $tag)
@@ -81,24 +61,23 @@
 @endif
 @endforeach
 
-{{-- <div class="screen-split-vertical"></div> --}}
 <div class="screen-split-horizontal"></div>
 
 <div class="comment-container">
 @if($post->comments()->count() > 0)
     @foreach($post->comments as $comment)
     <div class="comment">
-        <div class="author-info">
+        <a href="/profile/{{ $comment->user->id }}" class="author-info">
             <div class="profile-image-container">
                 <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.png') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
+                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
                 </div>
             </div>
             <div>
                 <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
                 <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p>
             </div>
-        </div>
+        </a>
         <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p>
         <div class="thumb-container">
             <svg class="like-thumb">
@@ -121,29 +100,7 @@
                 <path class="elem" d="M13.992 63.948c-2.5107-2.508-2.5107-6.576 0-9.0866l16.2973-16.296c2.5107-2.5107 6.5787-2.5107 9.0867 0L55.6773 54.864c2.508 2.508 2.508 6.5787 0 9.0867l-16.3 16.299c-2.508 2.508-6.5773 2.508-9.0853 0z"/>
             </g>
         </svg>
-        {{-- @foreach($comment->replies as $reply)
-            <div class="comment">
-                <div class="author-info">
-                    <div class="profile-image-container">
-                        <div class="profile-image">
-                            <img src="{{ asset('images/profile-default.png') }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
-                        </div>
-                    </div>
-                    <div>
-                        <h3>{{ $reply->user->first_name }} {{ $reply->user->last_name }}</h3>
-                        <p>{{ date("j F Y", strtotime($reply->created_at)) }} • post_id: {{ $reply->commentable->id }}</p>
-                    </div>
-                </div>
-                <p>{{ $reply->content }} • comment_id: {{ $reply->id }} </p>
-                <div class="thumb-container">
-                    <svg class="like-thumb">
-                        <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
-                    </svg>
-                    <h4>{{ count($reply->likes) }}</h4>
-                </div>
-            </div>
-        @endforeach --}}
-        <form action="" style="display: none">
+        <form id="reply-form" action="" style="display: none">
             <div class="form-box">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
@@ -157,7 +114,7 @@
     <p>This post has no comments yet!</p>
 @endif
 </div>
-<form action="">
+<form id="comment-form" action="">
     <div class="form-box">
         <svg>
             <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>

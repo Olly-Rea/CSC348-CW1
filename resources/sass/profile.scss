@@ -1,20 +1,23 @@
 @import 'content';
 
-// 'main' content formatting
 main {
-    .content-panel,
-    .comment {
-        .author-info {
-            transition: background-color $transitionTime ease-in-out;
+    padding: 14rem 0;
 
-            &:hover {
-                background-color: $logoLight;
-            }
-            &:active {
-                background-color: $footerColor;
-            }
+    .profile-image-container {
+        margin-bottom: 1rem;
+        width: 16%;
+
+        @include hasShadow();
+    }
+    h1#user-name {
+        font-size: 3rem;
+        margin: 0.8rem 0;
+        & + h4 {
+            margin-top: -0.8rem;
+            margin-bottom: 1rem;
         }
     }
+
 
     .content-panel {
 
@@ -112,6 +115,63 @@ main {
         font-size: 140%;
         margin-top: 4rem;
     }
-}
 
+    #profile-nav {
+        @include flexDisplay(row, center, center);
+
+        margin: 3rem 0;
+        margin-bottom: -1rem;
+
+        .menu-item {
+            @include flexDisplay(column, center, center);
+
+            margin: 0 2rem;
+
+            width: 6rem;
+            color: $footerColor;
+            // font-size: 70%;
+
+            * {
+                transition: all $transitionTime ease-in-out;
+            }
+
+            div {
+                position: relative;
+
+                @include flexDisplay(column, center, center);
+
+                height: 6rem;
+                width: 100%;
+                border-radius: 50%;
+                background-color: $panelAccent;
+
+                cursor: pointer;
+                user-select: none;
+
+                svg {
+                    height: 56%;
+                    width: 56%;
+
+                    fill: $graphicColor;
+                    stroke: $graphicColor;
+                }
+
+                &:hover {
+                    transform: scale(1.12);
+                }
+                &:active {
+                    transform: scale(1);
+                }
+            }
+            h1 {
+                margin: 1rem 0;
+                text-align: center;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+        }
+    }
+
+
+}
 

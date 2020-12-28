@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends("layouts.global")
 
 @section("styles")
 <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
@@ -38,18 +38,6 @@
                 </div>
             </a>
         </div>
-        @else
-            <div class="nav-link" >
-                {{ Auth::user()->name }}
-            </div>
-            <div class="nav-link" >
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" hidden>
-                    @csrf
-                </form>
-            </div>
         @endguest
     </div>
 

@@ -1,7 +1,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * *
  *          Blog comment replies JQuery          *
  * * * * * * * * * * * * * * * * * * * * * * * * */
-var transitionTime = 150;
 var paginatePage = 2;
 
 // Methods to be called on and/or added to elements on page load/pageshow

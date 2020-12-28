@@ -2,27 +2,96 @@
 
 // feed navigation top-bar
 #feed-nav {
-    flex-wrap: wrap;
-
     position: fixed;
     z-index: 1;
     top: 0;
 
-    padding-top: 2vh;
+    padding: 2rem;
+    width: calc(100% - 4rem);
+    height: 2.6rem;
 
     background-color: $backColor;
 
-    #nav-top,
-    #nav-bottom {
-        width: 86%;
-    }
+    // @include hasShadow();
 
-    #nav-top {
+    // padding-bottom: 0;
+    // height: 4.5rem;
+    // background: linear-gradient($backColor 80%, rgba(0,0,0,0) 99%);
+
+    #nav-left, #nav-center, #nav-right {
+        position: absolute;
+
         @include flexDisplay(row, space-between, center);
-        flex-wrap: wrap;
+
+        .menu-item {
+            @include flexDisplay(column, center, center);
+
+            margin: 0 1rem;
+
+            width: 4.4rem;
+            color: $footerColor;
+            font-size: 70%;
+
+            user-select: none;
+
+            * {
+                transition: all $transitionTime ease-in-out;
+            }
+
+            a {
+                position: relative;
+
+                @include flexDisplay(column, center, center);
+
+                height: 4.4rem;
+                width: 100%;
+                border-radius: 50%;
+                background-color: $panelAccent;
+
+                cursor: pointer;
+
+                svg {
+                    height: 60%;
+                    width: 60%;
+
+                    fill: $graphicColor;
+                    stroke: $graphicColor;
+                }
+
+                &:hover {
+                    transform: scale(1.12);
+
+                    & + h1 {
+                        opacity: 100%;
+                    }
+                }
+                &:active {
+                    transform: scale(1);
+                }
+            }
+            h1 {
+                margin: 1rem 0;
+
+                min-width: 4rem;
+                padding: 0.5rem;
+                border-radius: 0.32rem;
+
+                background-color: $overlayColor;
+                color: $backColor;
+                text-align: center;
+                font-weight: bold;
+                opacity: 0%;
+            }
+        }
+    }
+    #nav-left {
+        top: 1.4rem;
+        left: 7.4rem;
+
+        width: 32rem;
 
         #search-box {
-            width: 40%;
+            width: 90%;
 
             #search-icon {
                 fill: $graphicColor;
@@ -33,30 +102,179 @@
 
             #search-bar {
                 margin: 0;
-
                 width: 100%;
             }
+        }
+    }
+    #nav-center {
+        top: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+        #all {
+            &.active {
+                a {
+                    background-color: $appBlueUnderlay;
+                    svg {
+                        fill: $appBlueDark;
+                        stroke: $appBlueDark;
+                    }
+                }
+            }
+            a {
+                &:hover {
+                    background-color: $appBlueUnderlay;
+                    svg {
+                        fill: $appBlue;
+                        stroke: $appBlue;
+                    }
+                }
+                &:active {
+                    background-color: $appBlueUnderlay;
+                    // svg {
+                    //     fill: $appBlueDark !important;
+                    //     stroke: $appBlueDark !important;
+                    // }
+                }
+            }
+        }
+        #blogs {
+            &.active {
+                a {
+                    background-color: $appGreenUnderlay;
+                    svg {
+                        fill: $appGreenDark;
+                        stroke: $appGreenDark;
+                    }
+                }
+            }
+            a {
+                &:hover {
+                    background-color: $appGreenUnderlay;
+                    svg {
+                        fill: $appGreen;
+                        stroke: $appGreen;
+                    }
+                }
+                &:active {
+                    a {
+                        background-color: $appGreenUnderlay;
+                        // svg {
+                        //     fill: $appGreenDark !important;
+                        //     stroke: $appGreenDark !important;
+                        // }
+                    }
+                }
+            }
+        }
+        #news {
+            &.active {
+                a {
+                    background-color: $appRedUnderlay;
+                    svg {
+                        fill: $appRedDark;
+                        stroke: $appRedDark;
+                    }
+                }
+            }
+            a {
+                &:hover {
+                    background-color: $appRedUnderlay;
+                    svg {
+                        fill: $appRed;
+                        stroke: $appRed;
+                    }
+                }
+                &:active {
+                    a {
+                        background-color: $appRedUnderlay;
+                        // svg {
+                        //     fill: $appRedDark !important;
+                        //     stroke: $appRedDark !important;
+                        // }
+                    }
+                }
+            }
+        }
+
+    }
+    #nav-right {
+        top: 1.2rem;
+        right: 1.2rem;
+
+        #user-buttons {
+            margin-top: 0.4rem;
+        }
+    }
+
+    // .screen-split-horizontal {
+    //     position: absolute;
+    //     bottom: 0rem;
+    //     left: 50%;
+    //     transform: translateX(-50%);
+
+    //     margin: 0;
+    // }
+
+}
+
+#site-overlay {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: $overlayColor;
+
+    .prompt {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        @include flexDisplay(column, flex-start, center);
+
+        padding: 2rem;
+        background-color: $panelColor;
+        border-radius: $panelCorner;
+
+        user-select: none;
+
+        button {
+            margin: 1rem 0;
+        }
+
+        p.cancel-prompt {
+            cursor: pointer;
         }
     }
 
 }
 
-// general content formatting
-main,
-#feed-nav {
-    @include flexDisplay(column, flex-start, center);
-}
-
+// 'main' content formatting
 main {
-    min-height: 92vh;
-    padding-top: 8vh;
+    @include flexDisplay(column, flex-start, center);
+
+    padding-top: 9rem;
+    min-height: calc(100vh - 10rem);
 
     .content-panel,
     .comment {
         position: relative;
 
         .author-info {
-            @include flexDisplay(row, flex-start, center);
+            position: relative;
+
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+
+            border-radius: $inputCorner;
+            padding: 0.72rem;
+            margin: -0.72rem;
 
             .profile-image-container {
                 margin: 0;
@@ -64,9 +282,13 @@ main {
                 width: 4.2rem;
             }
 
+            h3,
+            p {
+                white-space: nowrap;
+            }
+
             h3 {
                 font-size: 1.4rem;
-                margin: 0;
                 margin-bottom: 0.24rem;
             }
             p {
@@ -75,15 +297,19 @@ main {
             div:not(.profile-image-container):not(.profile-image) {
                 width: 60%;
             }
-
         }
 
         .thumb-container {
             @include flexDisplay(column, center, center);
 
             position: absolute;
-            top: 1.4rem;
+            top: 1.6rem;
             right: 2rem;
+
+            // top: 0.2rem;
+            // right: 0.6rem;
+            // padding: 1.4rem;
+            // border-radius: 50%;
 
             user-select: none;
             cursor: pointer;
@@ -124,14 +350,13 @@ main {
     }
 
     .content-panel {
-        padding: 2.4rem;
-        padding-bottom: 1.4rem;
+        padding: 2rem;
 
         overflow: hidden;
 
         h1 {
             font-size: 2.4rem;
-            margin-bottom: 0.6rem
+            margin: 0.6rem 0;
         }
 
         .tag-container {

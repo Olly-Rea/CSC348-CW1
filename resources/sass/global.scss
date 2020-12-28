@@ -15,6 +15,9 @@ html {
 
     scroll-behavior: smooth;
 }
+* {
+    margin: 0;
+}
 
 a {
     text-decoration: none;
@@ -27,6 +30,7 @@ svg {
 
 #logo {
     position: fixed;
+    z-index: 2;
     top: 2vh;
     left: 2vh;
 
@@ -134,16 +138,18 @@ svg.loading-graphic {
     }
 }
 
-
 // general main content formatting
-main,
-#feed-nav {
+main {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
 
-    max-width: 1440px;
     width: 100%;
+}
+
+main,
+.screen-split-horizontal {
+    max-width: 1920px;
 }
 
 .screen-split {
@@ -178,12 +184,14 @@ main {
         @include hasShadow();
     }
     .content-panel {
-        width: 70%;
+        width: 50%;
         background-color: $panelColor;
     }
 }
 
 .profile-image-container {
+    border-radius: 50%;
+
     .profile-image {
         position: relative;
 
@@ -268,7 +276,6 @@ form {
 
     }
 }
-
 
 // Input formatting
 textarea,

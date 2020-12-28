@@ -1,16 +1,16 @@
 @foreach($replies as $reply)
 <div class="comment">
-    <div class="author-info">
+    <a href="/profile/{{ $reply->user->id }}" class="author-info">
         <div class="profile-image-container">
             <div class="profile-image">
-                <img src="{{ asset('images/profile-default.png') }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
+                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
             </div>
         </div>
         <div>
             <h3>{{ $reply->user->first_name }} {{ $reply->user->last_name }}</h3>
             <p>{{ date("j F Y", strtotime($reply->created_at)) }} • commentable_id: {{ $reply->commentable->id }}</p>
         </div>
-    </div>
+    </a>
     <p>{{ $reply->content }} • comment_id: {{ $reply->id }} </p>
     <div class="thumb-container">
         <svg class="like-thumb">

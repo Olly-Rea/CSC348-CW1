@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->id();
             // Define table contents
             $table->string('first_name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('site_admin');
-            $table->boolean('system_admin');
+            $table->boolean('system_admin')->nullable(); // true or null (highest level access -> only enabled using tinker)
             $table->rememberToken();
             // Add created_at & updated_at attributes
             $table->timestamps();

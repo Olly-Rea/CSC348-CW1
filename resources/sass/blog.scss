@@ -1,15 +1,27 @@
 @import 'content';
 
 main {
-    padding-top: 10rem;
+    .content-panel,
+    .comment {
+        .author-info {
+            transition: background-color $transitionTime ease-in-out;
+
+            &:hover {
+                background-color: $logoLight;
+            }
+            &:active {
+                background-color: $footerColor;
+            }
+        }
+    }
 
     .image-panel {
         display: inline-block;
 
         position: relative;
 
-        width: calc(70% + 4.8rem);
-        padding-top: 56.25%; // Force 16:9 Aspect Ratio
+        width: calc(50% + 4.8rem);
+        padding-top: calc(56.25% * 0.54); // Force 16:9 Aspect Ratio
 
         overflow: hidden;
 
@@ -76,7 +88,7 @@ main {
 
     > form,
     .comment-container {
-        width: 80%;
+        width: 52%;
     }
     form {
         margin: 3rem 0;
@@ -154,13 +166,13 @@ main {
         }
 
         svg {
-            transform: translate(-140%, -44%);
+            transform: translate(-140%, -50%);
 
             height: 2.4rem;
             width: 2.4rem;
         }
         h3 {
-            transform: translate(-36%, -88%);
+            transform: translate(-34%, -6%);
         }
 
         &:hover {

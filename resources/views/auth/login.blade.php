@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends("layouts.global")
 
 @section("styles")
 <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">

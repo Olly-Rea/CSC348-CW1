@@ -32,6 +32,10 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  margin: 0;
+}
+
 a {
   text-decoration: none;
   color: #424242;
@@ -46,6 +50,7 @@ svg {
 
 #logo {
   position: fixed;
+  z-index: 2;
   top: 2vh;
   left: 2vh;
   height: 4.2rem;
@@ -214,14 +219,17 @@ svg.loading-graphic .elem:nth-child(3) {
   }
 }
 
-main,
-#feed-nav {
+main {
   position: relative;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  max-width: 1440px;
   width: 100%;
+}
+
+main,
+.screen-split-horizontal {
+  max-width: 1920px;
 }
 
 .screen-split-horizontal {
@@ -249,8 +257,12 @@ main .image-panel {
 }
 
 main .content-panel {
-  width: 70%;
+  width: 50%;
   background-color: #f2f2f2;
+}
+
+.profile-image-container {
+  border-radius: 50%;
 }
 
 .profile-image-container .profile-image {
@@ -611,6 +623,11 @@ main .content-panel form {
 
 #guest-links {
   margin-top: 20%;
+}
+
+#guest-links #or-container {
+  margin: 1.4rem 0;
+  font-size: 140%;
 }
 
 #login-form,
