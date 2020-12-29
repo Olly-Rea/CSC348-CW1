@@ -66,13 +66,13 @@ class User extends Authenticatable
      * Child Model relationships
      */
     public function posts() {
-        return $this->hasMany("App\Models\Post");
+        return $this->hasMany('App\Models\Post');
     }
     public function comments() {
-        return $this->hasMany("App\Models\Comment");
+        return $this->hasMany('App\Models\Comment');
     }
     public function likes() {
-        return $this->hasMany("App\Models\Likes");
+        return $this->hasMany('App\Models\Likes');
     }
 
     // Function to call on the profile loadImage method

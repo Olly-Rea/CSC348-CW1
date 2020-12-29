@@ -20,6 +20,7 @@ $(window).on("load, pageshow", function() {
     }, transitionTime);
 });
 
+// Method to be called on page unload
 $(window).bind('beforeunload',function(){
     // Fade out all page elements
     $("#logo, #feed-nav, main, footer, #site-overlay").fadeOut(transitionTime);

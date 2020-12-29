@@ -1,86 +1,5 @@
-@extends('layouts.app')
-
-@section("styles")
-<link href="{{ asset('css/blog.css') }}" rel="stylesheet">
-@endsection
-
-@section("scripts")
-<script src="{{ asset('javascript/replies.js') }}" defer></script>
-@endsection
-
-@section('title')
-<title>{{ config('app.name', 'Laravel') }}</title>
-@endsection
-
-@section('content')
-<div class="content-panel">
-    <input value="post-{{ $post->id }}" hidden readonly>
-    @php
-        if (Auth::check()) {
-            $hasLike = $post->likes->contains(function ($like) {
-                return $like->user_id == Auth::user()->id;
-            });
-        } else {
-            $hasLike = false;
-        }
-    @endphp
-    <div class="thumb-container @if($hasLike)liked @endif">
-        <svg class="like-thumb">
-            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
-        </svg>
-        <h3>{{ count($post->likes) }}</h3>
-    </div>
-    <a href="/profile/{{ $post->user->id }}" class="author-info">
-        <div class="profile-image-container">
-            <div class="profile-image">
-                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
-            </div>
-        </div>
-        <div>
-            <h3>{{ $post->user->first_name }} {{ $post->user->last_name }}</h3>
-            {{-- <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p> --}}
-            @if(date('dmY') == date('dmY', strtotime($post->created_at)))
-            <p>Today • {{ date("g:ia", strtotime($post->created_at)) }}</p>
-            @else
-            <p>{{ date("j F Y", strtotime($post->created_at)) }}</p>
-            @endif
-        </div>
-    </a>
-    <h1><b>{{ $post->title }}</b></h1>
-    <div class="tag-container">
-        @forelse($post->tags as $tag)
-        <a href="#" class="{{ strtolower($tag->name) }}">{{ $tag->name }}</a>
-        @empty
-        <p>No Tags!</p>
-        @endforelse
-    </div>
-</div>
-@foreach($post->content as $content)
-@if($content->type == 'text')
-<div class="content-panel">
-    <p>{{ $content->content }}</p>
-    @if($content->sub_content != null)
-    <p>{{ $content->sub_content }}</p>
-    @endif
-</div>
-@endif
-@if($content->type == 'image')
-<div class="image-panel">
-    <img src="{{ $content->loadImage() }}" alt="">
-    @if($content->sub_content != null)
-    <div class="image-caption">
-        <p>{{ $content->sub_content }}</p>
-    </div>
-    @endif
-</div>
-@endif
-@endforeach
-
-<div class="screen-split-horizontal"></div>
-
-<div id="comment-container">
-@if($post->comments()->count() > 0)
-    @foreach($post->comments()->orderBy('created_at', 'ASC')->get() as $comment)
+@if(is_countable($comments))
+    @foreach($comments as $comment)
     <div class="comment">
         <input value="comment-{{ $comment->id }}" hidden>
         <a href="/profile/{{ $comment->user->id }}" class="author-info">
@@ -117,6 +36,48 @@
             <h4>{{ count($comment->likes) }}</h4>
         </div>
     </div>
+    @endforeach
+@else
+    @php
+        $comment = $comments;
+    @endphp
+    <div class="comment">
+        <input value="comment-{{ $comment->id }}" hidden>
+        <a href="/profile/{{ $comment->user->id }}" class="author-info">
+            <div class="profile-image-container">
+                <div class="profile-image">
+                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
+                </div>
+            </div>
+            <div>
+                <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
+                {{-- <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p> --}}
+                @if(date('dmY') == date('dmY', strtotime($comment->created_at)))
+                <p>Today • {{ date("g:ia", strtotime($comment->created_at)) }}</p>
+                @else
+                <p>{{ date("j F Y", strtotime($comment->created_at)) }}</p>
+                @endif
+            </div>
+        </a>
+        {{-- <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p> --}}
+        <p>{{ $comment->content }}</p>
+        @php
+            if (Auth::check()) {
+                $hasLike = $comment->likes->contains(function ($like) {
+                    return $like->user_id == Auth::user()->id;
+                });
+            } else {
+                $hasLike = false;
+            }
+        @endphp
+        <div class="thumb-container @if($hasLike)liked @endif">
+            <svg class="like-thumb">
+                <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+            </svg>
+            <h4>{{ count($comment->likes) }}</h4>
+        </div>
+    </div>
+    @if($comment->commentable_type == 'App\Models\Post')
     <div class="reply-button">
         <svg>
             <use xlink:href="{{ asset('images/graphics/reply.svg#icon') }}"></use>
@@ -141,18 +102,5 @@
             </div>
         </form>
     </div>
-    @endforeach
-@else
-    <p>This post has no comments yet!</p>
+    @endif
 @endif
-</div>
-<form id="comment-form">
-    <input type="hidden" value="post-{{ $post->id }}" hidden readonly>
-    <div class="form-box">
-        <svg>
-            <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
-        </svg>
-        <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" />
-    </div>
-</form>
-@endsection

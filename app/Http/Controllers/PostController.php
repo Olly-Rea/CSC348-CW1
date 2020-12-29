@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 // Custom import
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostController extends Controller
 {
@@ -63,29 +64,17 @@ class PostController extends Controller
     }
 
     /**
-     * Method for a user to like a post
+     * Method to edit an existing Post
      */
-    public static function like(Request $request) {
-        // Check that the request is ajax
-        if ($request->ajax()) {
-            // Ensure a user is logged in
-            if(Auth::check()) {
-                // Get the post from the request
-                $likeable = Post::where('id', $request->post_id)->first();
+    public static function edit() {
 
-                // See if the user is 'liking' or 'un-liking' a likeable item
-                if(Auth::user()->likes->has($request->post_id)) {
-                    // remove the post to the user's likes
-                    Auth::user()->likes->remocve($request->post_id);
-                } else {
-                    // Add the post to the user's likes
-                    Auth::user()->likes->attach($request->post_id);
-                }
-            }
-        // Else return a 404 not found error
-        } else {
-            abort(404);
-        }
+    }
+
+    /**
+     * Method to create new Post
+     */
+    public static function create() {
+
     }
 
 }

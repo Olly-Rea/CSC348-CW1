@@ -9,9 +9,6 @@ class Likes extends Model
 {
     use HasFactory;
 
-    // Disable timestamps
-    public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -20,7 +17,7 @@ class Likes extends Model
     protected $fillable = [
         'user_id',
         'likeable_id',
-        'likeable_type',  
+        'likeable_type',
     ];
 
     /**

@@ -25,8 +25,9 @@
 body,
 html {
   margin: 0 !important;
-  font: 1rem "C&L Regular";
+  font: 1.04rem "C&L Regular";
   line-height: 1.2;
+  letter-spacing: 0.034rem;
   color: #424242;
   background-color: #fafafa;
   scroll-behavior: smooth;

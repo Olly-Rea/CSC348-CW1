@@ -26,9 +26,10 @@
 
 // Typography
 $font-stack: "C&L Regular";
-$font-size-base: 1rem;
+$font-size-base: 1.04rem;
 $navFontSize: 24pt;
 $line-height-base: 1.2;
+
 // Borders
 $borderThin: 1px;
 $borderMed: 2px;
@@ -63,29 +64,34 @@ $footerColor: rgb(220, 220, 220);
 
 // Accent Colours
 $appRedUnderlay: rgb(243, 212, 231);
+$appRedUnderlayDark: rgb(233, 202, 221);
 $appRedlight: rgb(248, 95, 189);
 $appRed: rgb(228, 75, 169);
 $appRedDark: rgb(208, 55, 149);
 
 $appGreenUnderlay: rgb(205, 255, 236);
+$appGreenUnderlayDark: rgb(215, 245, 226);
 $appGreenLight: rgb(95, 248, 189);
 $appGreen: rgb(75, 228, 169);
 $appGreenDark: rgb(64, 200, 148);
 
 $appBlueUnderlay: rgb(189, 230, 239);
+$appBlueUnderlayDark: rgb(179, 220, 229);
 $appBlueLight: rgb(75, 199, 228);
 $appBlue: rgb(75, 169, 228);
 $appBlueDark: rgb(55, 149, 208);
 
-$appYellowUnderlay: rgb(205, 255, 236);
+$appYellowUnderlay: rgb(243, 238, 213);
+$appYellowUnderlayDark: rgb(233, 228, 203);
 $appYellowLight: rgb(248, 219, 95);
-$appYellow: rgb(228, 199, 75);
-$appYellowDark: rgb(208, 179, 55);
+$appYellow: rgb(238, 209, 85);
+$appYellowDark: rgb(228, 199, 75);
 
-$appPurpleUnderlay: rgb(205, 255, 236);
-$appPurpleLight: rgb(248, 219, 95);
-$appPurple: rgb(228, 199, 75);
-$appPurpleDark: rgb(208, 179, 55);
+$appPurpleUnderlay: rgb(199, 169, 238);
+$appPurpleUnderlayDark: rgb(189, 159, 228);
+$appPurpleLight: rgb(131, 51, 250);
+$appPurple: rgb(111, 21, 230);
+$appPurpleDark: rgb(91, 1, 210);
 
 // Logo colour stuff
 $logoLight: rgb(233, 233, 233);

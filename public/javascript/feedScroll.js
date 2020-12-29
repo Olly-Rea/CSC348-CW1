@@ -25,9 +25,6 @@ $(window).on("load, pageshow", function() {
 
 // Method to call on onscroll
 function scrollFunc() {
-
-    // console.log($(window).scrollTop() + " > " + ($("main").height() * scrollMax));
-
     // If the scroll position is past the scrollMax threshold (starting at 0.75, incrementing by 0.05 each call)
     if ($(window).scrollTop() > ($("main").height() * scrollMax)) {
         // Stop the event from firing more than once

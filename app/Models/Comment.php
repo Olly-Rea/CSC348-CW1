@@ -35,7 +35,7 @@ class Comment extends Model
         return $this->morphTo();
     }
     public function replies() {
-        return $this->morphMany("App\Models\Comment", "commentable")->orderBy('created_at', 'DESC');
+        return $this->morphMany("App\Models\Comment", "commentable");
     }
 
     /**
@@ -44,6 +44,5 @@ class Comment extends Model
     public function likes() {
         return $this->morphMany('App\Models\Likes', 'likeable');
     }
-
 
 }

@@ -44,14 +44,14 @@ class Post extends Model
      * Child relationship for post content (text and imagery)
      */
     public function content() {
-        return $this->hasMany('App\Models\Content');//->orderBy('position');
+        return $this->hasMany('App\Models\Content')->orderBy('position');
     }
 
     /**
      * Child Model relationship
      */
     public function comments() {
-        return $this->morphMany('App\Models\Comment', 'commentable')->orderBy('created_at', 'DESC');
+        return $this->morphMany('App\Models\Comment', 'commentable');
     }
 
 }

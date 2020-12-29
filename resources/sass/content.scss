@@ -8,7 +8,7 @@
 
     padding: 2rem;
     width: calc(100% - 4rem);
-    height: 2.6rem;
+    height: 2.8rem;
 
     background-color: $backColor;
 
@@ -20,6 +20,7 @@
 
     #nav-left, #nav-center, #nav-right {
         position: absolute;
+        z-index: 2;
 
         @include flexDisplay(row, space-between, center);
 
@@ -29,13 +30,15 @@
             margin: 0 1rem;
 
             width: 4.4rem;
-            color: $footerColor;
             font-size: 70%;
 
             user-select: none;
 
             * {
-                transition: all $transitionTime ease-in-out;
+                transition: transform $transitionTime ease-in-out,
+                            background-color $transitionTime ease-in-out 0.02s,
+                            stroke $transitionTime ease-in-out -0.02s,
+                            fill $transitionTime ease-in-out -0.02s;
             }
 
             a {
@@ -60,15 +63,15 @@
 
                 &:hover {
                     transform: scale(1.12);
-
                     & + h1 {
                         opacity: 100%;
                     }
                 }
                 &:active {
-                    transform: scale(1);
+                    transform: scale(0.96);
                 }
             }
+
             h1 {
                 margin: 1rem 0;
 
@@ -83,6 +86,16 @@
                 opacity: 0%;
             }
         }
+        // .menu-item:not(.active) {
+        //     a {
+        //         &:hover {
+        //             & + h1 {
+        //                 opacity: 100%;
+        //             }
+        //         }
+        //     }
+        // }
+
     }
     #nav-left {
         top: 1.4rem;
@@ -116,53 +129,51 @@
                 a {
                     background-color: $appBlueUnderlay;
                     svg {
-                        fill: $appBlueDark;
-                        stroke: $appBlueDark;
-                    }
-                }
-            }
-            a {
-                &:hover {
-                    background-color: $appBlueUnderlay;
-                    svg {
                         fill: $appBlue;
                         stroke: $appBlue;
                     }
                 }
-                &:active {
-                    background-color: $appBlueUnderlay;
-                    // svg {
-                    //     fill: $appBlueDark !important;
-                    //     stroke: $appBlueDark !important;
-                    // }
-                }
-            }
-        }
-        #blogs {
-            &.active {
-                a {
-                    background-color: $appGreenUnderlay;
-                    svg {
-                        fill: $appGreenDark;
-                        stroke: $appGreenDark;
-                    }
-                }
             }
             a {
                 &:hover {
+                    background-color: $appBlueUnderlay;
+                    svg {
+                        fill: $appBlueLight;
+                        stroke: $appBlueLight;
+                    }
+                }
+                &:active {
+                    background-color: $appBlueUnderlayDark;
+                    svg {
+                        fill: $appBlueDark ;
+                        stroke: $appBlueDark;
+                    }
+                }
+            }
+        }
+        #posts {
+            &.active {
+                a {
                     background-color: $appGreenUnderlay;
                     svg {
                         fill: $appGreen;
                         stroke: $appGreen;
                     }
                 }
+            }
+            a {
+                &:hover {
+                    background-color: $appGreenUnderlay;
+                    svg {
+                        fill: $appGreenLight;
+                        stroke: $appGreenLight;
+                    }
+                }
                 &:active {
-                    a {
-                        background-color: $appGreenUnderlay;
-                        // svg {
-                        //     fill: $appGreenDark !important;
-                        //     stroke: $appGreenDark !important;
-                        // }
+                    background-color: $appGreenUnderlayDark;
+                    svg {
+                        fill: $appGreenDark;
+                        stroke: $appGreenDark;
                     }
                 }
             }
@@ -172,8 +183,8 @@
                 a {
                     background-color: $appRedUnderlay;
                     svg {
-                        fill: $appRedDark;
-                        stroke: $appRedDark;
+                        fill: $appRed;
+                        stroke: $appRed;
                     }
                 }
             }
@@ -181,17 +192,15 @@
                 &:hover {
                     background-color: $appRedUnderlay;
                     svg {
-                        fill: $appRed;
-                        stroke: $appRed;
+                        fill: $appRedlight;
+                        stroke: $appRedlight;
                     }
                 }
                 &:active {
-                    a {
-                        background-color: $appRedUnderlay;
-                        // svg {
-                        //     fill: $appRedDark !important;
-                        //     stroke: $appRedDark !important;
-                        // }
+                    background-color: $appRedUnderlayDark;
+                    svg {
+                        fill: $appRedDark;
+                        stroke: $appRedDark;
                     }
                 }
             }
@@ -205,16 +214,129 @@
         #user-buttons {
             margin-top: 0.4rem;
         }
+
+        #create {
+            &.active {
+                a {
+                    background-color: $appPurpleUnderlay;
+                    svg {
+                        fill: $appPurple;
+                        stroke: $appPurple;
+                    }
+                }
+            }
+            a {
+                &:hover {
+                    background-color: $appPurpleUnderlay;
+                    svg {
+                        fill: $appPurpleLight;
+                        stroke: $appPurpleLight;
+                    }
+                }
+                &:active {
+                    background-color: $appPurpleUnderlayDark;
+                    svg {
+                        fill: $appPurpleDark;
+                        stroke: $appPurpleDark;
+                    }
+                }
+            }
+        }
+        #notifications {
+            &.active {
+                a {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellow;
+                        stroke: $appYellow;
+                    }
+                }
+            }
+            a {
+                &:hover {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellowLight;
+                        stroke: $appYellowLight;
+                    }
+                }
+                &:active {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellowDark;
+                        stroke: $appYellowDark;
+                    }
+                }
+            }
+        }
+
     }
 
-    // .screen-split-horizontal {
-    //     position: absolute;
-    //     bottom: 0rem;
-    //     left: 50%;
-    //     transform: translateX(-50%);
+    #notification-container {
+        position: absolute;
+        z-index: 1;
+        top: 7.2rem;
+        right: 2.4rem;
 
-    //     margin: 0;
-    // }
+        min-height: 28rem;
+        width: 14.6rem;
+        padding: 1rem;
+
+        border-radius: $panelCorner;
+        background-color: $panelAccent;
+
+        opacity: 0;
+        transform: scale(0);
+
+        transition: opacity $transitionTime ease-in-out,
+                    transform $transitionTime ease-in-out;
+
+        &:before {
+            content: '';
+
+            position: absolute;
+
+            top: -0.96rem;
+            right: 8.4rem;
+            transform: translateX(50%);
+
+            width: 0;
+            height: 0;
+            border-left: 1rem solid transparent;
+            border-right: 1rem solid transparent;
+
+            border-bottom: 1rem solid $panelAccent;
+
+            border-top-right-radius: 30%;
+        }
+
+        &.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        h4.notification {
+            margin: 0.6rem 0.2rem;
+
+            width: calc(100% - 2rem);
+            padding: 0.8rem 0.8rem;
+            background-color: $appGreenUnderlay;
+            border-radius: $inputCorner;
+
+            &:nth-child(1) {
+                margin-top: 0.32rem;
+            }
+        }
+
+        p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            white-space: nowrap;
+        }
+    }
 
 }
 
@@ -316,6 +438,16 @@ main {
 
             transition: transform $transitionTime ease-in-out;
 
+            &.liked {
+                .like-thumb {
+                    fill: $appGreen;
+                }
+                h3,
+                h4 {
+                    color: $appGreen;
+                }
+            }
+
             .like-thumb,
             h3,
             h4 {
@@ -334,7 +466,7 @@ main {
                 }
             }
             &:active {
-                transform: scale(1);
+                transform: scale(0.96);
 
                 .like-thumb {
                     fill: $appGreenDark;
@@ -377,6 +509,7 @@ main {
                 background-color: $backColor;
             }
             a {
+                letter-spacing: 0.04rem;
                 &.home {
                     background-color: $appYellow;
                 }
@@ -401,7 +534,8 @@ main {
                     background-color: $backColor;
                 }
                 &.gaming {
-                    background-color: $backColor
+                    color: $backColor;
+                    background-color: $appPurpleLight
                 }
                 &.nsfw {
                     color: $backColor;

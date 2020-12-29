@@ -31,13 +31,13 @@
             </a>
             <h1>All</h1>
         </div>
-        <div id="blogs" class="menu-item @if(Request::is('feed/blogs'))active @endif">
-            <a href="@if(Request::is('feed/blogs'))# @else(){{ route('blogs') }}@endif">
+        <div id="posts" class="menu-item @if(Request::is('feed/posts') || Request::is('post/*'))active @endif">
+            <a href="@if(Request::is('feed/posts'))# @else(){{ route('posts') }}@endif">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/blogs.svg#icon') }}"></use>
                 </svg>
             </a>
-            <h1>Blogs</h1>
+            <h1>Posts</h1>
         </div>
         <div id="news" class="menu-item @if(Request::is('feed/news'))active @endif">
             <a href="@if(Request::is('feed/news'))# @else(){{ route('news') }}@endif">
@@ -92,7 +92,15 @@
         @endif
         @endguest
     </div>
-    {{-- <div class="screen-split-horizontal"></div> --}}
+    @auth
+    <div id="notification-container" style="display: none">
+        <p>No new notifications!</p>
+        {{-- <h4 class="notification">No new notifications!</h4>
+        <h4 class="notification">No new notifications!</h4>
+        <h4 class="notification">No new notifications!</h4>
+        <h4 class="notification">No new notifications!</h4> --}}
+    </div>
+    @endauth
 </div>
 <div id="site-overlay" style="display: none">
     @auth

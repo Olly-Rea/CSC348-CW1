@@ -20,6 +20,7 @@ class CreateLikesTable extends Migration
             // Define polymorphic properties (shorthand)
             $table->morphs('likeable'); // Post or Comment
             $table->unique(['user_id', 'likeable_type', 'likeable_id']);
+            $table->timestamps();
         });
     }
 

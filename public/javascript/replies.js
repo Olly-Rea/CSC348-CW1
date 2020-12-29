@@ -6,7 +6,8 @@ var paginatePage = 2;
 // Methods to be called on and/or added to elements on page load/pageshow
 $(window).on("load, pageshow", function() {
 
-    $(".reply-button").on("click", function() {
+    // Handler to display comment replies
+    $("main").on("click", ".reply-button", function() {
         $(this).fadeOut(transitionTime);
         $replyContainer = $(this).next();
         setTimeout(function () {
@@ -38,7 +39,7 @@ function fetch_data($container) {
                 if($loadingGraphic.is(":visible")) {
                     $loadingGraphic.fadeOut(transitionTime);
                 }
-                $container.append("<p>This comment has no replies yet!</p>");
+                $container.append("<p class=\"empty\">This comment has no replies yet!</p>");
             }
             $container.find("form").appendTo($container);
             $container.find("form").fadeIn(transitionTime);

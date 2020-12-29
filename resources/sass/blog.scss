@@ -60,7 +60,7 @@ main {
 
     }
 
-    .comment-container,
+    #comment-container,
     .reply-container {
 
         .comment {
@@ -87,13 +87,13 @@ main {
     }
 
     > form,
-    .comment-container {
+    #comment-container {
         width: 52%;
     }
     form {
         margin: 3rem 0;
     }
-    .comment-container {
+    #comment-container {
         @include flexDisplay(column, flex-start, flex-end);
 
         padding: 2rem;
@@ -144,7 +144,7 @@ main {
         position: relative;
 
         height: 3rem;
-        width: 12rem;
+        width: 8rem;
 
         margin-top: -0.8rem;
         margin-bottom: 0.8rem;
@@ -166,13 +166,14 @@ main {
         }
 
         svg {
-            transform: translate(-140%, -50%);
+            transform: translate(-160%, -50%);
 
             height: 2.4rem;
             width: 2.4rem;
         }
         h3 {
-            transform: translate(-34%, -6%);
+            transform: translate(-39%, -6%);
+            white-space: nowrap;
         }
 
         &:hover {

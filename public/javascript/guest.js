@@ -5,6 +5,7 @@
 // Methods to be called on and/or added to elements on page load/pageshow
 $(window).on("load, pageshow", function() {
 
+    // Handlers to display the sign-up prompt (with custom messages)
     $("main").on("click", ".thumb-container", function() {
         showSignUpPrompt("Sign up to like content!");
     });
@@ -13,14 +14,15 @@ $(window).on("load, pageshow", function() {
         $("#comment-form input").trigger("blur");
         showSignUpPrompt("Sign up to write comments!");
     });
-    $("#reply-form").on("click", function() {
+    $(".reply-form").on("click", function() {
         // Un-focus the input field
-        $("#reply-form input").trigger("blur");
+        $(".reply-form input").trigger("blur");
         showSignUpPrompt("Sign up to reply to comments!");
     });
 
 });
 
+// Method to show the Sign Up prompt
 function showSignUpPrompt(msg) {
     // Alter the sign up prompt message
     $("#sign-up.prompt > h1").html(msg);

@@ -132,7 +132,10 @@ main {
             // font-size: 70%;
 
             * {
-                transition: all $transitionTime ease-in-out;
+                transition: transform $transitionTime ease-in-out,
+                            background-color $transitionTime ease-in-out,
+                            stroke $transitionTime ease-in-out,
+                            fill $transitionTime ease-in-out;
             }
 
             div {
@@ -160,7 +163,7 @@ main {
                     transform: scale(1.12);
                 }
                 &:active {
-                    transform: scale(1);
+                    transform: scale(0.96);
                 }
             }
             h1 {

@@ -21,7 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Routes and controller functions to display feed elements
 Route::get('/feed', 'PostController@index')->name('feed');
-Route::get('/feed/blogs', 'PostController@index')->name('blogs');
+Route::get('/feed/posts', 'PostController@index')->name('posts');
 Route::get('/feed/news', 'PostController@index')->name('news');
 Route::post('/feed/fetch', 'PostController@fetch');
 
@@ -39,4 +39,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/Me/edit', 'ProfileController@edit')->name('me.edit');
     // Route to create new posts
     Route::get('/post/create', 'PostController@create')->name('post.create');
+    // Route to allow the Auth User to like a 'likeable' item (but NOT access /like)
+    Route::match(['get', 'post'], '/like', 'LikeController@like');
+    // Route to allow the Auth user to comment on posts / reply to comments
+    Route::match(['get', 'post'], '/comment/create', 'CommentController@create')->name('comment.create');
+    Route::match(['get', 'post'], '/comment/edit', 'CommentController@edit')->name('comment.edit');
 });

@@ -15,10 +15,20 @@
 @section('content')
 @forelse($posts as $post)
 <div class="content-panel">
+    <input value="post-{{ $post->id }}" hidden readonly>
     <div class="overlay">
         <button onclick="window.location.href='{{ route('post', $post->id) }}'">Show more</button>
     </div>
-    <div class="thumb-container">
+    @php
+        if (Auth::check()) {
+            $hasLike = $post->likes->contains(function ($like) {
+                return $like->user_id == Auth::user()->id;
+            });
+        } else {
+            $hasLike = false;
+        }
+    @endphp
+    <div class="thumb-container @if($hasLike)liked @endif">
         <svg class="like-thumb">
             <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
         </svg>
@@ -32,7 +42,12 @@
         </div>
         <div>
             <h3>{{ $post->user->first_name }} {{ $post->user->last_name }}</h3>
-            <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p>
+            {{-- <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p> --}}
+            @if(date('dmY') == date('dmY', strtotime($post->created_at)))
+            <p>Today • {{ date("g:ia", strtotime($post->created_at)) }}</p>
+            @else
+            <p>{{ date("j F Y", strtotime($post->created_at)) }}</p>
+            @endif
         </div>
     </a>
     <h1><b>{{ $post->title }}</b></h1>
@@ -72,15 +87,30 @@
                 </div>
                 <div>
                     <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
-                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • commentable_id: {{ $topComment->commentable->id }}</p>
+                    {{-- <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • commentable_id: {{ $topComment->commentable->id }}</p> --}}
+                    @if(date('dmY') == date('dmY', strtotime($topComment->created_at)))
+                    <p>Today • {{ date("g:ia", strtotime($topComment->created_at)) }}</p>
+                    @else
+                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }}</p>
+                    @endif
                 </div>
             </div>
-            <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }} </p>
-            <div class="thumb-container">
+            {{-- <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }}</p> --}}
+            <p>{{ $topComment->content }}</p>
+            @php
+                if (Auth::check()) {
+                    $hasLike = $topComment->likes->contains(function ($like) {
+                        return $like->user_id == Auth::user()->id;
+                    });
+                } else {
+                    $hasLike = false;
+                }
+            @endphp
+            <div class="thumb-container @if($hasLike)liked @endif">
                 <svg class="like-thumb">
                     <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
                 </svg>
-                <h4>{{ count($topComment->likes) }}</h4>
+                <h4>{{ $topComment->likes_count }}</h4>
             </div>
         </div>
     @else
@@ -100,68 +130,4 @@
         <path class="elem" d="M13.992 63.948c-2.5107-2.508-2.5107-6.576 0-9.0866l16.2973-16.296c2.5107-2.5107 6.5787-2.5107 9.0867 0L55.6773 54.864c2.508 2.508 2.508 6.5787 0 9.0867l-16.3 16.299c-2.508 2.508-6.5773 2.508-9.0853 0z"/>
     </g>
 </svg>
-{{-- <div _id="screen-split"></div>
-<nav>
-Authentication Link
-    <a href="#">
-        <div class="nav-link" >
-            {{ __('Post Feed') }}
-        </div>
-    </a>
-    <a href="#">
-        <div class="nav-link" >
-            {{ __('Search') }}
-        </div>
-    </a>
-    @auth
-    <a href="#">
-        <div class="nav-link" >
-            {{ __('My Posts') }}
-        </div>
-    </a>
-    @else
-    <a href="{{ route('register') }}">
-        <div class="nav-link" >
-            {{ __('Sign Up') }}
-        </div>
-    </a>
-    @endauth
-</nav> --}}
-
-{{-- @guest
-    <a href="{{ route('login') }}">
-        <div class="nav-link" >
-            {{ __('Login') }}
-        </div>
-    </a>
-    @if (Route::has('register'))
-    <a href="{{ route('register') }}">
-        <div class="nav-link" >
-            {{ __('Register') }}
-        </div>
-    </a>
-    @endif
-    <div _id="or-container">
-        <div class="h-sep"></div>
-        <p>Or</p>
-        <div class="h-sep"></div>
-    </div>
-    <a href="{{ route('feed') }}">
-        <div class="nav-link" >
-            {{ __('Browse as Guest') }}
-        </div>
-    </a>
-@else
-<a class="nav-link" >
-    {{ Auth::user()->name }}
-</a>
-<div class="nav-link" >
-    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementBy_id('logout-form').submit();">
-        {{ __('Logout') }}
-    </a>
-    <form _id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" h_idden>
-        @csrf
-    </form>
-</div>
-@endguest --}}
 @endsection
