@@ -19,6 +19,21 @@ Route::get('/', 'HomeController@index')->name('home');
 //     return view('dashboard');
 // })->name('dashboard');
 
+// Routes that can only be used by Auth users
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Routes to display and edit the Auth user profile
+    Route::get('/Me', 'ProfileController@me')->name('me');
+    Route::get('/Me/edit', 'ProfileController@edit')->name('me.edit');
+    // Routes to create and edit posts
+    Route::match(['get', 'post'], '/post/create', 'PostController@create')->name('post.create');
+    Route::match(['get', 'post'], '/post/edit', 'PostController@edit')->name('post.edit');
+    // Route to allow the Auth User to like a 'likeable' item (but NOT access the URI)
+    Route::match(['get', 'post'], '/like', 'LikeController@like');
+    // Route to allow the Auth user to comment on posts / reply to comments (but NOT access the URI)
+    Route::match(['get', 'post'], '/comment/create', 'CommentController@create')->name('comment.create');
+    Route::match(['get', 'post'], '/comment/edit', 'CommentController@edit')->name('comment.edit');
+});
+
 // Routes and controller functions to display feed elements
 Route::get('/feed', 'PostController@index')->name('feed');
 Route::get('/feed/posts', 'PostController@index')->name('posts');
@@ -32,16 +47,4 @@ Route::post('/reply/fetch', 'CommentController@fetch');
 // Route to display site users' profiles
 Route::get('/profile/{user}', 'ProfileController@show');
 
-// Routes that can only be used by Auth users
-Route::middleware(['auth:sanctum'])->group(function () {
-    // Routes to display and edit the Auth user profile
-    Route::get('/Me', 'ProfileController@me')->name('me');
-    Route::get('/Me/edit', 'ProfileController@edit')->name('me.edit');
-    // Route to create new posts
-    Route::get('/post/create', 'PostController@create')->name('post.create');
-    // Route to allow the Auth User to like a 'likeable' item (but NOT access /like)
-    Route::match(['get', 'post'], '/like', 'LikeController@like');
-    // Route to allow the Auth user to comment on posts / reply to comments
-    Route::match(['get', 'post'], '/comment/create', 'CommentController@create')->name('comment.create');
-    Route::match(['get', 'post'], '/comment/edit', 'CommentController@edit')->name('comment.edit');
-});
+

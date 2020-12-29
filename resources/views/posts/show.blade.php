@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section("styles")
-<link href="{{ asset('css/blog.css') }}" rel="stylesheet">
+<link href="{{ asset('css/post.css') }}" rel="stylesheet">
 @endsection
 
 @section("scripts")
@@ -137,13 +137,13 @@
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
-                <input type="text" name="reply" placeholder="Type your reply here!" onfocusout="this.placeholder = 'Type your reply here!'" />
+                <input type="text" name="reply" placeholder="Type your reply here!" onfocusout="this.placeholder = 'Type your reply here!'" autocomplete="off"/>
             </div>
         </form>
     </div>
     @endforeach
 @else
-    <p>This post has no comments yet!</p>
+    <p class="empty">This post has no comments yet!</p>
 @endif
 </div>
 <form id="comment-form">
@@ -152,7 +152,7 @@
         <svg>
             <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
         </svg>
-        <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" />
+        <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" autocomplete="off"/>
     </div>
 </form>
 @endsection

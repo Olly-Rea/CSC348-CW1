@@ -32,7 +32,7 @@ class PostController extends Controller
         // Get first 30 posts
         $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
         // Return them in the feed view
-        return view('feed', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -60,21 +60,23 @@ class PostController extends Controller
      */
     public static function show(Post $post) {
         // Return them in the feed view
-        return view('blog', ['post' => $post]);
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
      * Method to edit an existing Post
      */
-    public static function edit() {
-
+    public static function edit(Post $post) {
+        // // Return them in the feed view
+        // return view('posts.edit', ['post' => $post]);
     }
 
     /**
      * Method to create new Post
      */
     public static function create() {
-
+        // Return them in the feed view
+        return view('posts.create');
     }
 
 }

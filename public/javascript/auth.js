@@ -5,7 +5,7 @@
 // Methods to be called on and/or added to elements on page load/pageshow
 $(window).on("load, pageshow", function() {
     // Handler to display the logout prompt
-    $("#logout").on("click", function() {
+    $("#logout a").on("click", function() {
         // Show the logout prompt
         $("#site-overlay, #logout.prompt").fadeIn(transitionTime);
         // Add cancel-prompt click handler
@@ -77,7 +77,17 @@ $(window).on("load, pageshow", function() {
             success: function(data) {
                 // Check the commentable_type, and add the data to the appropriate container
                 if (commentableType == "Post") {
-                    $("#comment-container").append(data);
+                    $empty = $("#comment-container").find("p.empty");
+                    if($empty.length == 1) {
+                        // ...fadeOut the .empty indicator
+                        $empty.fadeOut(transitionTime);
+                        // and append the data
+                        setTimeout(function () {
+                            $("#comment-container").append(data);
+                        }, transitionTime);
+                    } else {
+                        $("#comment-container").append(data);
+                    }
                 } else {
                     // Get the correct reply-container to append to
                     replyContainer = "#comment-"+commentableID+".reply-container"

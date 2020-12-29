@@ -31,7 +31,7 @@
             </a>
             <h1>All</h1>
         </div>
-        <div id="posts" class="menu-item @if(Request::is('feed/posts') || Request::is('post/*'))active @endif">
+        <div id="posts" class="menu-item @if(Request::is('feed/posts') || (Request::is('post/*') && !(Request::is('post/create') || Request::is('post/edit'))))active @endif">
             <a href="@if(Request::is('feed/posts'))# @else(){{ route('posts') }}@endif">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/blogs.svg#icon') }}"></use>
@@ -55,8 +55,8 @@
             <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         </div>
         @else
-        <div id="create" class="menu-item @if(Request::is('feed/create'))active @endif" >
-            <a href="@if(Request::is('feed/create'))# @else(){{ route('post.create') }}@endif">
+        <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit'))active @endif" >
+            <a href="@if(Request::is('post/create') || Request::is('post/edit'))# @else(){{ route('post.create') }}@endif">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
@@ -95,16 +95,15 @@
     @auth
     <div id="notification-container" style="display: none">
         <p>No new notifications!</p>
-        {{-- <h4 class="notification">No new notifications!</h4>
-        <h4 class="notification">No new notifications!</h4>
-        <h4 class="notification">No new notifications!</h4>
-        <h4 class="notification">No new notifications!</h4> --}}
+        {{-- <h4 class="notification">Demo notification!</h4> --}}
+        {{-- <h4 class="notification">Demo notification!</h4> --}}
+        {{-- <h4 class="notification">Demo notification!</h4> --}}
     </div>
     @endauth
 </div>
 <div id="site-overlay" style="display: none">
     @auth
-    <div id="logout" class="prompt">
+    <div id="logout" class="prompt" style="display: none">
         <h1>Are you sure you want to logout?</h1>
         <button onclick="window.location.href='{{ route('logout') }}'; document.getElementById('logout-form').submit();">Logout</button>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" hidden>
@@ -114,11 +113,15 @@
         <p class="cancel-prompt">Cancel</p>
     </div>
     @else
-    <div id="sign-up" class="prompt">
+    <div id="sign-up" class="prompt" style="display: none">
         <h1></h1>
         <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         <p class="cancel-prompt">Cancel</p>
     </div>
     @endauth
+    <div id="message" class="prompt" style="display: none">
+        <h1></h1>
+        <button>Okay</button>
+    </div>
 </div>
 @endsection

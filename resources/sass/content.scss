@@ -380,7 +380,8 @@
 main {
     @include flexDisplay(column, flex-start, center);
 
-    padding-top: 9rem;
+    padding: 9rem 0;
+
     min-height: calc(100vh - 10rem);
 
     .content-panel,

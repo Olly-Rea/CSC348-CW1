@@ -98,7 +98,7 @@
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
-                <input type="text" name="reply" placeholder="Type your reply here!" onfocusout="this.placeholder = 'Type your reply here!'" />
+                <input type="text" name="reply" placeholder="Type your reply here!" onfocusout="this.placeholder = 'Type your reply here!'" autocomplete="off"/>
             </div>
         </form>
     </div>

@@ -33,7 +33,7 @@ class ProfileController extends Controller
         if(Auth::check() && Auth::user()->id == $user->id) {
             return redirect('/Me');
         } else {
-            return view('profile', ['user' => $user]);
+            return view('profile.show', ['user' => $user]);
         }
 
     }
@@ -43,7 +43,7 @@ class ProfileController extends Controller
      */
     public static function me() {
         if (Auth::check()) {
-            return view('profile', ['user' => Auth::user()]);
+            return view('profile.show', ['user' => Auth::user()]);
         } else {
             abort(404);
         }

@@ -18,6 +18,18 @@ $(window).on("load, pageshow", function() {
     setTimeout(function () {
         $("#logo, #feed-nav, main, footer").fadeIn(transitionTime);
     }, transitionTime);
+
+    // Handler for search submission
+    $("#search-box").on("submit", function() {
+        // Prevent default action
+        event.preventDefault();
+        // Reset value (and drop focus)
+        $("#search-box input").val("");
+        $("#search-box input").trigger("blur");
+        // Output WIP message to the user
+        messagePrompt("Feature coming soon!");
+    });
+
 });
 
 // Method to be called on page unload
@@ -29,3 +41,16 @@ $(window).bind('beforeunload',function(){
         $("#loading-screen").fadeIn(transitionTime);
     }, transitionTime);
 });
+
+// Method to show the 'message' prompt
+function messagePrompt(msg) {
+    // Alter the message prompt message
+    $("#message.prompt > h1").html(msg);
+    // Show the message prompt
+    $("#site-overlay, #message.prompt").fadeIn(transitionTime);
+    // Add close-prompt click handler
+    $("#message.prompt button").on("click", function() {
+        $("#message.prompt button").off("click");
+        $("#site-overlay, #message.prompt").fadeOut(transitionTime);
+    });
+}

@@ -760,8 +760,8 @@ footer a {
 }
 
 #feed-nav #nav-right #create.active a svg {
-  fill: #6f15e6;
-  stroke: #6f15e6;
+  fill: #7929f0;
+  stroke: #7929f0;
 }
 
 #feed-nav #nav-right #create a:hover {
@@ -769,8 +769,8 @@ footer a {
 }
 
 #feed-nav #nav-right #create a:hover svg {
-  fill: #8333fa;
-  stroke: #8333fa;
+  fill: #882efa;
+  stroke: #882efa;
 }
 
 #feed-nav #nav-right #create a:active {
@@ -778,8 +778,8 @@ footer a {
 }
 
 #feed-nav #nav-right #create a:active svg {
-  fill: #5b01d2;
-  stroke: #5b01d2;
+  fill: #6515e6;
+  stroke: #6515e6;
 }
 
 #feed-nav #nav-right #notifications.active a {
@@ -930,7 +930,7 @@ main {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  padding-top: 9rem;
+  padding: 9rem 0;
   min-height: calc(100vh - 10rem);
 }
 
@@ -1147,7 +1147,7 @@ main .content-panel .tag-container a.cooking {
 
 main .content-panel .tag-container a.gaming {
   color: #fafafa;
-  background-color: #8333fa;
+  background-color: #882efa;
 }
 
 main .content-panel .tag-container a.nsfw {
@@ -1198,7 +1198,7 @@ main svg.loading-graphic {
 }
 
 main {
-  padding: 14rem 0;
+  padding-top: 14rem;
 }
 
 main .profile-image-container {
