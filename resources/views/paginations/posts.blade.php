@@ -2,7 +2,12 @@
 <div class="content-panel">
     <input value="post-{{ $post->id }}" hidden readonly>
     <div class="overlay">
-        <button onclick="window.location.href='{{ route('post', $post->id) }}'">Show more</button>
+        <div class="button-container">
+            <button onclick="window.location.href='{{ route('post', $post->id) }}'">Show more</button>
+            @if(Auth::check() && Auth::user()->id == $post->user->id)
+            <button onclick="window.location.href='{{ route('post.edit', $post->id) }}'">Edit</button>
+            @endif
+        </div>
     </div>
     @php
         if (Auth::check()) {

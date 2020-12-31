@@ -37,10 +37,10 @@
         </div>
         <h1>About</h1>
     </div>
-    <div id="posts" class="menu-item">
+    <div id="posts" class="menu-item active">
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/blogs.svg#icon') }}"></use>
+                <use xlink:href="{{ asset('images/graphics/post.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Posts</h1>
@@ -65,155 +65,158 @@
     @endif
 </div>
 
-{{-- -------------------------------------------------------------------------------------------------- --}}
+<div class="screen-split-horizontal"></div>
 
-{{-- @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updateProfileInformation()))
+@forelse ($user->posts()->orderBy('created_at', 'DESC')->get() as $post)
+    <div class="content-panel">
+        <input value="post-{{ $post->id }}" hidden readonly>
+        <div class="overlay">
+            <div class="button-container">
+                <button onclick="window.location.href='{{ route('post', $post->id) }}'">Show more</button>
+                @if(Auth::check() && Auth::user()->id == $post->user->id)
+                <button onclick="window.location.href='{{ route('post.edit', $post->id) }}'">Edit</button>
+                @endif
+            </div>
+        </div>
+        @php
+            if (Auth::check()) {
+                $hasLike = $post->likes->contains(function ($like) {
+                    return $like->user_id == Auth::user()->id;
+                });
+            } else {
+                $hasLike = false;
+            }
+        @endphp
+        <div class="thumb-container @if($hasLike)liked @endif">
+        <svg class="like-thumb">
+                <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+            </svg>
+            <h3>{{ count($post->likes) }}</h3>
+        </div>
+        <a @if($user->id != $post->user->id)href="/profile/{{ $post->user->id }}" @endif()class="author-info">
+            <div class="profile-image-container">
+                <div class="profile-image">
+                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
+                </div>
+            </div>
+            <div>
+                <h3>{{ $post->user->first_name }} {{ $post->user->last_name }}</h3>
+                {{-- <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p> --}}
+                @if(date('dmY') == date('dmY', strtotime($post->created_at)))
+                <p>Today • {{ date("g:ia", strtotime($post->created_at)) }}</p>
+                @else
+                <p>{{ date("j F Y", strtotime($post->created_at)) }}</p>
+                @endif
+            </div>
+        </a>
+        <h1><b>{{ $post->title }}</b></h1>
+        <div class="tag-container">
+            @forelse($post->tags as $tag)
+            <a href="#" class="{{ strtolower($tag->name) }}">{{ $tag->name }}</a>
+            @empty
+            <p>No Tags!</p>
+            @endforelse
+        </div>
+        <div class="content-preview">
+        @php
+            $firstContent = $post->content->first();
+        @endphp
+        @if($firstContent->type == 'text')
+            <p>{{ $firstContent->content }}</p>
+        @endif
+        @if($firstContent->type == 'image')
+            <div class="image-container">
+                <img src="{{ $firstContent->loadImage() }}">
+            </div>
+        @endif
+            <div class="content-fadeout"></div>
+        </div>
+        <div class="comment-container">
+        @if($post->comments()->count() > 0)
+            <h3>Top Comment:</h3>
+            @php
+                $topComment = $post->comments()->withCount('likes')->orderBy('likes_count', 'DESC')->first();
+            @endphp
+            <div class="comment">
+                <div class="author-info">
+                    <div class="profile-image-container">
+                        <div class="profile-image">
+                            <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
+                        {{-- <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • commentable_id: {{ $topComment->commentable->id }}</p> --}}
+                        @if(date('dmY') == date('dmY', strtotime($topComment->created_at)))
+                        <p>Today • {{ date("g:ia", strtotime($topComment->created_at)) }}</p>
+                        @else
+                        <p>{{ date("j F Y", strtotime($topComment->created_at)) }}</p>
+                        @endif
+                    </div>
+                </div>
+                {{-- <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }}</p> --}}
+                <p>{{ $topComment->content }}</p>
+                @php
+                    if (Auth::check()) {
+                        $hasLike = $topComment->likes->contains(function ($like) {
+                            return $like->user_id == Auth::user()->id;
+                        });
+                    } else {
+                        $hasLike = false;
+                    }
+                @endphp
+                <div class="thumb-container @if($hasLike)liked @endif">
+                    <svg class="like-thumb">
+                        <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                    </svg>
+                    <h4>{{ count($topComment->likes) }}</h4>
+                </div>
+            </div>
+        @else
+            <div class="comment">
+                <p><i>This post has no comments yet!</i></p>
+            </div>
+        @endif
+        </div>
+    </div>
+@empty
+    <p>@if(Request::is('Me'))You have @else()This user has @endif()no posts yet!</p>
+@endforelse
+
+@endsection
+
+@section('overlays')
+<div id="edit-profile" style="display: none">
+    @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updateProfileInformation()))
     @livewire('profile.update-profile-information-form')
 
     <x-jet-section-border />
-@endif
+    @endif
 
-@if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+    @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
     <div class="mt-10 sm:mt-0">
         @livewire('profile.update-password-form')
     </div>
 
     <x-jet-section-border />
-@endif
+    @endif
 
-@if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+    @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
     <div class="mt-10 sm:mt-0">
         @livewire('profile.two-factor-authentication-form')
     </div>
 
     <x-jet-section-border />
-@endif
+    @endif
 
-<div class="mt-10 sm:mt-0">
+    <div class="mt-10 sm:mt-0">
     @livewire('profile.logout-other-browser-sessions-form')
-</div>
+    </div>
 
-<x-jet-section-border />
+    <x-jet-section-border />
 
-<div class="mt-10 sm:mt-0">
+    <div class="mt-10 sm:mt-0">
     @livewire('profile.delete-user-form')
-</div> --}}
-
-{{-- -------------------------------------------------------------------------------------------------- --}}
-
-{{-- <h1>@if(Request::is('Me'))My @else(){{ $user->first_name }}'s @endif()Posts</h1> --}}
-
-<div class="screen-split-horizontal"></div>
-
-@forelse ($user->posts as $post)
-<div class="content-panel">
-    <input value="post-{{ $post->id }}" hidden readonly>
-    <div class="overlay">
-        <button onclick="window.location.href='{{ route('post', $post->id) }}'">Show more</button>
-    </div>
-    @php
-        if (Auth::check()) {
-            $hasLike = $post->likes->contains(function ($like) {
-                return $like->user_id == Auth::user()->id;
-            });
-        } else {
-            $hasLike = false;
-        }
-    @endphp
-    <div class="thumb-container @if($hasLike)liked @endif">
-    <svg class="like-thumb">
-            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
-        </svg>
-        <h3>{{ count($post->likes) }}</h3>
-    </div>
-    <a href="/profile/{{ $post->user->id }}" class="author-info">
-        <div class="profile-image-container">
-            <div class="profile-image">
-                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
-            </div>
-        </div>
-        <div>
-            <h3>{{ $post->user->first_name }} {{ $post->user->last_name }}</h3>
-            {{-- <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p> --}}
-            @if(date('dmY') == date('dmY', strtotime($post->created_at)))
-            <p>Today • {{ date("g:ia", strtotime($post->created_at)) }}</p>
-            @else
-            <p>{{ date("j F Y", strtotime($post->created_at)) }}</p>
-            @endif
-        </div>
-    </a>
-    <h1><b>{{ $post->title }}</b></h1>
-    <div class="tag-container">
-        @forelse($post->tags as $tag)
-        <a href="#" class="{{ strtolower($tag->name) }}">{{ $tag->name }}</a>
-        @empty
-        <p>No Tags!</p>
-        @endforelse
-    </div>
-    <div class="content-preview">
-    @php
-        $firstContent = $post->content->first();
-    @endphp
-    @if($firstContent->type == 'text')
-        <p>{{ $firstContent->content }}</p>
-    @endif
-    @if($firstContent->type == 'image')
-        <div class="image-container">
-            <img src="{{ $firstContent->loadImage() }}">
-        </div>
-    @endif
-        <div class="content-fadeout"></div>
-    </div>
-    <div class="comment-container">
-    @if($post->comments()->count() > 0)
-        <h3>Top Comment:</h3>
-        @php
-            $topComment = $post->comments()->withCount('likes')->orderBy('likes_count', 'DESC')->first();
-        @endphp
-        <div class="comment">
-            <div class="author-info">
-                <div class="profile-image-container">
-                    <div class="profile-image">
-                        <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
-                    </div>
-                </div>
-                <div>
-                    <h3>{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}</h3>
-                    {{-- <p>{{ date("j F Y", strtotime($topComment->created_at)) }} • commentable_id: {{ $topComment->commentable->id }}</p> --}}
-                    @if(date('dmY') == date('dmY', strtotime($topComment->created_at)))
-                    <p>Today • {{ date("g:ia", strtotime($topComment->created_at)) }}</p>
-                    @else
-                    <p>{{ date("j F Y", strtotime($topComment->created_at)) }}</p>
-                    @endif
-                </div>
-            </div>
-            {{-- <p>{{ $topComment->content }} • comment_id: {{ $topComment->id }}</p> --}}
-            <p>{{ $topComment->content }}</p>
-            @php
-                if (Auth::check()) {
-                    $hasLike = $topComment->likes->contains(function ($like) {
-                        return $like->user_id == Auth::user()->id;
-                    });
-                } else {
-                    $hasLike = false;
-                }
-            @endphp
-            <div class="thumb-container @if($hasLike)liked @endif">
-                <svg class="like-thumb">
-                    <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
-                </svg>
-                <h4>{{ count($topComment->likes) }}</h4>
-            </div>
-        </div>
-    @else
-        <div class="comment">
-            <p><i>This post has no comments yet!</i></p>
-        </div>
-    @endif
     </div>
 </div>
-@empty
-<p>@if(Request::is('Me'))You have @else()This user has @endif()no posts yet!</p>
-@endforelse
-
 @endsection

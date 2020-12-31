@@ -12,9 +12,6 @@ class Content extends Model
 
     // Disable timestamps
     public $timestamps = false;
-    // Set custom primary key
-    protected $primaryKey = ['user_id', 'stock_id'];
-    public $incrementing = false;
 
     /**
      * The table associated with the model.

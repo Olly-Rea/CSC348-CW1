@@ -90,13 +90,13 @@ main {
 
             transition: opacity $transitionTime ease-in-out;
 
-            button,
-            input[type="submit"] {
+            .button-container {
                 position: absolute;
-
                 bottom: 4rem;
                 left: 50%;
                 transform: translateX(-50%);
+
+                @include flexDisplay(row, center, center);
             }
 
         }
@@ -133,9 +133,9 @@ main {
 
             * {
                 transition: transform $transitionTime ease-in-out,
-                            background-color $transitionTime ease-in-out,
-                            stroke $transitionTime ease-in-out,
-                            fill $transitionTime ease-in-out;
+                            background-color $transitionTime ease-in-out 0.02s,
+                            stroke $transitionTime ease-in-out -0.02s,
+                            fill $transitionTime ease-in-out -0.02s;
             }
 
             div {
@@ -173,6 +173,80 @@ main {
                 white-space: nowrap;
             }
         }
+
+        #posts {
+            &.active {
+                div {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellow;
+                        stroke: $appYellow;
+                    }
+                }
+                h1 {
+                    color: $appYellow;
+                }
+            }
+            div {
+                &:hover {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellowLight;
+                        stroke: $appYellowLight;
+                    }
+                    & + h1 {
+                        color: $appYellowLight;
+                    }
+                }
+                &:active {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellowDark;
+                        stroke: $appYellowDark;
+                    }
+                    & + h1 {
+                        color: $appYellowDark;
+                    }
+                }
+            }
+        }
+        #likes {
+            &.active {
+                div {
+                    background-color: $appGreenUnderlay;
+                    svg {
+                        fill: $appGreen;
+                        stroke: $appGreen;
+                    }
+                }
+                h1 {
+                    color: $appGreen;
+                }
+            }
+            div {
+                &:hover {
+                    background-color: $appGreenUnderlay;
+                    svg {
+                        fill: $appGreenLight;
+                        stroke: $appGreenLight;
+                    }
+                    & + h1 {
+                        color: $appGreenLight;
+                    }
+                }
+                &:active {
+                    background-color: $appGreenUnderlayDark;
+                    svg {
+                        fill: $appGreenDark;
+                        stroke: $appGreenDark;
+                    }
+                    & + h1 {
+                        color: $appGreenDark;
+                    }
+                }
+            }
+        }
+
     }
 
 

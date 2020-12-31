@@ -25,11 +25,12 @@
         @include flexDisplay(row, space-between, center);
 
         .menu-item {
-            @include flexDisplay(column, center, center);
+            position: relative;
 
             margin: 0 1rem;
 
             width: 4.4rem;
+            height: 4.4rem;
             font-size: 70%;
 
             user-select: none;
@@ -41,8 +42,15 @@
                             fill $transitionTime ease-in-out -0.02s;
             }
 
+            a,
+            h1 {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
             a {
-                position: relative;
+                top: 0;
 
                 @include flexDisplay(column, center, center);
 
@@ -62,17 +70,19 @@
                 }
 
                 &:hover {
-                    transform: scale(1.12);
+                    transform: translateX(-50%) scale(1.12);
                     & + h1 {
                         opacity: 100%;
                     }
                 }
                 &:active {
-                    transform: scale(0.96);
+                    transform: translateX(-50%) scale(0.96);
                 }
             }
 
             h1 {
+                top: 100%;
+
                 margin: 1rem 0;
 
                 min-width: 4rem;
@@ -84,6 +94,10 @@
                 text-align: center;
                 font-weight: bold;
                 opacity: 0%;
+
+                pointer-events: none;
+
+                transition: opacity $transitionTime ease-in-out,
             }
         }
         // .menu-item:not(.active) {
@@ -369,8 +383,17 @@
             margin: 1rem 0;
         }
 
-        p.cancel-prompt {
+        p.cancel-prompt,
+        p.close-prompt {
             cursor: pointer;
+            transition: transform $transitionTime ease-in-out;
+
+            &:hover {
+                transform: scale(1.08);
+            }
+            &:active {
+                transform: scale(0.96);
+            }
         }
     }
 
@@ -511,6 +534,15 @@ main {
             }
             a {
                 letter-spacing: 0.04rem;
+                transition: transform $transitionTime ease-in-out;
+
+                &:hover {
+                    transform: scale(1.08);
+                }
+                &:active {
+                    transform: scale(0.96);
+                }
+
                 &.home {
                     background-color: $appYellow;
                 }

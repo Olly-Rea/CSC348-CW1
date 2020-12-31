@@ -1,0 +1,303 @@
+@import 'content';
+
+#post-form {
+    @include flexDisplay(column, center, center);
+
+    width: 60%;
+
+    textarea {
+        margin: 0;
+
+        width: calc(100% - 3.2rem);
+        padding: 1.6rem;
+
+        background-color: $panelColor;
+
+        resize: vertical;
+        // resize: none;
+    }
+
+    .content-panel,
+    .text-container,
+    .image-container {
+        position: relative;
+        border-radius: $inputCorner;
+        margin: 1rem 0;
+    }
+
+    .content-panel,
+    .image-container {
+        box-shadow: 0 0 0.1rem 0 $shdwClr;
+    }
+
+    .text-container,
+    .image-container {
+        width: 100%;
+
+        .overlay {
+            @include flexDisplay(row, center, center);
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: $overlayColor;
+            opacity: 0;
+
+            transition: opacity $transitionTime ease-in-out;
+
+            #move.menu-item {
+                cursor: grab;
+            }
+            .menu-item {
+                position: relative;
+
+                @include flexDisplay(column, center, center);
+
+                margin: 0 1.4rem;
+
+                height: 5rem;
+                width: 5rem;
+                border-radius: 50%;
+                background-color: rgba(255,255,255, 0.32);
+
+                transition: transform $transitionTime ease-in-out,
+                    background-color $transitionTime ease-in-out,
+                    stroke $transitionTime ease-in-out,
+                    fill $transitionTime ease-in-out;
+
+                cursor: pointer;
+                user-select: none;
+
+                svg {
+                    height: 56%;
+                    width: 56%;
+
+                    fill: $inputColor;
+                    stroke: $inputColor;
+                }
+
+                &:hover {
+                    transform: scale(1.12);
+                }
+                &:active {
+                    transform: scale(0.96);
+                }
+            }
+        }
+
+        &:hover {
+            .overlay {
+                opacity: 1;
+            }
+        }
+        &:active {
+            .overlay {
+                opacity: 1;
+            }
+        }
+
+    }
+
+    .content-panel {
+        width: calc(100% - 4rem);
+
+        input {
+            margin: 0;
+            margin-bottom: 0.32rem;
+            margin-left: -0.6rem;
+
+            padding: 0.2rem 0.6rem;
+
+            font-size: 3rem;
+            font-weight: bold;
+
+            background-color: inherit;
+            box-shadow: none;
+
+            &:hover {
+                background-color: $logoLight;
+            }
+        }
+
+        .tag-container {
+            p {
+                cursor: pointer;
+                transition: transform $transitionTime ease-in-out;
+
+                &:hover {
+                    transform: scale(1.08);
+                }
+                &:active {
+                    transform: scale(0.96);
+                }
+            }
+        }
+
+
+    }
+
+    .text-container {
+        .overlay {
+            border-radius: $inputCorner;
+            height: calc(100% - 0.3rem);
+        }
+    }
+
+    .image-container {
+        display: inline-block;
+
+        padding-top: 56.25%; // Force 16:9 Aspect Ratio
+        background-color: $panelColor;
+        overflow: hidden;
+
+        #edit.menu-item {
+            position: relative;
+            input {
+                display: none;
+            }
+            svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        img,
+        p {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            padding: 0;
+            margin: 0;
+        }
+        img {
+            width: 100%;
+            // max-height: 100.6%;
+            // max-width: 100.6%;
+
+            object-fit: contain;
+        }
+
+        svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            fill: $graphicColor;
+            stroke: $graphicColor;
+        }
+
+        &.focused {
+            .overlay {
+                transition: opacity calc(#{$transitionTime} * 1.5) ease-in-out;
+
+                opacity: 1 !important;
+            }
+        }
+
+        // .image-caption {
+        //     position: absolute;
+        //     bottom: 1rem;
+        //     left: 50%;
+        //     transform: translateX(-50%);
+
+        //     width: calc(100% - 2rem);
+        //     min-height: 4rem;
+        //     border-radius: $panelCorner;
+        //     color: $panelColor;
+
+        //     background-color: $overlayColor;
+        // }
+
+    }
+
+}
+
+#form-nav {
+    @include flexDisplay(row, center, center);
+
+    margin: 3rem 0;
+    margin-bottom: -1rem;
+
+    .menu-item {
+        @include flexDisplay(column, center, center);
+
+        margin: 0 2rem;
+
+        width: 5rem;
+        color: $footerColor;
+        // font-size: 70%;
+
+        * {
+            transition: transform $transitionTime ease-in-out,
+                        background-color $transitionTime ease-in-out,
+                        stroke $transitionTime ease-in-out,
+                        fill $transitionTime ease-in-out;
+        }
+
+        div {
+            position: relative;
+
+            height: 5rem;
+            width: 5rem;
+            border-radius: 50%;
+            background-color: $panelAccent;
+
+            cursor: pointer;
+            user-select: none;
+
+            svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                height: 56%;
+                width: 56%;
+
+                fill: $graphicColor;
+                stroke: $graphicColor;
+            }
+
+            &:hover {
+                transform: scale(1.12);
+            }
+            &:active {
+                transform: scale(0.96);
+            }
+        }
+        h1 {
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+    }
+
+    #save.menu-item {
+        input {
+            display: none;
+        }
+    }
+
+}
+
+#tags.prompt {
+    #relevent-tags {
+        @include flexDisplay(column, flex-start, space-between);
+        // flex-wrap: wrap;
+
+        margin: 2rem 0 1rem 0;
+
+        width: 100%;
+    }
+}

@@ -50,7 +50,12 @@ $(window).on("load, pageshow", function() {
                 }
             },
             error: function(data) {
-                console.log(data);
+                if (likeableType == "Post") {
+                    errorPrompt("Error liking this post!");
+                } else {
+                    errorPrompt("Error liking this comment!");
+                }
+                // console.log(data);
             }
         });
     });
@@ -114,7 +119,12 @@ $(window).on("load, pageshow", function() {
                 $input.val("");
             },
             error: function(data) {
-                console.log(data);
+                if (commentableType == "Post") {
+                    errorPrompt("Error commenting on this post!");
+                } else {
+                    errorPrompt("Error replying to this comment!");
+                }
+                // console.log(data);
             }
         });
     });

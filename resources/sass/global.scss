@@ -230,11 +230,16 @@ form {
     input {
         align-self: center;
     }
-    // a, input:not([type="submit"]) {
-    //     width: 90%;
-    // }
     a {
         margin: 2vh 0;
+    }
+
+    p.form-error-msg {
+        align-self: flex-start;
+
+        margin: 1rem 0;
+        margin-top: -0.28rem;
+        color: $appRedDark;
     }
 
     .form-box {
@@ -307,7 +312,7 @@ input:not([type="checkbox"]) {
     border: none;
     border-radius: $inputCorner;
 
-    transition: all $transitionTime ease-in-out;
+    transition: box-shadow $transitionTime ease-in-out;
 
     &:hover {
         // background-color: $offBack;
@@ -364,7 +369,7 @@ label {
     // Checkbox formatting
     &.checkOption,
     &.subOption {
-        display: block;
+        display: inline-block;
         position: relative;
         margin: 0;
         margin-bottom: 0.6vh;

@@ -70,6 +70,9 @@ function fetch_data() {
                 // Output an "end of feed" message
                 $("main").append("<p>That's all folks!</p>");
             }
+        },
+        error: function() {
+            errorPrompt("Error loading feed content!");
         }
     });
 }

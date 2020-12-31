@@ -66,7 +66,7 @@
 @endif
 @if($content->type == 'image')
 <div class="image-panel">
-    <img src="{{ $content->loadImage() }}" alt="">
+    <img src="{{ $content->loadImage() }}">
     @if($content->sub_content != null)
     <div class="image-caption">
         <p>{{ $content->sub_content }}</p>

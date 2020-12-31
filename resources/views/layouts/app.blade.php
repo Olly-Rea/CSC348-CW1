@@ -31,10 +31,10 @@
             </a>
             <h1>All</h1>
         </div>
-        <div id="posts" class="menu-item @if(Request::is('feed/posts') || (Request::is('post/*') && !(Request::is('post/create') || Request::is('post/edit'))))active @endif">
+        <div id="posts" class="menu-item @if(Request::is('feed/posts') || (Request::is('post/*') && !(Request::is('post/create') || Request::is('post/edit/*'))))active @endif">
             <a href="@if(Request::is('feed/posts'))# @else(){{ route('posts') }}@endif">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/blogs.svg#icon') }}"></use>
+                    <use xlink:href="{{ asset('images/graphics/post.svg#icon') }}"></use>
                 </svg>
             </a>
             <h1>Posts</h1>
@@ -55,13 +55,17 @@
             <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         </div>
         @else
-        <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit'))active @endif" >
-            <a href="@if(Request::is('post/create') || Request::is('post/edit'))# @else(){{ route('post.create') }}@endif">
+        <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit/*'))active @endif" >
+            <a href="@if(Request::is('post/create') || Request::is('post/edit/*'))# @elseif((Auth::check() && isset($post)) && !(Request::is('Me')) && Auth::user()->id == $post->user->id){{ route('post.edit', $post->id) }} @else(){{ route('post.create') }}@endif">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
             </a>
-            <h1>Create</h1>
+            @if((Auth::check() && isset($post)) && !(Request::is('Me')) && Auth::user()->id == $post->user->id)
+                <h1>Edit</h1>
+            @else
+                <h1>Create</h1>
+            @endif
         </div>
         <div id="notifications" class="menu-item" >
             <a>
@@ -123,5 +127,11 @@
         <h1></h1>
         <button>Okay</button>
     </div>
+    <div id="error" class="prompt" style="display: none">
+        <h1></h1>
+        <p>Try reloading the page and trying again</p>
+        <button>Okay</button>
+    </div>
+    @yield('overlays')
 </div>
 @endsection

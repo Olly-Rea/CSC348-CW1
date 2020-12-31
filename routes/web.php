@@ -24,9 +24,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Routes to display and edit the Auth user profile
     Route::get('/Me', 'ProfileController@me')->name('me');
     Route::get('/Me/edit', 'ProfileController@edit')->name('me.edit');
-    // Routes to create and edit posts
-    Route::match(['get', 'post'], '/post/create', 'PostController@create')->name('post.create');
-    Route::match(['get', 'post'], '/post/edit', 'PostController@edit')->name('post.edit');
+    // Routes to create and edit (and persist changes to) posts
+    Route::get('/post/create', 'PostController@create')->name('post.create');
+    Route::post('/post/create', 'PostController@save')->name('post.save');
+    Route::get('/post/edit/{post}', 'PostController@edit')->name('post.edit');
+    Route::post('/post/edit/{post}', 'PostController@update')->name('post.update');
+    // Routes to add new elements to posts
+    Route::get('/post/add/text', 'PostController@addTextInput')->name('post.add.text');
+    Route::get('/post/add/image', 'PostController@addImageInput')->name('post.add.image');
     // Route to allow the Auth User to like a 'likeable' item (but NOT access the URI)
     Route::match(['get', 'post'], '/like', 'LikeController@like');
     // Route to allow the Auth user to comment on posts / reply to comments (but NOT access the URI)

@@ -44,6 +44,9 @@
                 </a>
             @endif
         </form>
+
+        <a href="{{ route('register') }}">Don't have an account? Sign up here!</a>
+
     </div>
 
     {{-- <div id="screen-split"></div> --}}

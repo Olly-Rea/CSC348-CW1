@@ -87,13 +87,13 @@ main {
 
             transition: opacity $transitionTime ease-in-out;
 
-            button,
-            input[type="submit"] {
+            .button-container {
                 position: absolute;
-
                 bottom: 4rem;
                 left: 50%;
                 transform: translateX(-50%);
+
+                @include flexDisplay(row, center, center);
             }
 
         }

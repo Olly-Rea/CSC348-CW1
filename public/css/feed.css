@@ -316,6 +316,14 @@ form a {
   margin: 2vh 0;
 }
 
+form p.form-error-msg {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin: 1rem 0;
+  margin-top: -0.28rem;
+  color: #d03795;
+}
+
 form .form-box {
   position: relative;
   height: 4rem;
@@ -375,8 +383,10 @@ input:not([type="checkbox"]) {
           box-shadow: 0 0 0.1rem 0 #8c8c8c;
   border: none;
   border-radius: 1rem;
-  -webkit-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
 }
 
 textarea:hover,
@@ -430,7 +440,7 @@ label.locked {
 }
 
 label.checkOption, label.subOption {
-  display: block;
+  display: inline-block;
   position: relative;
   margin: 0;
   margin-bottom: 0.6vh;
@@ -553,21 +563,10 @@ footer a {
 }
 
 #feed-nav #nav-left .menu-item, #feed-nav #nav-center .menu-item, #feed-nav #nav-right .menu-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  position: relative;
   margin: 0 1rem;
   width: 4.4rem;
+  height: 4.4rem;
   font-size: 70%;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -582,8 +581,18 @@ footer a {
   transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out 0.02s, stroke 0.1s ease-in-out -0.02s, fill 0.1s ease-in-out -0.02s, -webkit-transform 0.1s ease-in-out;
 }
 
+#feed-nav #nav-left .menu-item a,
+#feed-nav #nav-left .menu-item h1, #feed-nav #nav-center .menu-item a,
+#feed-nav #nav-center .menu-item h1, #feed-nav #nav-right .menu-item a,
+#feed-nav #nav-right .menu-item h1 {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
 #feed-nav #nav-left .menu-item a, #feed-nav #nav-center .menu-item a, #feed-nav #nav-right .menu-item a {
-  position: relative;
+  top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -612,8 +621,8 @@ footer a {
 }
 
 #feed-nav #nav-left .menu-item a:hover, #feed-nav #nav-center .menu-item a:hover, #feed-nav #nav-right .menu-item a:hover {
-  -webkit-transform: scale(1.12);
-          transform: scale(1.12);
+  -webkit-transform: translateX(-50%) scale(1.12);
+          transform: translateX(-50%) scale(1.12);
 }
 
 #feed-nav #nav-left .menu-item a:hover + h1, #feed-nav #nav-center .menu-item a:hover + h1, #feed-nav #nav-right .menu-item a:hover + h1 {
@@ -621,11 +630,12 @@ footer a {
 }
 
 #feed-nav #nav-left .menu-item a:active, #feed-nav #nav-center .menu-item a:active, #feed-nav #nav-right .menu-item a:active {
-  -webkit-transform: scale(0.96);
-          transform: scale(0.96);
+  -webkit-transform: translateX(-50%) scale(0.96);
+          transform: translateX(-50%) scale(0.96);
 }
 
 #feed-nav #nav-left .menu-item h1, #feed-nav #nav-center .menu-item h1, #feed-nav #nav-right .menu-item h1 {
+  top: 100%;
   margin: 1rem 0;
   min-width: 4rem;
   padding: 0.5rem;
@@ -635,6 +645,9 @@ footer a {
   text-align: center;
   font-weight: bold;
   opacity: 0%;
+  pointer-events: none;
+  -webkit-transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
 }
 
 #feed-nav #nav-left {
@@ -912,8 +925,25 @@ footer a {
   margin: 1rem 0;
 }
 
-#site-overlay .prompt p.cancel-prompt {
+#site-overlay .prompt p.cancel-prompt,
+#site-overlay .prompt p.close-prompt {
   cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+#site-overlay .prompt p.cancel-prompt:hover,
+#site-overlay .prompt p.close-prompt:hover {
+  -webkit-transform: scale(1.08);
+          transform: scale(1.08);
+}
+
+#site-overlay .prompt p.cancel-prompt:active,
+#site-overlay .prompt p.close-prompt:active {
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
 }
 
 main {
@@ -1115,6 +1145,20 @@ main .content-panel .tag-container p {
 
 main .content-panel .tag-container a {
   letter-spacing: 0.04rem;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+main .content-panel .tag-container a:hover {
+  -webkit-transform: scale(1.08);
+          transform: scale(1.08);
+}
+
+main .content-panel .tag-container a:active {
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
 }
 
 main .content-panel .tag-container a.home {
@@ -1283,13 +1327,25 @@ main .content-panel .overlay {
   transition: opacity 0.1s ease-in-out;
 }
 
-main .content-panel .overlay button,
-main .content-panel .overlay input[type="submit"] {
+main .content-panel .overlay .button-container {
   position: absolute;
   bottom: 4rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 main .content-panel:hover {

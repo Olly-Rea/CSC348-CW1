@@ -34,12 +34,7 @@ $(window).on("load, pageshow", function() {
 
 // Method to be called on page unload
 $(window).bind('beforeunload',function(){
-    // Fade out all page elements
-    $("#logo, #feed-nav, main, footer, #site-overlay").fadeOut(transitionTime);
-    // Fade in loading screen
-    setTimeout(function () {
-        $("#loading-screen").fadeIn(transitionTime);
-    }, transitionTime);
+    windowUnload();
 });
 
 // Method to show the 'message' prompt
@@ -53,4 +48,26 @@ function messagePrompt(msg) {
         $("#message.prompt button").off("click");
         $("#site-overlay, #message.prompt").fadeOut(transitionTime);
     });
+}
+// Method to show the 'error' prompt
+function errorPrompt(msg) {
+    // Alter the error prompt message
+    $("#error.prompt > h1").html(msg);
+    // Show the error prompt
+    $("#site-overlay, #error.prompt").fadeIn(transitionTime);
+    // Add close-prompt click handler
+    $("#error.prompt button").on("click", function() {
+        $("#error.prompt button").off("click");
+        $("#site-overlay, #error.prompt").fadeOut(transitionTime);
+    });
+}
+
+// Method to "unload" the window (fade out all page elements and fade in loading graphic)
+function windowUnload() {
+    // Fade out all page elements
+    $("#logo, #feed-nav, main, footer, #site-overlay").fadeOut(transitionTime);
+    // Fade in loading screen
+    setTimeout(function () {
+        $("#loading-screen").fadeIn(transitionTime);
+    }, transitionTime);
 }

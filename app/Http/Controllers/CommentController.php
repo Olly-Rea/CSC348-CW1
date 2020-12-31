@@ -16,6 +16,7 @@ class CommentController extends Controller
      * Method to fetch a comment's replies
      */
     public function fetch(Request $request) {
+        // Check that the request is ajax
         if ($request->ajax()) {
             // Get the next page of paginated replies
             $replies = Comment::find($request->id)->replies;//()->orderBy('created_at', 'DESC')->paginate(30);
@@ -68,6 +69,13 @@ class CommentController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    /**
+     * Method to update a comment
+     */
+    public static function update() {
+
     }
 
 

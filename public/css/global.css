@@ -316,6 +316,14 @@ form a {
   margin: 2vh 0;
 }
 
+form p.form-error-msg {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin: 1rem 0;
+  margin-top: -0.28rem;
+  color: #d03795;
+}
+
 form .form-box {
   position: relative;
   height: 4rem;
@@ -375,8 +383,10 @@ input:not([type="checkbox"]) {
           box-shadow: 0 0 0.1rem 0 #8c8c8c;
   border: none;
   border-radius: 1rem;
-  -webkit-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
 }
 
 textarea:hover,
@@ -430,7 +440,7 @@ label.locked {
 }
 
 label.checkOption, label.subOption {
-  display: block;
+  display: inline-block;
   position: relative;
   margin: 0;
   margin-bottom: 0.6vh;

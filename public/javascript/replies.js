@@ -47,6 +47,7 @@ function fetch_data($container) {
         error: function() {
             $loadingGraphic.fadeOut(transitionTime)
             $container.append("<p>Error loading data!</p>");
+            errorPrompt("Error loading replies!");
         }
     });
 }
