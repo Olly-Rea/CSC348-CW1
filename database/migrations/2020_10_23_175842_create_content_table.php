@@ -11,8 +11,7 @@ class CreateContentTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('content', function (Blueprint $table) {
             // Define primary key
             $table->id();
@@ -20,7 +19,6 @@ class CreateContentTable extends Migration
             $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
             // Define content position (and old positon) in post
             $table->integer('position');
-            $table->integer('old_position')->nullable();
             // Make the pairing unique
             $table->unique(['post_id', 'position']);
             // Define table contents
@@ -35,8 +33,7 @@ class CreateContentTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('content');
     }
 }

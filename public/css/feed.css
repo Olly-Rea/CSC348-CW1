@@ -466,26 +466,25 @@ label.checkOption input, label.subOption input {
   cursor: pointer;
 }
 
-label.checkOption input:checked ~ .checkbox,
-label.checkOption input:checked ~ .checkbox, label.subOption input:checked ~ .checkbox,
-label.subOption input:checked ~ .checkbox {
-  background-color: #4be4a9;
+label.checkOption input:checked ~ .checkbox svg,
+label.checkOption input:checked ~ .checkbox svg, label.subOption input:checked ~ .checkbox svg,
+label.subOption input:checked ~ .checkbox svg {
+  stroke: #fafafa;
+  fill: #4be4a9;
 }
 
-label.checkOption:hover input ~ .checkbox,
-label.checkOption:hover input ~ .checkbox, label.subOption:hover input ~ .checkbox,
-label.subOption:hover input ~ .checkbox {
-  background-color: #40c894;
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
+label.checkOption:hover input ~ .checkbox svg,
+label.checkOption:hover input ~ .checkbox svg, label.subOption:hover input ~ .checkbox svg,
+label.subOption:hover input ~ .checkbox svg {
+  stroke: #40c894;
+  fill: #fafafa;
 }
 
-label.checkOption:hover input:checked ~ .checkbox,
-label.checkOption:hover input:checked ~ .checkbox, label.subOption:hover input:checked ~ .checkbox,
-label.subOption:hover input:checked ~ .checkbox {
-  background-color: #40c894;
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
+label.checkOption:hover input:checked ~ .checkbox svg,
+label.checkOption:hover input:checked ~ .checkbox svg, label.subOption:hover input:checked ~ .checkbox svg,
+label.subOption:hover input:checked ~ .checkbox svg {
+  stroke: #fafafa;
+  fill: #4be4a9;
 }
 
 label.subOption {
@@ -495,13 +494,23 @@ label.subOption {
 
 .checkbox {
   position: absolute;
-  top: -0.5vh;
   left: 0;
-  background-color: #fafafa;
   border-radius: 0.2rem;
+  text-indent: 1.4rem;
+}
+
+.checkbox svg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   height: 1.2rem;
   width: 1.2rem;
-  text-indent: 1.4rem;
+  fill: #fafafa;
+  stroke: #fafafa;
+  -webkit-transition: fill 0.1s ease-in-out, stroke 0.1s ease-in-out;
+  transition: fill 0.1s ease-in-out, stroke 0.1s ease-in-out;
 }
 
 input[type="checkbox"] {
@@ -620,9 +629,52 @@ footer a {
   stroke: #dadada;
 }
 
+#feed-nav #nav-left .menu-item a .notify-indicator, #feed-nav #nav-center .menu-item a .notify-indicator, #feed-nav #nav-right .menu-item a .notify-indicator {
+  position: absolute;
+  top: 84%;
+  right: 18%;
+  height: 0.8rem;
+  width: 0.8rem;
+  border-radius: 50%;
+  background-color: #f3d4e7;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+}
+
+#feed-nav #nav-left .menu-item a .notify-indicator p, #feed-nav #nav-left .menu-item a .notify-indicator::after, #feed-nav #nav-center .menu-item a .notify-indicator p, #feed-nav #nav-center .menu-item a .notify-indicator::after, #feed-nav #nav-right .menu-item a .notify-indicator p, #feed-nav #nav-right .menu-item a .notify-indicator::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#feed-nav #nav-left .menu-item a .notify-indicator p, #feed-nav #nav-center .menu-item a .notify-indicator p, #feed-nav #nav-right .menu-item a .notify-indicator p {
+  -webkit-transform: translate(-46.4%, -45%);
+          transform: translate(-46.4%, -45%);
+  font-size: 0.64rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  color: #fafafa;
+}
+
+#feed-nav #nav-left .menu-item a .notify-indicator::after, #feed-nav #nav-center .menu-item a .notify-indicator::after, #feed-nav #nav-right .menu-item a .notify-indicator::after {
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  content: '';
+  z-index: -1;
+  height: 1.2rem;
+  width: 1.2rem;
+  border-radius: 50%;
+  background-color: #fafafa;
+}
+
 #feed-nav #nav-left .menu-item a:hover, #feed-nav #nav-center .menu-item a:hover, #feed-nav #nav-right .menu-item a:hover {
   -webkit-transform: translateX(-50%) scale(1.12);
           transform: translateX(-50%) scale(1.12);
+}
+
+#feed-nav #nav-left .menu-item a:hover .notify-indicator, #feed-nav #nav-center .menu-item a:hover .notify-indicator, #feed-nav #nav-right .menu-item a:hover .notify-indicator {
+  background-color: #e44ba9;
 }
 
 #feed-nav #nav-left .menu-item a:hover + h1, #feed-nav #nav-center .menu-item a:hover + h1, #feed-nav #nav-right .menu-item a:hover + h1 {
@@ -632,6 +684,10 @@ footer a {
 #feed-nav #nav-left .menu-item a:active, #feed-nav #nav-center .menu-item a:active, #feed-nav #nav-right .menu-item a:active {
   -webkit-transform: translateX(-50%) scale(0.96);
           transform: translateX(-50%) scale(0.96);
+}
+
+#feed-nav #nav-left .menu-item a:active .notify-indicator, #feed-nav #nav-center .menu-item a:active .notify-indicator, #feed-nav #nav-right .menu-item a:active .notify-indicator {
+  background-color: #d03795;
 }
 
 #feed-nav #nav-left .menu-item h1, #feed-nav #nav-center .menu-item h1, #feed-nav #nav-right .menu-item h1 {
@@ -828,6 +884,7 @@ footer a {
   top: 7.2rem;
   right: 2.4rem;
   min-height: 28rem;
+  max-height: 50%;
   width: 14.6rem;
   padding: 1rem;
   border-radius: 1.6rem;
@@ -841,7 +898,7 @@ footer a {
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-#feed-nav #notification-container:before {
+#feed-nav #notification-container::before {
   content: '';
   position: absolute;
   top: -0.96rem;
@@ -856,22 +913,67 @@ footer a {
   border-top-right-radius: 30%;
 }
 
+#feed-nav #notification-container > div {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+#feed-nav #notification-container > div::-webkit-scrollbar {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
 #feed-nav #notification-container.active {
   opacity: 1;
   -webkit-transform: scale(1);
           transform: scale(1);
 }
 
-#feed-nav #notification-container h4.notification {
+#feed-nav #notification-container a h4.notification {
   margin: 0.6rem 0.2rem;
   width: calc(100% - 2rem);
   padding: 0.8rem 0.8rem;
   background-color: #cdffec;
   border-radius: 1rem;
+  cursor: pointer;
+  -webkit-transition: background-color 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-#feed-nav #notification-container h4.notification:nth-child(1) {
+#feed-nav #notification-container a h4.notification.seen {
+  background-color: #e9e9e9;
+}
+
+#feed-nav #notification-container a h4.notification.seen:hover {
+  background-color: gainsboro;
+}
+
+#feed-nav #notification-container a h4.notification.seen:active {
+  background-color: #dadada;
+}
+
+#feed-nav #notification-container a h4.notification:nth-child(1) {
   margin-top: 0.32rem;
+}
+
+#feed-nav #notification-container a h4.notification:hover:not(.seen) {
+  background-color: #4be4a9;
+  -webkit-transform: scale(1.024);
+          transform: scale(1.024);
+}
+
+#feed-nav #notification-container a h4.notification:active:not(.seen) {
+  background-color: #40c894;
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
 }
 
 #feed-nav #notification-container p {

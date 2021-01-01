@@ -12,12 +12,6 @@
 
     background-color: $backColor;
 
-    // @include hasShadow();
-
-    // padding-bottom: 0;
-    // height: 4.5rem;
-    // background: linear-gradient($backColor 80%, rgba(0,0,0,0) 99%);
-
     #nav-left, #nav-center, #nav-right {
         position: absolute;
         z-index: 2;
@@ -69,14 +63,64 @@
                     stroke: $graphicColor;
                 }
 
+                .notify-indicator {
+                    position: absolute;
+                    top: 84%;
+                    right: 18%;
+
+                    height: 0.8rem;
+                    width: 0.8rem;
+                    border-radius: 50%;
+
+                    background-color: $appRedUnderlay;
+
+                    transition: background-color $transitionTime ease-in-out;
+
+                    p,
+                    &::after {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                    }
+
+                    p {
+                        transform: translate(-46.4%, -45%);
+                        font-size: 0.64rem;
+                        font-weight: bold;
+                        text-align: center;
+                        width: 100%;
+                        color: $backColor;
+                    }
+
+                    &::after {
+                        transform: translate(-50%, -50%);
+                        content: '';
+                        z-index: -1;
+
+                        height: 1.2rem;
+                        width: 1.2rem;
+                        border-radius: 50%;
+
+                        background-color: $backColor;
+                    }
+                }
+
                 &:hover {
                     transform: translateX(-50%) scale(1.12);
+
+                    .notify-indicator {
+                        background-color: $appRed;
+                    }
                     & + h1 {
                         opacity: 100%;
                     }
                 }
                 &:active {
                     transform: translateX(-50%) scale(0.96);
+
+                    .notify-indicator {
+                        background-color: $appRedDark;
+                    }
                 }
             }
 
@@ -99,6 +143,9 @@
 
                 transition: opacity $transitionTime ease-in-out,
             }
+
+
+
         }
         // .menu-item:not(.active) {
         //     a {
@@ -293,6 +340,8 @@
         right: 2.4rem;
 
         min-height: 28rem;
+        max-height: 50%;
+
         width: 14.6rem;
         padding: 1rem;
 
@@ -305,7 +354,7 @@
         transition: opacity $transitionTime ease-in-out,
                     transform $transitionTime ease-in-out;
 
-        &:before {
+        &::before {
             content: '';
 
             position: absolute;
@@ -324,23 +373,77 @@
             border-top-right-radius: 30%;
         }
 
+        > div {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+
+            width: calc(100% - 2rem);
+            height: calc(100% - 2rem);
+
+            overflow-y: scroll;
+
+            // remove scrollbar (in firefox)
+            scrollbar-width: none;
+            // remove scrollbar (all other browsers)
+            &::-webkit-scrollbar {
+                display: none;
+                height: 0;
+                width: 0;
+                // width: 0;
+                // opacity: 0%;
+                // transition: opacity $transitionTime ease-in-out;
+            }
+        }
+
         &.active {
             opacity: 1;
             transform: scale(1);
         }
 
-        h4.notification {
-            margin: 0.6rem 0.2rem;
+        a {
+            h4.notification {
+                margin: 0.6rem 0.2rem;
 
-            width: calc(100% - 2rem);
-            padding: 0.8rem 0.8rem;
-            background-color: $appGreenUnderlay;
-            border-radius: $inputCorner;
+                width: calc(100% - 2rem);
+                padding: 0.8rem 0.8rem;
+                background-color: $appGreenUnderlay;
+                border-radius: $inputCorner;
 
-            &:nth-child(1) {
-                margin-top: 0.32rem;
+                cursor: pointer;
+
+                transition: background-color $transitionTime ease-in-out,
+                            transform $transitionTime ease-in-out;
+
+                &.seen {
+                    background-color: $logoLight;
+
+                    &:hover {
+                        background-color: $footerColor;
+                    }
+                    &:active {
+                        background-color: $graphicColor;
+                    }
+
+                }
+
+                &:nth-child(1) {
+                    margin-top: 0.32rem;
+                }
+
+                &:hover:not(.seen) {
+                    background-color: $appGreen;
+                    transform: scale(1.024);
+                }
+                &:active:not(.seen) {
+                    background-color: $appGreenDark;
+                    transform: scale(0.96);
+                }
+
             }
+
         }
+
 
         p {
             position: absolute;
@@ -350,6 +453,15 @@
 
             white-space: nowrap;
         }
+
+        // &:hover {
+        //     > div {
+        //         &::-webkit-scrollbar {
+        //             opacity: 100%;
+        //         }
+        //     }
+        // }
+
     }
 
 }

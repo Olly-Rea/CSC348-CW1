@@ -161,14 +161,24 @@
         @foreach ($tags as $tag)
         <label class="checkOption">
             <input form="post-form" type="checkbox" name="tags[]" value="{{ $tag->name }}" @if(in_array($tag->name, old('tags'))) checked @endif/>
-            <span class="checkbox">{{ $tag->name }}</span>
+            <span class="checkbox">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                </svg>
+                {{ $tag->name }}
+            </span>
         </label>
         @endforeach
     @else
         @foreach ($tags as $tag)
         <label class="checkOption">
             <input form="post-form" type="checkbox" name="tags[]" value="{{ $tag->name }}"/>
-            <span class="checkbox">{{ $tag->name }}</span>
+            <span class="checkbox">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                </svg>
+                {{ $tag->name }}
+            </span>
         </label>
         @endforeach
     @endif

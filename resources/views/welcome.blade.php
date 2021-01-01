@@ -9,6 +9,7 @@
 @endsection
 
 @section("content")
+<div id="welcome-screen">
     <div id="demo-content">
         <div class="content-panel panel-1">
             <h1>News Stuff</h1>
@@ -32,7 +33,7 @@
                 <p>Or</p>
                 <div class="h-sep"></div>
             </div>
-            <a href="{{ route('feed') }}">
+            <a href="{{ route('feed') }}" id="guest-browse">
                 <div class="nav-link" >
                     {{ __('Browse as Guest') }}
                 </div>
@@ -40,5 +41,5 @@
         </div>
         @endguest
     </div>
-
+</div>
 @endsection

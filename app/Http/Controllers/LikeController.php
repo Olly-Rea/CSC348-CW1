@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// Custom import
+// Custom imports
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
-use App\Models\Likes;
+use App\Notifications\UserInteraction;
 
 class LikeController extends Controller
 {
@@ -41,9 +41,12 @@ class LikeController extends Controller
                     $toLike->likes()->where('user_id', Auth::user()->id)->delete();
                 } else {
                     // Add the 'Like' relationship
-                    $toLike->likes()->create([
+                    $like = $toLike->likes()->create([
                         'user_id' => Auth::user()->id,
                     ]);
+                    // Notify the author of their content being liked
+                    $likeable = $like->likeable;
+                    $likeable->user->notify(new UserInteraction($likeable, "like", $like->user));
                 }
             }
         // Else return a 404 not found error

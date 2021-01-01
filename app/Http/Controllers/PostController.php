@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use Illuminate\Http\Request;
 
-// Custom import
+// Custom imports
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -128,7 +128,7 @@ class PostController extends Controller
                         // Set the imagePath
                         $imagePath = 'user_uploads/posts/' . $post->id . '/';
                         // Set the image name (with it's original extension)
-                        $name = $image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+                        $name = $image->getClientOriginalName();
                         // Get the full path, and move the file to that directory
                         $destinationPath = public_path() . '/storage/' . $imagePath;
                         $image->move($destinationPath, $name);
@@ -217,7 +217,7 @@ class PostController extends Controller
             }
 
             // Loop through all the posts and move them 'out of the way'
-            $pos = count(request('content')) * 2;
+            $pos = count(request('content')) + 1;
             foreach($post->content as $content) {
                 $content->update([
                     'position' => $pos++

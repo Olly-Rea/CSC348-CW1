@@ -63,6 +63,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * One-to-One relation
+     */
+    public function profile() {
+        return $this->hasOne('App\Models\Profile');
+    }
+
+    /**
      * Child Model relationships
      */
     public function posts() {

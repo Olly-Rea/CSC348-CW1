@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// Custom import
+// Custom imports
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Post;
 
 class ProfileController extends Controller
 {

@@ -72,6 +72,18 @@
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/bell.svg#icon') }}"></use>
                 </svg>
+                @php
+                    $count = count(Auth::user()->unreadNotifications);
+                @endphp
+                @if($count > 0)
+                <div class="notify-indicator">
+                    @if($count > 9)
+                    <p> +</p>
+                    @else
+                    <p>{{ count(Auth::user()->unreadNotifications) }}</p>
+                    @endif
+                </div>
+                @endif
             </a>
             <h1>Notifications</h1>
         </div>
@@ -98,10 +110,17 @@
     </div>
     @auth
     <div id="notification-container" style="display: none">
-        <p>No new notifications!</p>
-        {{-- <h4 class="notification">Demo notification!</h4> --}}
-        {{-- <h4 class="notification">Demo notification!</h4> --}}
-        {{-- <h4 class="notification">Demo notification!</h4> --}}
+        <div>
+            @forelse(Auth::user()->notifications as $notification)
+                @if(Request::is('post/'.$notification->data["post_id"]))
+                <a class="@if(isset($notification->read_at))seen @endif"><h4 id="{{ $notification->id }}" class="notification @if(isset($notification->read_at))seen @endif">{{ $notification->data["message"] }}</h4></a>
+                @else
+                <a href="{{ route('post', $notification->data["post_id"]) }}" class="@if(isset($notification->read_at))seen @endif"><h4 id="{{ $notification->id }}" class="notification @if(isset($notification->read_at))seen @endif">{{ $notification->data["message"] }}</h4></a>
+                @endif
+            @empty
+                <p>No new notifications!</p>
+            @endforelse
+        </div>
     </div>
     @endauth
 </div>

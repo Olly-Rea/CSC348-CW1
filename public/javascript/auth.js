@@ -20,6 +20,86 @@ $(window).on("load, pageshow", function() {
         toggleNotificationPanel();
     });
 
+    $("#notification-container a").not("#notification-container a.seen").on("click", function() {
+        event.preventDefault();
+        // Get the href from the link
+        $href = $(this).attr('href');
+        // get the notification
+        $notification = $(this).children().first();
+        // Get the notification indicator
+        $notifyDot = $("#notifications .notify-indicator p");
+        // Perform the ajax request
+        $.ajax({
+            type : 'POST',
+            url : "/notify/read",
+            data: {'id': $notification.attr('id')},
+            success: function(data) {
+                if(data) {
+                    // $notification.parent().addClass("seen");
+                    // Decrese the notification counter (if not '+')
+                    if($notifyDot.html() == "+") {
+                        let num = $("#notification-container a").not("#notification-container a.seen").children().length;
+                        if(num < 9) {
+                            $notifyDot.html(num);
+                        }
+                    } else {
+                        if(!$notification.parent().hasClass("seen")) {
+                            count = $notifyDot.html() - 1;
+                            // If notification counter is 0, fade it out
+                            if(count > 0) {
+                                $notifyDot.html(count);
+                            } else {
+                                setTimeout(function () {
+                                    $notifyDot.parent().fadeOut(transitionTime);
+                                }, 50);
+                            }
+                        }
+                    }
+                    // Add the seen class to the <h4> notification (and parent <a>)
+                    $notification.add($notification.parent()).addClass("seen");
+                    // Link to the post (if not already there)
+                    if($href != undefined) {
+                        window.location = $href;
+                    }
+                }
+            },
+            error: function(data) {
+                errorPrompt("Error opening this notification!");
+                // console.log(data);
+            }
+        });
+    });
+    $("#notification-container").on("click", "a.seen", function() {
+        event.preventDefault();
+        // get the notification
+        $notification = $(this).children().first();
+        // Perform the ajax request
+        $.ajax({
+            type : 'POST',
+            url : "/notify/delete",
+            data: {'id': $notification.attr('id')},
+            success: function(data) {
+                if(data) {
+                    // Fade out the notification before removing it
+                    $notification.fadeOut(transitionTime);
+                    setTimeout(function () {
+                        $notification.parent().remove();
+                        setTimeout(function () {
+                            $container = $("#notification-container div");
+                            if($container.children().length == 0) {
+                                $container.append("<p>No new notifications!</p>");
+                            }
+                        }, 50);
+                    }, transitionTime);
+                }
+            },
+            error: function(data) {
+                errorPrompt("Error deleting this notification!");
+                console.log(data);
+            }
+        });
+    });
+
     // Handler to like content
     $("main").on("click", ".thumb-container", function() {
         // Define this (so it can also be used inside the ajax method)
@@ -77,7 +157,6 @@ $(window).on("load, pageshow", function() {
         $.ajax({
             type : 'POST',
             url : "/comment/create",
-            // data: {'user_id': likeableType, 'commentable_id': likeableID, 'content': input},
             data: {'commentable_type': commentableType, 'commentable_id': commentableID, 'content': $input.val()},
             success: function(data) {
                 // Check the commentable_type, and add the data to the appropriate container

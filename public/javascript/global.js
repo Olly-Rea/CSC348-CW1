@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * *
- *    JQuery Global doc for Union Collective     *
+ *       jQuery Global doc for CS348_CW1         *
  * * * * * * * * * * * * * * * * * * * * * * * * */
 transitionTime = 250;
 

@@ -466,26 +466,25 @@ label.checkOption input, label.subOption input {
   cursor: pointer;
 }
 
-label.checkOption input:checked ~ .checkbox,
-label.checkOption input:checked ~ .checkbox, label.subOption input:checked ~ .checkbox,
-label.subOption input:checked ~ .checkbox {
-  background-color: #4be4a9;
+label.checkOption input:checked ~ .checkbox svg,
+label.checkOption input:checked ~ .checkbox svg, label.subOption input:checked ~ .checkbox svg,
+label.subOption input:checked ~ .checkbox svg {
+  stroke: #fafafa;
+  fill: #4be4a9;
 }
 
-label.checkOption:hover input ~ .checkbox,
-label.checkOption:hover input ~ .checkbox, label.subOption:hover input ~ .checkbox,
-label.subOption:hover input ~ .checkbox {
-  background-color: #40c894;
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
+label.checkOption:hover input ~ .checkbox svg,
+label.checkOption:hover input ~ .checkbox svg, label.subOption:hover input ~ .checkbox svg,
+label.subOption:hover input ~ .checkbox svg {
+  stroke: #40c894;
+  fill: #fafafa;
 }
 
-label.checkOption:hover input:checked ~ .checkbox,
-label.checkOption:hover input:checked ~ .checkbox, label.subOption:hover input:checked ~ .checkbox,
-label.subOption:hover input:checked ~ .checkbox {
-  background-color: #40c894;
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
+label.checkOption:hover input:checked ~ .checkbox svg,
+label.checkOption:hover input:checked ~ .checkbox svg, label.subOption:hover input:checked ~ .checkbox svg,
+label.subOption:hover input:checked ~ .checkbox svg {
+  stroke: #fafafa;
+  fill: #4be4a9;
 }
 
 label.subOption {
@@ -495,13 +494,23 @@ label.subOption {
 
 .checkbox {
   position: absolute;
-  top: -0.5vh;
   left: 0;
-  background-color: #fafafa;
   border-radius: 0.2rem;
+  text-indent: 1.4rem;
+}
+
+.checkbox svg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   height: 1.2rem;
   width: 1.2rem;
-  text-indent: 1.4rem;
+  fill: #fafafa;
+  stroke: #fafafa;
+  -webkit-transition: fill 0.1s ease-in-out, stroke 0.1s ease-in-out;
+  transition: fill 0.1s ease-in-out, stroke 0.1s ease-in-out;
 }
 
 input[type="checkbox"] {

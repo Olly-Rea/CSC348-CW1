@@ -466,26 +466,25 @@ label.checkOption input, label.subOption input {
   cursor: pointer;
 }
 
-label.checkOption input:checked ~ .checkbox,
-label.checkOption input:checked ~ .checkbox, label.subOption input:checked ~ .checkbox,
-label.subOption input:checked ~ .checkbox {
-  background-color: #4be4a9;
+label.checkOption input:checked ~ .checkbox svg,
+label.checkOption input:checked ~ .checkbox svg, label.subOption input:checked ~ .checkbox svg,
+label.subOption input:checked ~ .checkbox svg {
+  stroke: #fafafa;
+  fill: #4be4a9;
 }
 
-label.checkOption:hover input ~ .checkbox,
-label.checkOption:hover input ~ .checkbox, label.subOption:hover input ~ .checkbox,
-label.subOption:hover input ~ .checkbox {
-  background-color: #40c894;
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
+label.checkOption:hover input ~ .checkbox svg,
+label.checkOption:hover input ~ .checkbox svg, label.subOption:hover input ~ .checkbox svg,
+label.subOption:hover input ~ .checkbox svg {
+  stroke: #40c894;
+  fill: #fafafa;
 }
 
-label.checkOption:hover input:checked ~ .checkbox,
-label.checkOption:hover input:checked ~ .checkbox, label.subOption:hover input:checked ~ .checkbox,
-label.subOption:hover input:checked ~ .checkbox {
-  background-color: #40c894;
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
+label.checkOption:hover input:checked ~ .checkbox svg,
+label.checkOption:hover input:checked ~ .checkbox svg, label.subOption:hover input:checked ~ .checkbox svg,
+label.subOption:hover input:checked ~ .checkbox svg {
+  stroke: #fafafa;
+  fill: #4be4a9;
 }
 
 label.subOption {
@@ -495,13 +494,23 @@ label.subOption {
 
 .checkbox {
   position: absolute;
-  top: -0.5vh;
   left: 0;
-  background-color: #fafafa;
   border-radius: 0.2rem;
+  text-indent: 1.4rem;
+}
+
+.checkbox svg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   height: 1.2rem;
   width: 1.2rem;
-  text-indent: 1.4rem;
+  fill: #fafafa;
+  stroke: #fafafa;
+  -webkit-transition: fill 0.1s ease-in-out, stroke 0.1s ease-in-out;
+  transition: fill 0.1s ease-in-out, stroke 0.1s ease-in-out;
 }
 
 input[type="checkbox"] {
@@ -554,6 +563,23 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+}
+
+main #welcome-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -564,7 +590,8 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 
 main .content-panel {
@@ -578,6 +605,27 @@ main .content-panel {
 
 main .content-panel form {
   padding: 2rem;
+}
+
+main a:not(#guest-browse) {
+  margin-top: 2rem;
+}
+
+main a {
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+main a:hover {
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
+}
+
+main a:active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 #demo-content {

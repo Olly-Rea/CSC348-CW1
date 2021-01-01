@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// Custom import
-use App\Models\Comment;
+// Custom imports
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Comment;
+use App\Notifications\UserInteraction;
 
 class CommentController extends Controller
 {
@@ -62,6 +63,9 @@ class CommentController extends Controller
                     'commentable_id' => $request->commentable_id,
                     'content' => $request->content,
                 ]);
+                // Notify the author of their content being commented on / replied to
+                $commentable = $comment->commentable;
+                $commentable->user->notify(new UserInteraction($commentable, "comment", $comment->user));
                 // Render new comment
                 return view('paginations.comments', ['comments' => $comment])->render();
             }

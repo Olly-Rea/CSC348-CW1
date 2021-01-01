@@ -14,8 +14,15 @@ h2 {
 }
 
 main {
-    @include flexDisplay(row, center, center);
+    @include flexDisplay(column, center, center);
+
     height: 100vh;
+
+    #welcome-screen {
+        @include flexDisplay(row, center, center);
+        height: 100%;
+        width: 100%;
+    }
 
     .content-panel {
         user-select: none;
@@ -25,8 +32,24 @@ main {
         form {
             padding: 2rem;
         }
+    }
+
+    a:not(#guest-browse) {
+        margin-top: 2rem;
+    }
+
+    a {
+        transition: transform $transitionTime ease-in-out;
+
+        &:hover {
+            transform: scale(1.04);
+        }
+        &:active {
+            transform: scale(1);
+        }
 
     }
+
 }
 
 #demo-content {
