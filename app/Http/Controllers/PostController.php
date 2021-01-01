@@ -135,7 +135,7 @@ class PostController extends Controller
                         // Set the file path as content (to store in the database)
                         $content = $imagePath . $name;
 
-                        // TODO add $subContent =
+                        // TODO add $subContent stuff
                         $subContent = null;
                     } else {
                         // Set the content type as 'text'
@@ -177,7 +177,7 @@ class PostController extends Controller
             // The post/edit view with tags
             return view('posts.edit', ['post' => $post, 'tags' => $tags]);
         } else {
-            abort(404);
+            abort(403);
         }
     }
 

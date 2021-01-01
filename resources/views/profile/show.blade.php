@@ -186,6 +186,7 @@
 @endsection
 
 @section('overlays')
+@auth
 <div id="edit-profile" style="display: none">
     @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updateProfileInformation()))
     @livewire('profile.update-profile-information-form')
@@ -219,4 +220,5 @@
     @livewire('profile.delete-user-form')
     </div>
 </div>
+@endauth
 @endsection

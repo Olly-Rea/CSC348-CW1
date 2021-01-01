@@ -141,6 +141,9 @@
             windowUnload();
         });
     });
+
+    // TODO Add delete handler
+
 });
 
 // Method to display the exit-page confirmation prompt
