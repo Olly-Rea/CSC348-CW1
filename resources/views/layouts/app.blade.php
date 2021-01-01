@@ -78,7 +78,7 @@
                 @if($count > 0)
                 <div class="notify-indicator">
                     @if($count > 9)
-                    <p> +</p>
+                    <p>+</p>
                     @else
                     <p>{{ count(Auth::user()->unreadNotifications) }}</p>
                     @endif

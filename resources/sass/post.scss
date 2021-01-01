@@ -187,5 +187,22 @@ main {
 
 }
 
+// Maximum aspect ratio - mobile/portrait browsers
+@media (max-aspect-ratio: 12/10) {
 
+    main {
+        .image-panel {
+            width: 92% !important;
+            padding-top: 56.25% !important; // Force 16:9 Aspect Ratio
+        }
+
+        > form,
+        #comment-container {
+            width: 92%;
+        }
+    }
+
+
+
+}
 

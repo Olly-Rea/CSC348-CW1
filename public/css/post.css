@@ -543,6 +543,28 @@ footer a {
   font-size: 16pt;
 }
 
+@media (max-aspect-ratio: 12 / 10) {
+  body,
+  html {
+    font-size: 11pt;
+    width: 100vw;
+  }
+  main {
+    width: 100vw;
+  }
+  main .content-panel,
+  main .image-panel {
+    margin: 0.6rem 0;
+  }
+  main .content-panel {
+    width: calc(92% - 2rem) !important;
+  }
+  #loading-screen svg.loading-graphic {
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
 #feed-nav {
   position: fixed;
   z-index: 1;
@@ -1343,6 +1365,27 @@ main svg.loading-graphic {
   width: 5rem;
 }
 
+@media (max-aspect-ratio: 12 / 10) {
+  #feed-nav {
+    width: 92% !important;
+  }
+  #feed-nav #nav-left, #feed-nav #nav-center, #feed-nav #nav-right {
+    width: 100vw !important;
+  }
+  main {
+    padding-top: 7.4rem;
+    padding-bottom: 3.2rem;
+  }
+  main .content-panel {
+    padding: 1rem !important;
+  }
+  main .content-panel .thumb-container,
+  main .comment .thumb-container {
+    top: 1rem !important;
+    right: 1.1rem !important;
+  }
+}
+
 main .content-panel .author-info,
 main .comment .author-info {
   -webkit-transition: background-color 0.1s ease-in-out;
@@ -1531,5 +1574,16 @@ main .reply-button:hover {
 main .reply-button:active {
   -webkit-transform: scale(1);
           transform: scale(1);
+}
+
+@media (max-aspect-ratio: 12 / 10) {
+  main .image-panel {
+    width: 92% !important;
+    padding-top: 56.25% !important;
+  }
+  main > form,
+  main #comment-container {
+    width: 92%;
+  }
 }
 /*# sourceMappingURL=post.css.map */

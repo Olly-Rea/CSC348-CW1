@@ -543,6 +543,28 @@ footer a {
   font-size: 16pt;
 }
 
+@media (max-aspect-ratio: 12 / 10) {
+  body,
+  html {
+    font-size: 11pt;
+    width: 100vw;
+  }
+  main {
+    width: 100vw;
+  }
+  main .content-panel,
+  main .image-panel {
+    margin: 0.6rem 0;
+  }
+  main .content-panel {
+    width: calc(92% - 2rem) !important;
+  }
+  #loading-screen svg.loading-graphic {
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
 #feed-nav {
   position: fixed;
   z-index: 1;
@@ -1343,6 +1365,27 @@ main svg.loading-graphic {
   width: 5rem;
 }
 
+@media (max-aspect-ratio: 12 / 10) {
+  #feed-nav {
+    width: 92% !important;
+  }
+  #feed-nav #nav-left, #feed-nav #nav-center, #feed-nav #nav-right {
+    width: 100vw !important;
+  }
+  main {
+    padding-top: 7.4rem;
+    padding-bottom: 3.2rem;
+  }
+  main .content-panel {
+    padding: 1rem !important;
+  }
+  main .content-panel .thumb-container,
+  main .comment .thumb-container {
+    top: 1rem !important;
+    right: 1.1rem !important;
+  }
+}
+
 #post-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1686,5 +1729,11 @@ main svg.loading-graphic {
           justify-content: flex-start;
   margin: 2rem 0 1rem 0;
   width: 100%;
+}
+
+@media (max-aspect-ratio: 12 / 10) {
+  #post-form {
+    width: 92%;
+  }
 }
 /*# sourceMappingURL=post-edit.css.map */

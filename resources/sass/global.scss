@@ -482,6 +482,31 @@ footer {
 // Maximum aspect ratio - mobile/portrait browsers
 @media (max-aspect-ratio: 12/10) {
 
+    body,
+    html {
+        font-size: 11pt;
+        width: 100vw;
+    }
 
+    // "main" tag-specific content formatting
+    main {
+        width: 100vw;
+
+        .content-panel,
+        .image-panel {
+            margin: 0.6rem 0;
+        }
+        .content-panel {
+            width: calc(92% - 2rem) !important;
+        }
+    }
+
+    // Loading screen formatting
+    #loading-screen {
+        svg.loading-graphic {
+            height: 6rem;
+            width: 6rem;
+        }
+    }
 
 }

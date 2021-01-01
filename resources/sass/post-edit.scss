@@ -301,3 +301,12 @@
         width: 100%;
     }
 }
+
+// Maximum aspect ratio - mobile/portrait browsers
+@media (max-aspect-ratio: 12/10) {
+
+    #post-form {
+        width: 92%;
+    }
+
+}

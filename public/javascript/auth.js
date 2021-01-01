@@ -36,11 +36,10 @@ $(window).on("load, pageshow", function() {
             data: {'id': $notification.attr('id')},
             success: function(data) {
                 if(data) {
-                    // $notification.parent().addClass("seen");
                     // Decrese the notification counter (if not '+')
                     if($notifyDot.html() == "+") {
                         let num = $("#notification-container a").not("#notification-container a.seen").children().length;
-                        if(num < 9) {
+                        if(num < 10) {
                             $notifyDot.html(num);
                         }
                     } else {

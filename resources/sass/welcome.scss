@@ -74,10 +74,10 @@ main {
         }
 
         &.panel-1 {
-            transform: translate(-40%, -70%);
+            transform: translate(-18%, -70%);
         }
         &.panel-2 {
-            transform: translate(-100%, -30%);
+            transform: translate(-78%, -30%);
         }
     }
 
@@ -104,4 +104,62 @@ main {
 #login-form,
 #register-form {
     width: 40rem;
+}
+
+// Maximum aspect ratio - mobile/portrait browsers
+@media (max-aspect-ratio: 12/10) {
+
+    h1 {
+        font-size: 3.4rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    #welcome-screen {
+        flex-direction: column-reverse !important;
+    }
+
+    #greeting,
+    #demo-content {
+        @include flexDisplay(column, center, center);
+
+        height: 100vh !important;
+        width: 100vw !important;
+    }
+
+    #demo-content {
+
+        .content-panel {
+            // position: absolute;
+
+            // top: 50%;
+            // left: 50%;
+
+            width: 9rem !important;
+            height: 15rem !important;
+        }
+    }
+
+    .screen-split {
+        &-vertical {
+            margin: 2vh 0;
+
+            height: $borderMed;
+            width: 90%;
+
+            background-color: $foreLight;
+            border-radius: $roundedEnd;
+        }
+        &-horizontal {
+            margin: 0 2vh;
+
+            height: 90%;
+            width: $borderMed;
+
+            background-color: $foreLight;
+            border-radius: $roundedEnd;
+        }
+    }
+
 }

@@ -543,6 +543,28 @@ footer a {
   font-size: 16pt;
 }
 
+@media (max-aspect-ratio: 12 / 10) {
+  body,
+  html {
+    font-size: 11pt;
+    width: 100vw;
+  }
+  main {
+    width: 100vw;
+  }
+  main .content-panel,
+  main .image-panel {
+    margin: 0.6rem 0;
+  }
+  main .content-panel {
+    width: calc(92% - 2rem) !important;
+  }
+  #loading-screen svg.loading-graphic {
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
 h1,
 h2 {
   margin: 0;
@@ -650,13 +672,13 @@ main a:active {
 }
 
 #demo-content .content-panel.panel-1 {
-  -webkit-transform: translate(-40%, -70%);
-          transform: translate(-40%, -70%);
+  -webkit-transform: translate(-18%, -70%);
+          transform: translate(-18%, -70%);
 }
 
 #demo-content .content-panel.panel-2 {
-  -webkit-transform: translate(-100%, -30%);
-          transform: translate(-100%, -30%);
+  -webkit-transform: translate(-78%, -30%);
+          transform: translate(-78%, -30%);
 }
 
 #greeting,
@@ -692,5 +714,56 @@ main a:active {
 #login-form,
 #register-form {
   width: 40rem;
+}
+
+@media (max-aspect-ratio: 12 / 10) {
+  h1 {
+    font-size: 3.4rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  #welcome-screen {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: reverse !important;
+        -ms-flex-direction: column-reverse !important;
+            flex-direction: column-reverse !important;
+  }
+  #greeting,
+  #demo-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+  #demo-content .content-panel {
+    width: 9rem !important;
+    height: 15rem !important;
+  }
+  .screen-split-vertical {
+    margin: 2vh 0;
+    height: 2px;
+    width: 90%;
+    background-color: silver;
+    border-radius: 10rem;
+  }
+  .screen-split-horizontal {
+    margin: 0 2vh;
+    height: 90%;
+    width: 2px;
+    background-color: silver;
+    border-radius: 10rem;
+  }
 }
 /*# sourceMappingURL=welcome.css.map */

@@ -367,3 +367,17 @@ main {
 
 }
 
+// Maximum aspect ratio - mobile/portrait browsers
+@media (max-aspect-ratio: 12/10) {
+
+    main {
+        padding-top: 12rem;
+
+        .profile-image-container {
+            width: 50% !important;
+        }
+
+    }
+
+}
+
