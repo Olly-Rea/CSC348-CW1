@@ -38,8 +38,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::match(['get', 'post'], '/comment/create', 'CommentController@create')->name('comment.create');
     Route::match(['get', 'post'], '/comment/edit', 'CommentController@edit')->name('comment.edit');
     // Notification routes
-    Route::match(['get', 'post'], '/notify/read', 'HomeController@notifyRead')->name('comment.edit');
-    Route::match(['get', 'post'], '/notify/delete', 'HomeController@notifyDelete')->name('comment.edit');
+    Route::match(['get', 'post'], '/notify/read', 'NotifyController@notifyRead')->name('comment.edit');
+    Route::match(['get', 'post'], '/notify/delete', 'NotifyController@notifyDelete')->name('comment.edit');
 });
 
 // Routes and controller functions to display feed elements

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
-use App\Notifications\UserInteraction;
+use App\Notifications\LikeNotification;
 
 class LikeController extends Controller
 {
@@ -46,7 +46,7 @@ class LikeController extends Controller
                     ]);
                     // Notify the author of their content being liked
                     $likeable = $like->likeable;
-                    $likeable->user->notify(new UserInteraction($likeable, "like", $like->user));
+                    $likeable->user->notify(new LikeNotification($likeable, $like->user));
                 }
             }
         // Else return a 404 not found error

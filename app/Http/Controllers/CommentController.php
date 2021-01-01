@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Comment;
-use App\Notifications\UserInteraction;
+use App\Notifications\CommentNotification;
 
 class CommentController extends Controller
 {
@@ -65,7 +65,7 @@ class CommentController extends Controller
                 ]);
                 // Notify the author of their content being commented on / replied to
                 $commentable = $comment->commentable;
-                $commentable->user->notify(new UserInteraction($commentable, "comment", $comment->user));
+                $commentable->user->notify(new CommentNotification($commentable, $comment->user));
                 // Render new comment
                 return view('paginations.comments', ['comments' => $comment])->render();
             }

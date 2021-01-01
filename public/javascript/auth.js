@@ -20,6 +20,7 @@ $(window).on("load, pageshow", function() {
         toggleNotificationPanel();
     });
 
+    // Notification handlers
     $("#notification-container a").not("#notification-container a.seen").on("click", function() {
         event.preventDefault();
         // Get the href from the link
@@ -135,7 +136,7 @@ $(window).on("load, pageshow", function() {
                 } else {
                     errorPrompt("Error liking this comment!");
                 }
-                // console.log(data);
+                console.log(data);
             }
         });
     });
