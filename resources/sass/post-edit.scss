@@ -283,7 +283,8 @@
         }
     }
 
-    #save.menu-item {
+    #save.menu-item,
+    #delete.menu-item {
         input {
             display: none;
         }

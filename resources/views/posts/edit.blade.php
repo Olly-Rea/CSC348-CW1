@@ -13,10 +13,6 @@
 <script src="{{ asset('javascript/post_forms/edit.js') }}" defer></script>
 @endsection
 
-@section('title')
-<title>{{ config('app.name', 'Laravel') }}</title>
-@endsection
-
 @section('content')
 <form id="post-form" method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
     @csrf
@@ -95,6 +91,9 @@
         @endif
     @endforeach
 </form>
+<form id="post-delete" action="{{ route('post.delete', $post->id) }}" method="POST" hidden>
+    @csrf
+</form>
 
 <div class="screen-split-horizontal"></div>
 
@@ -135,7 +134,7 @@
     <div id="delete" class="menu-item" >
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/about.svg#icon') }}"></use>
+                <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Delete</h1>

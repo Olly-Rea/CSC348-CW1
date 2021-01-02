@@ -7,7 +7,7 @@
         {{-- CSRF Token --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
         {{-- Page title --}}
-        @yield("title")
+        <title>@yield("title")</title>
         <!-- Styles -->
         @yield("styles")
         <!-- Referenced JQuery scripts -->

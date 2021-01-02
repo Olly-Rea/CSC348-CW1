@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Routes to add new elements to posts
     Route::get('/post/add/text', 'PostController@addTextInput')->name('post.add.text');
     Route::get('/post/add/image', 'PostController@addImageInput')->name('post.add.image');
+    // Route to delete a post
+    Route::post('/post/delete/{post}', 'PostController@delete')->name('post.delete');
 
     // Routes to get (and fetch) paginated news from an external api (user must be logged in to access news)
     Route::get('/feed/news', 'NewsController@index')->name('news');

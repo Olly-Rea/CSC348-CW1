@@ -1,5 +1,9 @@
 @extends("layouts.global")
 
+@section('title')
+{{ config('app.name', 'Laravel') }}
+@endsection
+
 @section('scripts-app')
 @auth
 <script src="{{ asset('javascript/auth.js') }}" defer></script>
@@ -135,12 +139,19 @@
         {{-- href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" --}}
         <p class="cancel-prompt">Cancel</p>
     </div>
+    <div id="confirm" class="prompt" style="display: none">
+        <h1>Are you sure?</h1>
+        <p></p>
+        <button>Okay</button>
+        <p class="cancel-prompt">Cancel</p>
+    </div>
     @else
     <div id="sign-up" class="prompt" style="display: none">
         <h1></h1>
         <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         <p class="cancel-prompt">Cancel</p>
     </div>
+
     @endauth
     <div id="message" class="prompt" style="display: none">
         <h1></h1>

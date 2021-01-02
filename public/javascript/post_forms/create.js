@@ -4,6 +4,38 @@
 
  // Methods to be called on and/or added to elements on page load/pageshow
 $(window).on("load, pageshow", function() {
+
+    // Handlers for the addText and addImage nav items
+    $("#add-text div").on("click", function() {
+        // console.log("added text!");
+        $.ajax({
+            url:"/post/add/text",
+            method:"GET",
+            data: {editing: 0},
+            success: function(data) {
+                $("#post-form").append(data);
+            },
+            error: function(data) {
+                errorPrompt("Error loading new text input!");
+                // console.log(data);
+            }
+        });
+    });
+    $("#add-image div").on("click", function() {
+        $.ajax({
+            url:"/post/add/image",
+            method:"GET",
+            data: {editing: 0},
+            success: function(data) {
+                $("#post-form").append(data);
+            },
+            error: function(data) {
+                errorPrompt("Error loading new image input!");
+                // console.log(data);
+            }
+        });
+    });
+
     // Handler to delete an input container
     $("main").on("click", "#delete.menu-item", function() {
         $container = $(this).parent().parent();

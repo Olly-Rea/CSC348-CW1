@@ -220,14 +220,6 @@ svg.loading-graphic .elem:nth-child(3) {
   }
 }
 
-main {
-  position: relative;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  width: 100%;
-}
-
 main,
 .screen-split-horizontal {
   max-width: 1920px;
@@ -249,6 +241,14 @@ main,
   border-radius: 10rem;
 }
 
+main {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100%;
+}
+
 main .content-panel,
 main .image-panel {
   margin: 1rem 0;
@@ -260,6 +260,20 @@ main .image-panel {
 main .content-panel {
   width: 50%;
   background-color: #f2f2f2;
+}
+
+main .error-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+}
+
+main .error-container a {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .profile-image-container {

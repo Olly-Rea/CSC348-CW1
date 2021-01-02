@@ -23,4 +23,7 @@
             </svg>
         </div>
     </div>
+    @if($editing)
+    <input name="content[][to_delete]" type="checkbox" hidden>
+    @endif
 </div>

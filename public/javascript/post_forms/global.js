@@ -78,35 +78,6 @@
         }
     });
 
-    // Handlers for the addText and addImage nav items
-    $("#add-text div").on("click", function() {
-        // console.log("added text!");
-        $.ajax({
-            url:"/post/add/text",
-            method:"GET",
-            success: function(data) {
-                $("#post-form").append(data);
-            },
-            error: function(data) {
-                errorPrompt("Error loading new text input!");
-                // console.log(data);
-            }
-        });
-    });
-    $("#add-image div").on("click", function() {
-        $.ajax({
-            url:"/post/add/image",
-            method:"GET",
-            success: function(data) {
-                $("#post-form").append(data);
-            },
-            error: function(data) {
-                errorPrompt("Error loading new image input!");
-                // console.log(data);
-            }
-        });
-    });
-
     // Handler to submit the post-form
     $("#save.menu-item").on("click", function() {
         // Final 'updatePositions' on form submit
@@ -136,8 +107,6 @@
             }
         });
 
-        console.log($("#post-form div:visible").length);
-
         // Check that the user has at least one 'content' element in their post
         if($("#post-form div:visible").length < 3) {
             event.preventDefault();
@@ -151,8 +120,6 @@
         }
 
     });
-
-    // TODO Add delete handler
 
 });
 

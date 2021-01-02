@@ -220,14 +220,6 @@ svg.loading-graphic .elem:nth-child(3) {
   }
 }
 
-main {
-  position: relative;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  width: 100%;
-}
-
 main,
 .screen-split-horizontal {
   max-width: 1920px;
@@ -249,6 +241,14 @@ main,
   border-radius: 10rem;
 }
 
+main {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100%;
+}
+
 main .content-panel,
 main .image-panel {
   margin: 1rem 0;
@@ -260,6 +260,75 @@ main .image-panel {
 main .content-panel {
   width: 50%;
   background-color: #f2f2f2;
+}
+
+main .error-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 132%;
+}
+
+main .error-container div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+main .error-container div .seperator {
+  margin: 0 0.8rem;
+  width: 1px;
+  height: 6rem;
+  background-color: #e9e9e9;
+}
+
+main .error-container a {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+main .error-container a:hover {
+  -webkit-transform: translateX(-50%) scale(1.04);
+          transform: translateX(-50%) scale(1.04);
+}
+
+main .error-container a:active {
+  -webkit-transform: translateX(-50%) scale(1);
+          transform: translateX(-50%) scale(1);
 }
 
 .profile-image-container {

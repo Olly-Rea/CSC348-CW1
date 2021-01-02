@@ -72,7 +72,7 @@ class NewsContainer
      */
     public function get() {
         // return the newsArray if it != null, otherwise return server error
-        return $this->newsArray != null ? $this->newsArray : abort(500);
+        return $this->newsArray != null ? $this->newsArray : null;
     }
 
     /**
@@ -84,11 +84,13 @@ class NewsContainer
 
         // Set the start index (page to start at)
         $startIndex = $page * $num;
-        // Get the page of news at that start index
-        $newsPage = collect(array_slice($this->newsArray, $startIndex, $num));
+        if(!$this->apiRequestFail) {
+            // Get the page of news at that start index
+            $newsPage = collect(array_slice($this->newsArray, $startIndex, $num));
+        }
 
         // return the newsPage if it != null, otherwise return server error
-        return $newsPage != null ? $newsPage : abort(500);
+        return isset($newsPage) && $newsPage != null ? $newsPage : null;
     }
 
     /**

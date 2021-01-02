@@ -9,10 +9,6 @@
 <script src="{{ asset('javascript/feed/allFetch.js') }}" defer></script>
 @endsection
 
-@section('title')
-<title>{{ config('app.name', 'Laravel') }}</title>
-@endsection
-
 @section('content')
 @if($requestFail)
 <h2>API Request Error! Only User posts shown</h2>

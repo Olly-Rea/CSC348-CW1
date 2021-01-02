@@ -9,10 +9,6 @@
 <script src="{{ asset('javascript/feed/postFetch.js') }}" defer></script>
 @endsection
 
-@section('title')
-<title>{{ config('app.name', 'Laravel') }}</title>
-@endsection
-
 @section('content')
 <h2>Showing all User posts</h2>
 @forelse($posts as $post)

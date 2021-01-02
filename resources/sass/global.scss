@@ -141,14 +141,6 @@ svg.loading-graphic {
 }
 
 // general main content formatting
-main {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 100%;
-}
-
 main,
 .screen-split-horizontal {
     max-width: 1920px;
@@ -177,6 +169,12 @@ main,
 
 // "main" tag-specific content formatting
 main {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100%;
+
     .content-panel,
     .image-panel {
         margin: 1rem 0;
@@ -188,6 +186,46 @@ main {
     .content-panel {
         width: 50%;
         background-color: $panelColor;
+    }
+
+    .error-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+
+        @include flexDisplay(column, center, center);
+
+        font-size: 132%;
+
+        div {
+            @include flexDisplay(row, center, center);
+
+            user-select: none;
+
+            .seperator {
+                margin: 0 0.8rem;
+
+                width: $borderThin;
+                height: 6rem;
+
+                background-color: $logoLight;
+            }
+        }
+
+        a {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            transition: transform $transitionTime ease-in-out;
+            &:hover {
+                transform: translateX(-50%) scale(1.04);
+            }
+            &:active {
+                transform: translateX(-50%) scale(1);
+            }
+        }
     }
 }
 

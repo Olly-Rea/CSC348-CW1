@@ -11,10 +11,6 @@
 @endif
 @endsection
 
-@section('title')
-<title>{{ config('app.name', 'Laravel') }}</title>
-@endsection
-
 @section('content')
 <div class="profile-image-container">
     <div class="profile-image">

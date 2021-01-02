@@ -218,16 +218,25 @@ class PostController extends Controller
                 $post->tags()->sync($tags);
             }
 
+            // Get the (correct) length of items to rearrange
+            $contentRequest = request('content');
+            foreach($contentRequest as $key => $content) {
+                if(!isset($content['id']) && isset($content['to_delete'])) {
+                    unset($contentRequest[$key]);
+                }
+            }
+
             // Loop through all the posts and move them 'out of the way'
-            $pos = count(request('content')) + 1;
+            $pos = count($contentRequest) + 1;
             foreach($post->content as $content) {
                 $content->update([
                     'position' => $pos++
                 ]);
             }
 
+            $pos = 0;
             // Loop through all the Post 'content' in the form
-            foreach(request('content') as $key => $editContent) {
+            foreach($contentRequest as $editContent) {
                 // If the Content isn't null
                 if($editContent != null) {
                     // Check if the content already exists
@@ -251,7 +260,7 @@ class PostController extends Controller
                             if($postContent->position != $key) {
                                 // If so; set the new position of the content
                                 $postContent->update([
-                                    'position' => $key
+                                    'position' => $pos++
                                 ]);
                             }
                         }
@@ -260,7 +269,7 @@ class PostController extends Controller
                             // Create the new content
                             $postContent = Content::create([
                                 'post_id' => $post->id,
-                                'position' => $key,
+                                'position' => $pos++,
                                 'type' => 'undefined',
                                 'content' => $editContent['content'],
                             ]);
@@ -334,7 +343,7 @@ class PostController extends Controller
     // Methods to add a text/image input to the post create/edit forms
     public static function addTextInput(Request $request) {
         if ($request->ajax()) {
-            return view('posts.form.text')->render();
+            return view('posts.form.text', ['editing' => boolval($request->editing)])->render();
         // Else return a 404 not found error
         } else {
             abort(404);
@@ -342,7 +351,10 @@ class PostController extends Controller
     }
     public static function addImageInput(Request $request) {
         if ($request->ajax()) {
-            return view('posts.form.image')->render();
+
+            // dd($request->editing);
+
+            return view('posts.form.image', ['editing' => boolval($request->editing)])->render();
         // Else return a 404 not found error
         } else {
             abort(404);
@@ -353,7 +365,12 @@ class PostController extends Controller
      * Method to delete a post
      */
     public static function delete(Post $post) {
-
+        // Delete all the likes of a post
+        $post->likes()->delete();
+        // Delete the post
+        $post->delete();
+        // Redirect the user to the feed
+        return redirect('feed');
     }
 
 }

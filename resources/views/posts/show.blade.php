@@ -11,10 +11,6 @@
 @endauth
 @endsection
 
-@section('title')
-<title>{{ config('app.name', 'Laravel') }}</title>
-@endsection
-
 @section('content')
 <div class="content-panel">
     <input value="post-{{ $post->id }}" hidden readonly>
