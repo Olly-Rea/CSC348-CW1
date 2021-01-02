@@ -5,7 +5,8 @@
 @endsection
 
 @section("scripts")
-<script src="{{ asset('javascript/feedScroll.js') }}" defer></script>
+<script src="{{ asset('javascript/feed/onScroll.js') }}" defer></script>
+<script src="{{ asset('javascript/feed/postFetch.js') }}" defer></script>
 @endsection
 
 @section('title')
@@ -13,6 +14,7 @@
 @endsection
 
 @section('content')
+<h2>Showing all User posts</h2>
 @forelse($posts as $post)
 <div class="content-panel">
     <input value="post-{{ $post->id }}" hidden readonly>

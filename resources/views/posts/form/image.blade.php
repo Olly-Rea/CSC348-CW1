@@ -1,4 +1,4 @@
-<div class="image-container">
+<div class="image-container new">
     <svg>
         <use xlink:href="{{ asset('images/graphics/image.svg#icon') }}"></use>
     </svg>
@@ -24,5 +24,3 @@
         </div>
     </div>
 </div>
-@if($errors->has('content')) <p class="form-error-msg">{{ $errors->first('content') }}</p>@endif
-@if($errors->has('content.*')) <p class="form-error-msg">{{ $errors->first('content.*') }}</p>@endif

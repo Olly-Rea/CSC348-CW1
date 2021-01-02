@@ -14,6 +14,9 @@ use App\Models\Tag;
 
 class PostController extends Controller
 {
+    // Variable for the number of News articles to get each time
+    private $paginate = 12;
+
     /**
      * Method to load images for image-type 'Content'
      */
@@ -31,9 +34,9 @@ class PostController extends Controller
     /**
      * Method to return the post feed
      */
-    public static function index() {
-        // Get first 30 posts
-        $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
+    public function index() {
+        // Get the first page of post results
+        $posts = Post::orderBy('created_at', 'DESC')->paginate($this->paginate);
         // Return them in the feed view
         return view('posts.index', ['posts' => $posts]);
     }
@@ -45,13 +48,13 @@ class PostController extends Controller
         // Check that the request is ajax
         if ($request->ajax()) {
             // Get the next page of paginated posts
-            $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
-
-            if(count($posts) == 0) {
-                return null;
-            } else {
-                // render the posts and return them to the TalentFeed
+            $posts = Post::orderBy('created_at', 'DESC')->paginate($this->paginate);
+            // If $posts != null and is > 0...
+            if($posts != null && count($posts) > 0) {
+                // ...render the posts and return them to the feed
                 return view('paginations.posts', ['posts' => $posts])->render();
+            } else {
+                return null;
             }
         // Else return a 404 not found error
         } else {
@@ -62,7 +65,7 @@ class PostController extends Controller
     /**
      * Method to return the post feed
      */
-    public static function show(Post $post) {
+    public function show(Post $post) {
         // Return them in the feed view
         return view('posts.show', ['post' => $post]);
     }
@@ -70,7 +73,7 @@ class PostController extends Controller
     /**
      * Method to create new Post
      */
-    public static function create() {
+    public function create() {
         // Get the possible tags you can use in a post
         $tags = Tag::get();
         // The post/create view with tags
@@ -80,7 +83,7 @@ class PostController extends Controller
     /**
      * Method to save a post
      */
-    public static function save() {
+    public function save() {
         // // Check that the request is ajax
         // if ($request->ajax()) {
 
@@ -95,8 +98,8 @@ class PostController extends Controller
             // Validate the data
             Validator::make(request()->all(), [
                 'title' => ['required', 'string', 'max:255'],
-                'tags'    => ['array', 'min:1'],
-                'tags.*'  => ['required', 'string', 'distinct'],
+                'tags'    => ['array'],
+                'tags.*'  => ['string', 'distinct'],
                 'content'    => ['required', 'array', 'min:1'],
                 'content.*'  => ['distinct'],
             ], [], $attributeNames)->validate();
@@ -196,9 +199,8 @@ class PostController extends Controller
             // Validate the data
             Validator::make(request()->all(), [
                 'title' => ['required', 'string', 'max:255'],
-                'tags'    => ['array', 'min:1'],
-                'tags.*'  => ['required', 'string', 'distinct'],
-                // Post Content
+                'tags'    => ['array'],
+                'tags.*'  => ['string', 'distinct'],
                 'content'    => ['required', 'array', 'min:1'],
                 'content.*'  => ['distinct'],
             ], [], $attributeNames)->validate();
@@ -254,15 +256,17 @@ class PostController extends Controller
                             }
                         }
                     } else {
-                        // Create the new content
-                        $postContent = Content::create([
-                            'post_id' => $post->id,
-                            'position' => $key,
-                            'type' => 'undefined',
-                            'content' => $editContent['content'],
-                        ]);
-                        // Add the new content to the post
-                        $post->content()->save($postContent);
+                        if(!isset($editContent['to_delete'])) {
+                            // Create the new content
+                            $postContent = Content::create([
+                                'post_id' => $post->id,
+                                'position' => $key,
+                                'type' => 'undefined',
+                                'content' => $editContent['content'],
+                            ]);
+                            // Add the new content to the post
+                            $post->content()->save($postContent);
+                        }
                     }
 
                     // Check if the input has included content (image input is nullable)

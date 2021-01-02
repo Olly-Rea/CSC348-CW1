@@ -72,7 +72,7 @@ class ProfileController extends Controller
             if(count($posts) == 0) {
                 return null;
             } else {
-                // render the posts and return them to the TalentFeed
+                // render the posts and return them to the feed
                 return view('paginations.posts', ['posts' => $posts])->render();
             }
         // Else return a 404 not found error

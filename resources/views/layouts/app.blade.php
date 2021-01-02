@@ -146,6 +146,11 @@
         <h1></h1>
         <button>Okay</button>
     </div>
+    <div id="warning" class="prompt" style="display: none">
+        <h1>Warning!</h1>
+        <p></p>
+        <button>Okay</button>
+    </div>
     <div id="error" class="prompt" style="display: none">
         <h1></h1>
         <p>Try reloading the page and trying again</p>

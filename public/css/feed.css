@@ -1045,8 +1045,13 @@ footer a {
           user-select: none;
 }
 
+#site-overlay .prompt p:not(.cancel-prompt):not(.close-prompt) {
+  font-size: 1.1rem;
+}
+
 #site-overlay .prompt button {
   margin: 1rem 0;
+  margin-top: 2rem;
 }
 
 #site-overlay .prompt p.cancel-prompt,
@@ -1500,6 +1505,11 @@ main .content-panel:hover {
 
 main .content-panel:hover .overlay {
   opacity: 100%;
+}
+
+main > h2 {
+  margin-bottom: 2rem;
+  color: #dadada;
 }
 
 main > p {

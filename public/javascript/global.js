@@ -49,6 +49,20 @@ function messagePrompt(msg) {
         $("#site-overlay, #message.prompt").fadeOut(transitionTime);
     });
 }
+
+// Method to show the 'warning' prompt
+function warningPrompt(msg) {
+    // Alter the error prompt message
+    $("#warning.prompt > p").html(msg);
+    // Show the error prompt
+    $("#site-overlay, #warning.prompt").fadeIn(transitionTime);
+    // Add close-prompt click handler
+    $("#warning.prompt button").on("click", function() {
+        $("#warning.prompt button").off("click");
+        $("#site-overlay, #warning.prompt").fadeOut(transitionTime);
+    });
+}
+
 // Method to show the 'error' prompt
 function errorPrompt(msg) {
     // Alter the error prompt message

@@ -72,9 +72,30 @@ main {
             border-radius: $panelCorner;
             // @include hasShadow();
 
+            form,
             p {
                 width: 90%;
             }
+            form {
+                margin: 0;
+                padding: 0;
+
+                input[type="text"] {
+                    margin: -0.72rem 0;
+
+                    font-size: 1.04rem;
+
+                    width: 100%;
+                    background-color: $panelColor;
+
+                    box-shadow: none;
+
+                    &:hover {
+                        background-color: $logoLight;
+                    }
+                }
+            }
+
         }
 
         > p {

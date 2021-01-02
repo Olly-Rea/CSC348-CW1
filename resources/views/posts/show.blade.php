@@ -6,6 +6,9 @@
 
 @section("scripts")
 <script src="{{ asset('javascript/replies.js') }}" defer></script>
+@auth
+<script src="{{ asset('javascript/post_forms/comment.js') }}" defer></script>
+@endauth
 @endsection
 
 @section('title')
@@ -99,8 +102,13 @@
                 @endif
             </div>
         </a>
-        {{-- <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p> --}}
+        @if(Auth::check() && Auth::user() == $comment->user)
+        <form class="comment-edit">
+            <input name="comment" type="text" value="{{ $comment->content }}" autocomplete="off">
+        </form>
+        @else
         <p>{{ $comment->content }}</p>
+        @endif
         @php
             if (Auth::check()) {
                 $hasLike = $comment->likes->contains(function ($like) {

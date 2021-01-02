@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-//     return view('dashboard');
-// })->name('dashboard');
+Route::get('/', 'HomeController@show')->name('home');
 
 // Routes that can only be used by Auth users
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -32,22 +28,30 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Routes to add new elements to posts
     Route::get('/post/add/text', 'PostController@addTextInput')->name('post.add.text');
     Route::get('/post/add/image', 'PostController@addImageInput')->name('post.add.image');
+
+    // Routes to get (and fetch) paginated news from an external api (user must be logged in to access news)
+    Route::get('/feed/news', 'NewsController@index')->name('news');
+    Route::post('/feed/news/fetch', 'NewsController@fetch');
+
     // Route to allow the Auth User to like a 'likeable' item (but NOT access the URI)
     Route::match(['get', 'post'], '/like', 'LikeController@like');
     // Route to allow the Auth user to comment on posts / reply to comments (but NOT access the URI)
     Route::match(['get', 'post'], '/comment/create', 'CommentController@create')->name('comment.create');
-    Route::match(['get', 'post'], '/comment/edit', 'CommentController@edit')->name('comment.edit');
+    // Method to allow a user to edit/delete their comments
+    Route::match(['get', 'post'], '/comment/update', 'CommentController@update')->name('comment.edit');
+    Route::match(['get', 'post'], '/comment/delete', 'CommentController@delete')->name('comment.delete');
     // Notification routes
     Route::match(['get', 'post'], '/notify/read', 'NotifyController@notifyRead')->name('comment.edit');
     Route::match(['get', 'post'], '/notify/delete', 'NotifyController@notifyDelete')->name('comment.edit');
 });
 
-// Routes and controller functions to display feed elements
-Route::get('/feed', 'PostController@index')->name('feed');
-Route::get('/feed/posts', 'PostController@index')->name('posts');
-Route::get('/feed/news', 'PostController@index')->name('news');
-Route::post('/feed/fetch', 'PostController@fetch');
+// Routes to display (and fetch) all feed elements
+Route::get('/feed', 'HomeController@index')->name('feed');
+Route::post('/feed/fetch', 'HomeController@fetch');
 
+// Routes to display (and fetch) post elements
+Route::get('/feed/posts', 'PostController@index')->name('posts');
+Route::post('/feed/posts/fetch', 'PostController@fetch');
 // Routes and controller to display a post
 Route::get('/post/{post}', 'PostController@show')->name('post');
 Route::post('/reply/fetch', 'CommentController@fetch');

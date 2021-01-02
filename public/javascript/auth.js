@@ -33,7 +33,7 @@ $(window).on("load, pageshow", function() {
         $.ajax({
             type : 'POST',
             url : "/notify/read",
-            data: {'id': $notification.attr('id')},
+            data: {id: $notification.attr('id')},
             success: function(data) {
                 if(data) {
                     // Decrese the notification counter (if not '+')
@@ -77,7 +77,7 @@ $(window).on("load, pageshow", function() {
         $.ajax({
             type : 'POST',
             url : "/notify/delete",
-            data: {'id': $notification.attr('id')},
+            data: {id: $notification.attr('id')},
             success: function(data) {
                 if(data) {
                     // Fade out the notification before removing it

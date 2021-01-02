@@ -10,14 +10,21 @@ $(window).on("load, pageshow", function() {
         $container = $(this).parent().parent();
         // Fade out the container and remove it from the page
         $container.fadeOut(transitionTime);
-        // Make the to_delete chex input checked (true)
-        $todelete = $container.find("input[type=\"checkbox\"]").attr('checked', 'checked');
+        // If the container is a new addition, remove it from the DOM
+        if($container.hasClass("new")) {
+            setTimeout(function () {
+                $container.remove();
+            }, transitionTime);
+        } else {
+            // Make the to_delete chex input checked (true)
+            $todelete = $container.find("input[type=\"checkbox\"]").attr('checked', 'checked');
+        }
     });
 
 });
 
+// method to update the position of all of the inputs
 function updatePositions() {
-    // Set the position of all of the inputs
     let pos = 0;
     $(".image-container, .text-container").each(function() {
         // Get the input fields

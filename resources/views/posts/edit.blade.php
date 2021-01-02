@@ -30,12 +30,13 @@
                 <p id="tag-selector">No Tags!</p>
             @endforelse
         </div>
-        @if ($errors->has('tags')) <p class="form-error-msg">{{ $errors->first('tags') }}</p> @endif
+        @if ($errors->has('tags[]')) <p class="form-error-msg">{{ $errors->first('tags[]') }}</p> @endif
     </div>
+    @if($errors->has('content[]')) <p class="form-error-msg">{{ $errors->first('content[]') }}</p>@endif
     @foreach($post->content as $key => $content)
         @if($content->type == 'text')
             <div class="text-container">
-                <textarea name="content[][content]" rows="8" placeholder="Insert text here!" onfocusout="this.placeholder = 'Insert text here!'" autocomplete="off">{{ $content->content }}</textarea>
+                <textarea name="content[][content]" rows="8" placeholder="Insert text here!" onfocusout="this.placeholder = 'Insert text here!'" autocomplete="off" required>{{ $content->content }}</textarea>
                 <div class="overlay">
                     <div id="edit" class="menu-item">
                         <svg>
@@ -57,8 +58,7 @@
                 <input name="content[][id]" type="number" value="{{ $content->id }}" hidden>
                 <input name="content[][to_delete]" type="checkbox" hidden>
             </div>
-            @if($errors->has('content')) <p class="form-error-msg">{{ $errors->first('content') }}</p>@endif
-            @if($errors->has('content.*')) <p class="form-error-msg">{{ $errors->first('content.*') }}</p>@endif
+            @if($errors->has('content.'.$key)) <p class="form-error-msg">{{ $errors->first('content.'.$key) }}</p>@endif
         @elseif($content->type == 'image')
             <div class="image-container">
                 <svg>
@@ -89,8 +89,7 @@
                 <input name="content[][id]" type="number" value="{{ $content->id }}" hidden>
                 <input name="content[][to_delete]" type="checkbox" hidden>
             </div>
-            @if($errors->has('content')) <p class="form-error-msg">{{ $errors->first('content') }}</p>@endif
-            @if($errors->has('content.*')) <p class="form-error-msg">{{ $errors->first('content.*') }}</p>@endif
+            @if($errors->has('content.'.$key)) <p class="form-error-msg">{{ $errors->first('content.'.$key) }}</p>@endif
         @else
             <p>Unrecognised content!</p>
         @endif
@@ -160,14 +159,24 @@
         @foreach ($tags as $tag)
         <label class="checkOption">
             <input form="post-form" type="checkbox" name="tags[]" value="{{ $tag->name }}" @if(in_array($tag->name, old('tags')) || $post->tags->contains('name', $tag->name))checked @endif/>
-            <span class="checkbox">{{ $tag->name }}</span>
+            <span class="checkbox">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                </svg>
+                {{ $tag->name }}
+            </span>
         </label>
         @endforeach
     @else
         @foreach ($tags as $tag)
         <label class="checkOption">
             <input form="post-form" type="checkbox" name="tags[]" value="{{ $tag->name }}" @if($post->tags->contains('name', $tag->name))checked @endif/>
-            <span class="checkbox">{{ $tag->name }}</span>
+            <span class="checkbox">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                </svg>
+                {{ $tag->name }}
+            </span>
         </label>
         @endforeach
     @endif

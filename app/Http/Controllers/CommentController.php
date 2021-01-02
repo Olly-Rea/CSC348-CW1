@@ -28,7 +28,7 @@ class CommentController extends Controller
             if(count($replies) == 0) {
                 return null;
             } else {
-                // render the replies and return them to the TalentFeed
+                // render the replies and return them to the current page
                 return view('paginations.comments', ['comments' => $replies])->render();
             }
         // Else return a 404 not found error
@@ -76,11 +76,60 @@ class CommentController extends Controller
     }
 
     /**
-     * Method to update a comment
+     * Method to update a User's comment
      */
-    public static function update() {
-
+    public static function update(Request $request) {
+        // Check that the request is ajax
+        if ($request->ajax()) {
+            // Ensure the user is logged in
+            if(Auth::check()) {
+                // Get the comment to edit
+                $comment = Auth::user()->comments()->where('id', $request->comment_id)->first();
+                // Check the the user does in fact have acces to this comment
+                if($comment != null) {
+                    // Update the comment
+                    $comment->update([
+                        'content' => $request->comment_val
+                    ]);
+                    // return success
+                    return true;
+                } else {
+                    // Return 'issue'
+                    return false;
+                }
+            }
+        // Else return a 404 not found error
+        } else {
+            abort(404);
+        }
     }
 
+    /**
+     * Method to delete a User's comment
+     */
+    public static function delete(Request $request) {
+        // Check that the request is ajax
+        if ($request->ajax()) {
+            // Ensure the user is logged in
+            if(Auth::check()) {
+                // Get the comment to edit
+                $comment = Auth::user()->comments()->where('id', $request->comment_id)->first();
+                // Check the the user does in fact have acces to this comment
+                if($comment != null) {
+                    // Delete the comment
+                    $comment->delete();
+                    // return success
+                    return true;
+                } else {
+                    // Return 'issue'
+                    return false;
+                }
+
+            }
+        // Else return a 404 not found error
+        } else {
+            abort(404);
+        }
+    }
 
 }

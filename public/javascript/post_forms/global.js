@@ -112,7 +112,7 @@
         // Final 'updatePositions' on form submit
         updatePositions();
         // Check each image input and prevent submission until they are filled in (or removed)
-        $(".image-container").each(function() {
+        $(".image-container:visible").each(function() {
             // Get the image container
             $container = $(this);
             $input = $container.find("input[type=\"file\"]");
@@ -135,11 +135,21 @@
                 return false;
             }
         });
-        // re-bind the beforeunload handler
-        $(window).unbind("beforeunload");
-        $(window).bind("beforeunload", function() {
-            windowUnload();
-        });
+
+        console.log($("#post-form div:visible").length);
+
+        // Check that the user has at least one 'content' element in their post
+        if($("#post-form div:visible").length < 3) {
+            event.preventDefault();
+            warningPrompt("You must have at least one element in your post!");
+        } else {
+            // re-bind the beforeunload handler
+            $(window).unbind("beforeunload");
+            $(window).bind("beforeunload", function() {
+                windowUnload();
+            });
+        }
+
     });
 
     // TODO Add delete handler

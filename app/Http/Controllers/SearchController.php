@@ -9,13 +9,15 @@ use App\Models\Post;
 
 class SearchController extends Controller
 {
+    // Variable for the number of News articles to get each time
+    private $paginate = 12;
 
     /**
      * Method to search for specific posts
      */
     public function search(Request $request) {
         // Get first 30 posts
-        $posts = Post::with('tags')->where('tags', $request->tags)->orderBy('created_at', 'DESC')->paginate(30);
+        $posts = Post::with('tags')->where('tags', $request->tags)->orderBy('created_at', 'DESC')->paginate($this->paginate);
         // Return them in the feed view
         return view('feed', ['posts' => $posts]);
     }
@@ -25,7 +27,7 @@ class SearchController extends Controller
      */
     public function refine(Request $request) {
         // Get first 30 posts
-        $posts = Post::with('tags')->where('tags', $request->tags)->orderBy('created_at', 'DESC')->paginate(30);
+        $posts = Post::with('tags')->where('tags', $request->tags)->orderBy('created_at', 'DESC')->paginate($this->paginate);
         // Return them in the feed view
         return view('feed', ['posts' => $posts]);
     }
@@ -38,7 +40,7 @@ class SearchController extends Controller
             // Convert the request query (form data) to a new instance of Request
             $formRequest = new Request($request->query());
             // Set the profile collection based on the users request (and paginate)
-            $posts = $this->getposts($formRequest)->paginate(30);
+            $posts = $this->getposts($formRequest)->paginate($this->paginate);
             // Check this page of the collection isn't empty
             if(count($posts) == 0) {
                 return null;
