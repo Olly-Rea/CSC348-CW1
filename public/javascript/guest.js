@@ -14,12 +14,15 @@ $(window).on("load, pageshow", function() {
         $("#comment-form input").trigger("blur");
         showSignUpPrompt("Sign up to write comments!");
     });
-    $(".reply-form").on("click", function() {
+    $("main").on("click", ".reply-form", function() {
         // Un-focus the input field
         $(".reply-form input").trigger("blur");
         showSignUpPrompt("Sign up to reply to comments!");
     });
-
+    $("#news").on("click", function() {
+        event.preventDefault();
+        showSignUpPrompt("Sign up to see News feed!");
+    });
 });
 
 // Method to show the Sign Up prompt

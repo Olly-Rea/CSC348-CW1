@@ -95,7 +95,7 @@ $(window).on("load, pageshow", function() {
             },
             error: function(data) {
                 errorPrompt("Error deleting this notification!");
-                console.log(data);
+                // console.log(data);
             }
         });
     });
@@ -135,7 +135,7 @@ $(window).on("load, pageshow", function() {
                 } else {
                     errorPrompt("Error liking this comment!");
                 }
-                console.log(data);
+                // console.log(data);
             }
         });
     });
