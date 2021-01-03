@@ -17,9 +17,11 @@ Route::get('/', 'HomeController@show')->name('home');
 
 // Routes that can only be used by Auth users
 Route::middleware(['auth:sanctum'])->group(function () {
-    // Routes to display and edit the Auth user profile
+    // Routes to display, edit and delete the Auth user profile
     Route::get('/Me', 'ProfileController@me')->name('me');
-    Route::get('/Me/edit', 'ProfileController@edit')->name('me.edit');
+    Route::post('/Me/update', 'ProfileController@update')->name('me.update');
+    Route::post('/Me/delete', 'ProfileController@delete')->name('me.delete');
+
     // Routes to create and edit (and persist changes to) posts
     Route::get('/post/create', 'PostController@create')->name('post.create');
     Route::post('/post/create', 'PostController@save')->name('post.save');

@@ -5,7 +5,7 @@
         <a href="/profile/{{ $reply->user->id }}" class="author-info">
             <div class="profile-image-container">
                 <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
+                    <img src="{{ $reply->user->profile->profileImage() }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
                 </div>
             </div>
             <div>
@@ -69,7 +69,7 @@
         <a href="/profile/{{ $comment->user->id }}" class="author-info">
             <div class="profile-image-container">
                 <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
+                    <img src="{{ $comment->user->profile->profileImage() }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
                 </div>
             </div>
             <div>

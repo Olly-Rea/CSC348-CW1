@@ -44,9 +44,14 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'site_admin' => false,
         ]);
+
+        // dd($user->id);
+
         // Create the new User's Profile
         Profile::create([
+            'user_id' => $user->id,
             'about_me' => null,
+            'profile_image' => null,
         ]);
         // return the User
         return $user;

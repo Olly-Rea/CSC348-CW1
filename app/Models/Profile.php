@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// Custom import
+use App\Http\Controllers\ProfileController;
+
 class Profile extends Model
 {
     use HasFactory;
@@ -18,7 +21,9 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'about_me',
+        'profile_image'
     ];
 
     /**
@@ -26,6 +31,11 @@ class Profile extends Model
      */
     public function user() {
         return $this->belongsTo('App\Models\user');
+    }
+
+    // Function to call on the profile loadImage method
+    public function profileImage() {
+        return ProfileController::loadImage($this->profile_image);
     }
 
 }

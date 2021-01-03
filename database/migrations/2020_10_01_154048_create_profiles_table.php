@@ -21,6 +21,7 @@ class CreateProfilesTable extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->text('about_me')->nullable();
+            $table->string('profile_image')->nullable();
         });
     }
 

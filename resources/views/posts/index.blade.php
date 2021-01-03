@@ -40,7 +40,7 @@
     <a href="/profile/{{ $post->user->id }}" class="author-info">
         <div class="profile-image-container">
             <div class="profile-image">
-                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
+                <img src="{{ $post->user->profile->profileImage() }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
             </div>
         </div>
         <div>
@@ -85,7 +85,7 @@
             <div class="author-info">
                 <div class="profile-image-container">
                     <div class="profile-image">
-                        <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
+                        <img src="{{ $topComment->user->profile->profileImage() }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
                     </div>
                 </div>
                 <div>

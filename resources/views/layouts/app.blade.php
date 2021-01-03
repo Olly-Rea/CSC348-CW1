@@ -95,7 +95,7 @@
         <div id="logout" class="menu-item" >
             <a>
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/about.svg#icon') }}"></use>
+                    <use xlink:href="{{ asset('images/graphics/logout.svg#icon') }}"></use>
                 </svg>
             </a>
             <h1>Logout</h1>
@@ -104,7 +104,7 @@
         <div id="profile" class="menu-item" >
             <a href="@if(Request::is('Me'))# @else(){{ route('me') }}@endif" class="profile-image-container">
                 <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}">
+                    <img src="{{ Auth::user()->profile->profileImage() }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}">
                 </div>
             </a>
             <h1>{{ Auth::user()->first_name }}</h1>
@@ -128,7 +128,7 @@
     </div>
     @endauth
 </div>
-<div id="site-overlay" style="display: none">
+<div id="site-overlay" @if(!$errors->me->any())style="display: none"@endif>
     @auth
     <div id="logout" class="prompt" style="display: none">
         <h1>Are you sure you want to logout?</h1>
@@ -151,7 +151,6 @@
         <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         <p class="cancel-prompt">Cancel</p>
     </div>
-
     @endauth
     <div id="message" class="prompt" style="display: none">
         <h1></h1>

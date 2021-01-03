@@ -361,6 +361,10 @@ class PostController extends Controller
         // Delete all the likes and comments (polymorphics) of this post
         $post->likes()->delete();
         $post->comments()->delete();
+
+        // Delete any uploaded files from the server
+        Storage::deleteDirectory('user_uploads/posts/' . $post->id);
+
         // Delete the post
         $post->delete();
         // Redirect the user to the feed

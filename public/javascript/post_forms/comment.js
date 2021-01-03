@@ -39,8 +39,10 @@ var $form;
 
     // Handler to delete a comment
     $("main").on("click", "#delete.menu-item", function() {
+        // Get and store this
+        $this = $(this);
         // Get the comment container
-        $container = $(this).parent().parent();
+        $container = $this.parent().parent();
         // Get the reply button and reply container elements (provided they exist)
         $replyBtn = $container.next();
         if(!$replyBtn.hasClass('reply-button')) {
@@ -58,7 +60,7 @@ var $form;
         $("#site-overlay, #confirm.prompt").fadeIn(transitionTime);
         // Add 'confirm' button click handler
         $("#confirm.prompt button").on("click", function() {
-            $("#confirm.prompt button").off("click");
+            $("#confirm.prompt button").add($this).off("click");
             $("#site-overlay, #confirm.prompt").fadeOut(transitionTime);
             // Perform the ajax query
             $.ajax({

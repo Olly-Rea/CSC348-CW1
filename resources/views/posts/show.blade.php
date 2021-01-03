@@ -32,7 +32,7 @@
     <a href="/profile/{{ $post->user->id }}" class="author-info">
         <div class="profile-image-container">
             <div class="profile-image">
-                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
+                <img src="{{ $post->user->profile->profileImage() }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
             </div>
         </div>
         <div>
@@ -84,7 +84,7 @@
         <a href="/profile/{{ $comment->user->id }}" class="author-info">
             <div class="profile-image-container">
                 <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
+                    <img src="{{ $comment->user->profile->profileImage() }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
                 </div>
             </div>
             <div>
@@ -96,7 +96,7 @@
                 @endif
             </div>
         </a>
-        @if(Auth::check() && Auth::user() == $comment->user)
+        @if(Auth::check() && Auth::user()->id == $comment->user->id)
         <form class="comment-edit" style="display: none">
             <input name="comment" type="text" value="{{ $comment->content }}" autocomplete="off">
             <p class="form-cancel">Cancel</p>
@@ -120,7 +120,7 @@
             </svg>
             <h4>{{ count($comment->likes) }}</h4>
         </div>
-        @if(Auth::check() && Auth::user() == $comment->user)
+        @if(Auth::check() && Auth::user()->id == $comment->user->id)
         <div class="overlay">
             <div id="edit" class="menu-item">
                 <svg>

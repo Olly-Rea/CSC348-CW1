@@ -2,6 +2,9 @@
 
 @section("styles")
 <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+@if(Request::is('Me') && Auth::check())
+<link href="{{ asset('css/profile-edit.css') }}" rel="stylesheet">
+@endif
 @endsection
 
 @section("scripts")
@@ -14,7 +17,7 @@
 @section('content')
 <div class="profile-image-container">
     <div class="profile-image">
-        <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $user->first_name }} {{ $user->last_name }}">
+        <img src="{{ $user->profile->profileImage() }}" alt="{{ $user->first_name }} {{ $user->last_name }}">
     </div>
 </div>
 <h1 id="user-name">{{ $user->first_name }} {{ $user->last_name }}</h1>
@@ -49,14 +52,14 @@
         </div>
         <h1>Likes</h1>
     </div>
-    {{-- <div id="settings" class="menu-item" >
+    <div id="settings" class="menu-item" >
         <div>
             <svg>
                 <use xlink:href="{{ asset('images/graphics/cog.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Edit Profile</h1>
-    </div> --}}
+    </div>
     @endif
 </div>
 <div class="screen-split-horizontal"></div>
@@ -110,7 +113,7 @@
             <a @if($user->id != $post->user->id)href="/profile/{{ $post->user->id }}" @endif()class="author-info">
                 <div class="profile-image-container">
                     <div class="profile-image">
-                        <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
+                        <img src="{{ $post->user->profile->profileImage() }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
                     </div>
                 </div>
                 <div>
@@ -155,7 +158,7 @@
                     <div class="author-info">
                         <div class="profile-image-container">
                             <div class="profile-image">
-                                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
+                                <img src="{{ $topComment->user->profile->profileImage() }}" alt="{{ $topComment->user->first_name }} {{ $topComment->user->last_name }}">
                             </div>
                         </div>
                         <div>
@@ -235,7 +238,7 @@
                     <a @if($user->id != $post->user->id)href="/profile/{{ $post->user->id }}" @endif()class="author-info">
                         <div class="profile-image-container">
                             <div class="profile-image">
-                                <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
+                                <img src="{{ $post->user->profile->profileImage() }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }}">
                             </div>
                         </div>
                         <div>
@@ -268,12 +271,11 @@
                 <a href="/profile/{{ $comment->user->id }}" class="author-info">
                     <div class="profile-image-container">
                         <div class="profile-image">
-                            <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
+                            <img src="{{ $comment->user->profile->profileImage() }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
                         </div>
                     </div>
                     <div>
                         <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
-                        {{-- <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p> --}}
                         @if(date('dmY') == date('dmY', strtotime($comment->created_at)))
                         <p>Today • {{ date("g:ia", strtotime($comment->created_at)) }}</p>
                         @else
@@ -281,7 +283,6 @@
                         @endif
                     </div>
                 </a>
-                {{-- <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p> --}}
                 <p>{{ $comment->content }}</p>
                 @php
                     if (Auth::check()) {
@@ -313,41 +314,90 @@
 
 @section('overlays')
 @auth
-<div id="edit-profile" style="display: none">
-    <div id="edit-nav">
+<div id="scroll-padding" @if(!$errors->me->any())style="display: none"@endif>
+    <div id="edit-profile">
+        <form id="profile-form" method="POST" action="{{ route('me.update') }}" enctype="multipart/form-data">
+            @csrf
+            <h1>Profile Photo</h1>
+            <div class="profile-image-container">
+                <div class="profile-image">
+                    <img src="{{ $user->profile->profileImage() }}" alt="{{ $user->first_name }} {{ $user->last_name }}">
+                </div>
+                <div class="image-overlay">
+                    <label id="edit" class="menu-item">
+                        <input type="file" name="profile_image" accept=".jpg, .jpeg, .png, .bmp" hidden>
+                        <span>
+                            <svg>
+                                <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            @if($errors->me->has('profile_image'))<p class="form-error-msg">{{ $errors->me->first('profile_image') }}</p>@endif
 
+            <h2>My Name</h2>
+            <div class="form-row">
+                <input name="first_name" type="text" placeholder="{{ $user->first_name }}" onfocusout="this.placeholder = '{{ $user->first_name }}'" value="{{ old('title') ? old('title') : $user->first_name }}" autocomplete="off" required/>
+                <input name="last_name" type="text" placeholder="{{ $user->last_name }}" onfocusout="this.placeholder = '{{ $user->last_name }}'" value="{{ old('title') ? old('title') : $user->last_name }}" autocomplete="off" required/>
+            </div>
+            @if($errors->me->has('first_name') || $errors->me->has('last_name'))
+            <div class="form-row">
+                @if($errors->me->has('first_name')) <p class="form-error-msg">{{ $errors->me->first('first_name') }}</p>@endif
+                @if($errors->me->has('last_name')) <p class="form-error-msg">{{ $errors->me->first('last_name') }}</p>@endif
+            </div>
+            @endif
+
+            <h2>About Me</h2>
+            <textarea name="about_me" id="bio-edit" rows="8">{{ isset($user->profile->about_me) ? $user->profile->about_me : "" }}</textarea>
+            @if($errors->me->has('about_me')) <p class="form-error-msg">{{ $errors->me->first('about_me') }}</p>@endif
+        </form>
+        <div id="edit-nav">
+            <label id="save" class="menu-item">
+                <div>
+                    <input type="submit" form="profile-form">
+                    <svg>
+                        <use xlink:href="{{ asset('images/graphics/save.svg#icon') }}"></use>
+                    </svg>
+                </div>
+                <h1>Save</h1>
+            </label>
+        </div>
+
+        {{-- <h2 id="delete-profile">Delete Profile</h2>
+        <form id="delete-form" method="POST" action="{{ route('me.delete', Auth::user()) }}" hidden>
+            @csrf
+        </form> --}}
+
+        <p class="close-prompt">Close</p>
+        {{-- @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updateProfileInformation()))
+        @livewire('profile.update-profile-information-form')
+        <x-jet-section-border />
+        @endif
+
+        @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+        <div>
+            @livewire('profile.update-password-form')
+        </div>
+        <x-jet-section-border />
+        @endif
+
+        @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+        <div>
+            @livewire('profile.two-factor-authentication-form')
+        </div>
+        <x-jet-section-border />
+        @endif
+
+        <div>
+        @livewire('profile.logout-other-browser-sessions-form')
+        </div>
+        <x-jet-section-border />
+
+        <div>
+        @livewire('profile.delete-user-form')
+        </div> --}}
     </div>
-    <div id="edit-container">
-
-    </div>
-    <p class="close-prompt">Close</p>
-    {{-- @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updateProfileInformation()))
-    @livewire('profile.update-profile-information-form')
-    <x-jet-section-border />
-    @endif
-
-    @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-    <div>
-        @livewire('profile.update-password-form')
-    </div>
-    <x-jet-section-border />
-    @endif
-
-    @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-    <div>
-        @livewire('profile.two-factor-authentication-form')
-    </div>
-    <x-jet-section-border />
-    @endif
-
-    <div>
-    @livewire('profile.logout-other-browser-sessions-form')
-    </div>
-    <x-jet-section-border />
-
-    <div>
-    @livewire('profile.delete-user-form')
-    </div> --}}
 </div>
 @endauth
 @endsection

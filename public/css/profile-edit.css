@@ -1454,28 +1454,107 @@ main svg.loading-graphic {
   }
 }
 
-main {
-  padding-top: 14rem;
+#site-overlay {
+  overflow-y: scroll;
 }
 
-main > .profile-image-container {
-  margin-bottom: 1rem;
-  width: 16%;
-  -webkit-box-shadow: 0 0 0.2rem 0 #8c8c8c;
-          box-shadow: 0 0 0.2rem 0 #8c8c8c;
+#site-overlay #scroll-padding {
+  position: relative;
+  width: 100%;
+  height: 120%;
+  background-color: rgba(0, 0, 0, 0);
 }
 
-main h1#user-name {
-  font-size: 3rem;
-  margin: 0.8rem 0;
+#site-overlay #edit-profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: calc(70% - 2rem);
+  max-width: 1280px;
+  padding: 3.2rem 1rem;
+  border-radius: 1.6rem;
+  background-color: #fafafa;
 }
 
-main h1#user-name + h4 {
-  margin-top: -0.8rem;
-  margin-bottom: 1rem;
+#site-overlay #edit-profile .profile-image-container {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  position: relative;
+  margin: 2rem 0;
+  width: 18rem;
+  overflow: hidden;
 }
 
-main #profile-nav {
+#site-overlay #edit-profile .profile-image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+#site-overlay #edit-profile .profile-image-container:active .image-overlay {
+  opacity: 1;
+}
+
+#site-overlay #edit-profile .profile-image-container .image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(10, 10, 10, 0.5);
+  opacity: 0;
+  -webkit-transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
+}
+
+#site-overlay #edit-profile .profile-image-container .image-overlay .menu-item span {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+
+#site-overlay #edit-profile > div {
+  margin-bottom: 3.2rem;
+}
+
+#site-overlay #edit-profile > div:nth-child(1) {
+  margin-top: 3.2rem !important;
+}
+
+#site-overlay #edit-profile form {
+  width: 70%;
+}
+
+#site-overlay #edit-profile form h2 {
+  margin: 2rem 0 0.4rem 0.4rem;
+}
+
+#site-overlay #edit-profile #edit-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1489,50 +1568,14 @@ main #profile-nav {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin: 3rem 0;
-  margin-bottom: -1rem;
-  /*#posts {
-            &.active {
-                div {
-                    background-color: $appYellowUnderlay;
-                    svg {
-                        fill: $appYellow;
-                        stroke: $appYellow;
-                    }
-                }
-                h1 {
-                    color: $appYellow;
-                }
-            }
-            div {
-                &:hover {
-                    background-color: $appYellowUnderlay;
-                    svg {
-                        fill: $appYellowLight;
-                        stroke: $appYellowLight;
-                    }
-                    & + h1 {
-                        color: $appYellowLight;
-                    }
-                }
-                &:active {
-                    background-color: $appYellowUnderlay;
-                    svg {
-                        fill: $appYellowDark;
-                        stroke: $appYellowDark;
-                    }
-                    & + h1 {
-                        color: $appYellowDark;
-                    }
-                }
-            }
-        }
-        #likes {
-
-        }*/
+  margin: 2rem 0;
 }
 
-main #profile-nav .menu-item {
+#site-overlay #edit-profile #save.menu-item input {
+  display: none;
+}
+
+#site-overlay #edit-profile .menu-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1551,14 +1594,15 @@ main #profile-nav .menu-item {
   color: gainsboro;
 }
 
-main #profile-nav .menu-item * {
+#site-overlay #edit-profile .menu-item * {
   -webkit-transition: background-color 0.1s ease-in-out 0.02s, stroke 0.1s ease-in-out -0.02s, fill 0.1s ease-in-out -0.02s, -webkit-transform 0.1s ease-in-out;
   transition: background-color 0.1s ease-in-out 0.02s, stroke 0.1s ease-in-out -0.02s, fill 0.1s ease-in-out -0.02s, -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out 0.02s, stroke 0.1s ease-in-out -0.02s, fill 0.1s ease-in-out -0.02s;
   transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out 0.02s, stroke 0.1s ease-in-out -0.02s, fill 0.1s ease-in-out -0.02s, -webkit-transform 0.1s ease-in-out;
 }
 
-main #profile-nav .menu-item div {
+#site-overlay #edit-profile .menu-item div,
+#site-overlay #edit-profile .menu-item span {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1584,279 +1628,79 @@ main #profile-nav .menu-item div {
           user-select: none;
 }
 
-main #profile-nav .menu-item div svg {
+#site-overlay #edit-profile .menu-item div svg,
+#site-overlay #edit-profile .menu-item span svg {
   height: 56%;
   width: 56%;
   fill: #dadada;
   stroke: #dadada;
 }
 
-main #profile-nav .menu-item div:hover {
+#site-overlay #edit-profile .menu-item div:hover,
+#site-overlay #edit-profile .menu-item span:hover {
   -webkit-transform: scale(1.12);
           transform: scale(1.12);
 }
 
-main #profile-nav .menu-item div:active {
+#site-overlay #edit-profile .menu-item div:active,
+#site-overlay #edit-profile .menu-item span:active {
   -webkit-transform: scale(0.96);
           transform: scale(0.96);
 }
 
-main #profile-nav .menu-item h1 {
+#site-overlay #edit-profile .menu-item h1 {
   margin: 1rem 0;
   text-align: center;
   font-weight: bold;
   white-space: nowrap;
 }
 
-main #profile-nav .menu-item.active div {
-  background-color: #cdffec;
+#site-overlay #edit-profile #delete-profile {
+  margin: 4rem 0;
+  color: #e44ba9;
+  cursor: pointer;
+  -webkit-transition: color 0.1s ease-in-out 0.02s, -webkit-transform 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out 0.02s, -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, color 0.1s ease-in-out 0.02s;
+  transition: transform 0.1s ease-in-out, color 0.1s ease-in-out 0.02s, -webkit-transform 0.1s ease-in-out;
 }
 
-main #profile-nav .menu-item.active div svg {
-  fill: #4be4a9;
-  stroke: #4be4a9;
+#site-overlay #edit-profile #delete-profile:hover {
+  -webkit-transform: scale(1.12);
+          transform: scale(1.12);
+  color: #f85fbd;
 }
 
-main #profile-nav .menu-item.active h1 {
-  color: #4be4a9;
+#site-overlay #edit-profile #delete-profile:active {
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
+  color: #d03795;
 }
 
-main #profile-nav .menu-item div:hover {
-  background-color: #cdffec;
+#site-overlay #edit-profile #delete-form {
+  display: none;
 }
 
-main #profile-nav .menu-item div:hover svg {
-  fill: #5ff8bd;
-  stroke: #5ff8bd;
-}
-
-main #profile-nav .menu-item div:hover + h1 {
-  color: #5ff8bd;
-}
-
-main #profile-nav .menu-item div:active {
-  background-color: #d7f5e2;
-}
-
-main #profile-nav .menu-item div:active svg {
-  fill: #40c894;
-  stroke: #40c894;
-}
-
-main #profile-nav .menu-item div:active + h1 {
-  color: #40c894;
-}
-
-main #profile-content,
-main #about-container,
-main #posts-container,
-main #likes-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-main #profile-content {
-  width: 100%;
-}
-
-main #profile-content #about-container,
-main #profile-content #posts-container,
-main #profile-content #likes-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 50%;
-}
-
-main #profile-content #likes-container h2 {
-  margin: 2rem 0;
-  color: #dadada;
-}
-
-main #profile-content #likes-container .content-panel .author-info,
-main #profile-content #likes-container .comment .author-info {
-  -webkit-transition: background-color 0.1s ease-in-out;
-  transition: background-color 0.1s ease-in-out;
-}
-
-main #profile-content #likes-container .content-panel .author-info:hover,
-main #profile-content #likes-container .comment .author-info:hover {
-  background-color: #e9e9e9;
-}
-
-main #profile-content #likes-container .content-panel .author-info:active,
-main #profile-content #likes-container .comment .author-info:active {
-  background-color: gainsboro;
-}
-
-main #profile-content #likes-container .content-panel > a.like-link,
-main #profile-content #likes-container .comment > a.like-link {
+#site-overlay #edit-profile p.close-prompt {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-main #profile-content #likes-container .comment {
-  padding: 1.4rem;
-  background-color: #f4f4f4;
-  border-radius: 1.6rem;
-}
-
-main #profile-content #about-container h1 {
-  margin: 1rem 0;
-}
-
-main #profile-content #about-container #bio {
-  margin-bottom: 2.4rem;
-}
-
-main #profile-content .content-panel,
-main #profile-content .comment {
-  margin: 1.4rem 0;
-  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
-  transition: -webkit-box-shadow 0.1s ease-in-out;
-  transition: box-shadow 0.1s ease-in-out;
-  transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
-  width: 100%;
-}
-
-main #profile-content .content-panel .content-preview,
-main #profile-content .comment .content-preview {
-  position: relative;
-  margin: 1rem 0;
-  max-height: 28rem;
-  overflow: hidden;
-}
-
-main #profile-content .content-panel .content-preview .image-container,
-main #profile-content .comment .content-preview .image-container {
-  width: 100%;
-  border-radius: 1.6rem 1.6rem 0 0;
-  overflow: hidden;
-}
-
-main #profile-content .content-panel .content-preview .image-container img,
-main #profile-content .comment .content-preview .image-container img {
-  width: 100%;
-}
-
-main #profile-content .content-panel .content-preview .content-fadeout,
-main #profile-content .comment .content-preview .content-fadeout {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40%;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(96%, #f2f2f2));
-  background: linear-gradient(rgba(0, 0, 0, 0) 0%, #f2f2f2 96%);
-}
-
-main #profile-content .content-panel .comment-container,
-main #profile-content .comment .comment-container {
-  margin-left: -2.4rem;
-  margin-bottom: -2.4rem;
-  width: 100%;
-  padding: 2.4rem;
-  padding-top: 1.4rem;
-  background-color: #f4f4f4;
-}
-
-main #profile-content .content-panel .comment-container > h3,
-main #profile-content .comment .comment-container > h3 {
-  margin: 0;
-  margin-left: 1.4rem;
-  margin-bottom: -0.6rem;
-}
-
-main #profile-content .content-panel .comment-container .comment,
-main #profile-content .comment .comment-container .comment {
-  padding: 1.4rem;
-  margin: 1rem 0;
-  background-color: #fafafa;
-  border-radius: 1.6rem;
-}
-
-main #profile-content .content-panel .overlay,
-main #profile-content .comment .overlay {
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  left: 0;
-  height: 50%;
-  width: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(10, 10, 10, 0.5)));
-  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(10, 10, 10, 0.5) 100%);
-  opacity: 0%;
-  -webkit-transition: opacity 0.1s ease-in-out;
-  transition: opacity 0.1s ease-in-out;
-}
-
-main #profile-content .content-panel .overlay .button-container,
-main #profile-content .comment .overlay .button-container {
-  position: absolute;
-  bottom: 4rem;
+  bottom: 2rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-main #profile-content .content-panel:hover,
-main #profile-content .comment:hover {
-  -webkit-box-shadow: 0 0 0.4rem 0 #8c8c8c;
-          box-shadow: 0 0 0.4rem 0 #8c8c8c;
+#site-overlay #edit-profile p.close-prompt:hover {
+  -webkit-transform: translateX(-50%) scale(1.12);
+          transform: translateX(-50%) scale(1.12);
 }
 
-main #profile-content .content-panel:hover .overlay,
-main #profile-content .comment:hover .overlay {
-  opacity: 100%;
+#site-overlay #edit-profile p.close-prompt:active {
+  -webkit-transform: translateX(-50%) scale(0.96);
+          transform: translateX(-50%) scale(0.96);
 }
-
-main #profile-content > p {
-  font-size: 140%;
-  margin-top: 4rem;
-}
-
-@media (max-aspect-ratio: 12 / 10) {
-  main {
-    padding-top: 12rem;
-  }
-  main .profile-image-container {
-    width: 50% !important;
-  }
-}
-/*# sourceMappingURL=profile.css.map */
+/*# sourceMappingURL=profile-edit.css.map */

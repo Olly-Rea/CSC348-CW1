@@ -14,6 +14,17 @@ html {
 
     scroll-behavior: smooth;
 }
+body {
+    &.no-scroll {
+        padding-right: 1rem;
+        overflow: hidden;
+
+        #feed-nav {
+            padding-right: 1rem;
+        }
+    }
+}
+
 * {
     margin: 0;
 }
@@ -46,37 +57,6 @@ svg {
         }
     }
 }
-
-// Site navigation side-bar
-nav {
-    @include flexDisplay(row, center, center);
-
-    height: 100%;
-    padding: 2vh;
-
-    font-size: $navFontSize;
-
-    // nav a
-    a {
-        margin: 2.4vh 0;
-        transition: transform $transitionTime ease-in-out;
-        &:hover {
-            transform: scale(1.02);
-        }
-        &:active {
-            transform: scale(1);
-        }
-    }
-
-    svg {
-        fill: $foreLight;
-        stroke: $foreLight;
-
-        transition: transform $transitionTime ease-in-out;
-    }
-
-}
-
 
 // Loading screen formatting
 #loading-screen {
@@ -315,6 +295,21 @@ form {
         }
 
     }
+    .form-row {
+        @include flexDisplay(row, center, center);
+
+        width: 100%;
+
+        textarea,
+        input:not([type="checkbox"]) {
+            width: 49%;
+
+            &:first-child {
+                margin-right: 2%;
+            }
+        }
+
+    }
 }
 
 // Input formatting
@@ -350,6 +345,9 @@ input:not([type="checkbox"]) {
         box-shadow: 0 0 0.2rem 0 $shdwClr;
     }
 
+}
+textarea {
+    padding: 1.6rem;
 }
 
 button,

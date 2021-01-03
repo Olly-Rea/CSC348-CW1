@@ -3,7 +3,7 @@
 main {
     padding-top: 14rem;
 
-    .profile-image-container {
+    > .profile-image-container {
         margin-bottom: 1rem;
         width: 16%;
 
@@ -31,7 +31,6 @@ main {
 
             width: 6rem;
             color: $footerColor;
-            // font-size: 70%;
 
             * {
                 transition: transform $transitionTime ease-in-out,
@@ -112,45 +111,45 @@ main {
 
         }
 
-        // #posts {
-        //     &.active {
-        //         div {
-        //             background-color: $appYellowUnderlay;
-        //             svg {
-        //                 fill: $appYellow;
-        //                 stroke: $appYellow;
-        //             }
-        //         }
-        //         h1 {
-        //             color: $appYellow;
-        //         }
-        //     }
-        //     div {
-        //         &:hover {
-        //             background-color: $appYellowUnderlay;
-        //             svg {
-        //                 fill: $appYellowLight;
-        //                 stroke: $appYellowLight;
-        //             }
-        //             & + h1 {
-        //                 color: $appYellowLight;
-        //             }
-        //         }
-        //         &:active {
-        //             background-color: $appYellowUnderlay;
-        //             svg {
-        //                 fill: $appYellowDark;
-        //                 stroke: $appYellowDark;
-        //             }
-        //             & + h1 {
-        //                 color: $appYellowDark;
-        //             }
-        //         }
-        //     }
-        // }
-        // #likes {
+        /*#posts {
+            &.active {
+                div {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellow;
+                        stroke: $appYellow;
+                    }
+                }
+                h1 {
+                    color: $appYellow;
+                }
+            }
+            div {
+                &:hover {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellowLight;
+                        stroke: $appYellowLight;
+                    }
+                    & + h1 {
+                        color: $appYellowLight;
+                    }
+                }
+                &:active {
+                    background-color: $appYellowUnderlay;
+                    svg {
+                        fill: $appYellowDark;
+                        stroke: $appYellowDark;
+                    }
+                    & + h1 {
+                        color: $appYellowDark;
+                    }
+                }
+            }
+        }
+        #likes {
 
-        // }
+        }*/
 
     }
 
@@ -319,72 +318,6 @@ main {
             margin-top: 4rem;
         }
 
-    }
-
-}
-
-#edit-profile {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: calc(50% - 6.4rem);
-    height: 90%;
-    padding: 3.2rem;
-    padding-bottom: 0;
-    border-radius: $panelCorner;
-
-    background-color: $panelColor;
-
-    overflow-y: scroll;
-
-    p.close-prompt {
-        position: absolute;
-        top: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-
-        cursor: pointer;
-
-        transition: transform $transitionTime ease-in-out;
-
-        &:hover {
-            transform: translateX(-50%) scale(1.12);
-        }
-        &:active {
-            transform: translateX(-50%) scale(0.96);
-        }
-    }
-
-    > div {
-        margin-bottom: 3.2rem;
-
-        &:nth-child(1) {
-            margin-top: 3.2rem !important;
-        }
-    }
-
-    form {
-        div {
-            width: 100%;
-        }
-        > div {
-            position: relative;
-            padding: 1rem 0;
-            padding-bottom: 3rem;
-        }
-
-        button {
-            position: absolute;
-            bottom: -0.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        // input {
-        //     width: 90%;
-        // }
     }
 
 }

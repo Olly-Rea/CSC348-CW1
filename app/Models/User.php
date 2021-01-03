@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -80,11 +79,6 @@ class User extends Authenticatable
     }
     public function likes() {
         return $this->hasMany('App\Models\Likes');
-    }
-
-    // Function to call on the profile loadImage method
-    public function profileImage() {
-        return ProfileController::loadImage($this->profile->profile_id);
     }
 
     // TODO ADD ADMIN ROLES

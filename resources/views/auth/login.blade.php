@@ -5,7 +5,7 @@
 @endsection
 
 @section("title")
-<title>{{ config('app.name', 'Laravel') }}</title>
+{{ config('app.name', 'Laravel') }}
 @endsection
 
 @section("content")
