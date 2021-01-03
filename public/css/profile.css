@@ -388,8 +388,8 @@ form a {
 form p.form-error-msg {
   -ms-flex-item-align: start;
       align-self: flex-start;
-  margin: 1rem 0;
-  margin-top: -0.28rem;
+  margin: 1.4rem 0;
+  margin-top: -1.2rem;
   color: #d03795;
 }
 
@@ -468,7 +468,7 @@ button,
 input[type="submit"] {
   min-width: 8rem;
   padding: 1vh 2vh;
-  margin: 0 0.5vh;
+  margin: 0 0.6rem;
   border: none;
   border-radius: 10rem;
   background-color: #4be4a9;
@@ -1614,6 +1614,25 @@ main #profile-nav .menu-item div:active + h1 {
   color: #40c894;
 }
 
+main #profile-content,
+main #about-container,
+main #posts-container,
+main #likes-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 main #profile-content {
   width: 100%;
 }
@@ -1634,6 +1653,7 @@ main #profile-content #likes-container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 50%;
 }
 
 main #profile-content #likes-container h2 {
@@ -1672,32 +1692,46 @@ main #profile-content #likes-container .comment {
   border-radius: 1.6rem;
 }
 
-main #profile-content .content-panel {
+main #profile-content #about-container h1 {
+  margin: 1rem 0;
+}
+
+main #profile-content #about-container #bio {
+  margin-bottom: 2.4rem;
+}
+
+main #profile-content .content-panel,
+main #profile-content .comment {
   margin: 1.4rem 0;
   -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
   transition: -webkit-box-shadow 0.1s ease-in-out;
   transition: box-shadow 0.1s ease-in-out;
   transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+  width: 100%;
 }
 
-main #profile-content .content-panel .content-preview {
+main #profile-content .content-panel .content-preview,
+main #profile-content .comment .content-preview {
   position: relative;
   margin: 1rem 0;
   max-height: 28rem;
   overflow: hidden;
 }
 
-main #profile-content .content-panel .content-preview .image-container {
+main #profile-content .content-panel .content-preview .image-container,
+main #profile-content .comment .content-preview .image-container {
   width: 100%;
   border-radius: 1.6rem 1.6rem 0 0;
   overflow: hidden;
 }
 
-main #profile-content .content-panel .content-preview .image-container img {
+main #profile-content .content-panel .content-preview .image-container img,
+main #profile-content .comment .content-preview .image-container img {
   width: 100%;
 }
 
-main #profile-content .content-panel .content-preview .content-fadeout {
+main #profile-content .content-panel .content-preview .content-fadeout,
+main #profile-content .comment .content-preview .content-fadeout {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -1706,7 +1740,8 @@ main #profile-content .content-panel .content-preview .content-fadeout {
   background: linear-gradient(rgba(0, 0, 0, 0) 0%, #f2f2f2 96%);
 }
 
-main #profile-content .content-panel .comment-container {
+main #profile-content .content-panel .comment-container,
+main #profile-content .comment .comment-container {
   margin-left: -2.4rem;
   margin-bottom: -2.4rem;
   width: 100%;
@@ -1715,20 +1750,23 @@ main #profile-content .content-panel .comment-container {
   background-color: #f4f4f4;
 }
 
-main #profile-content .content-panel .comment-container > h3 {
+main #profile-content .content-panel .comment-container > h3,
+main #profile-content .comment .comment-container > h3 {
   margin: 0;
   margin-left: 1.4rem;
   margin-bottom: -0.6rem;
 }
 
-main #profile-content .content-panel .comment-container .comment {
+main #profile-content .content-panel .comment-container .comment,
+main #profile-content .comment .comment-container .comment {
   padding: 1.4rem;
   margin: 1rem 0;
   background-color: #fafafa;
   border-radius: 1.6rem;
 }
 
-main #profile-content .content-panel .overlay {
+main #profile-content .content-panel .overlay,
+main #profile-content .comment .overlay {
   position: absolute;
   z-index: 2;
   bottom: 0;
@@ -1742,7 +1780,8 @@ main #profile-content .content-panel .overlay {
   transition: opacity 0.1s ease-in-out;
 }
 
-main #profile-content .content-panel .overlay .button-container {
+main #profile-content .content-panel .overlay .button-container,
+main #profile-content .comment .overlay .button-container {
   position: absolute;
   bottom: 4rem;
   left: 50%;
@@ -1763,12 +1802,14 @@ main #profile-content .content-panel .overlay .button-container {
           justify-content: center;
 }
 
-main #profile-content .content-panel:hover {
+main #profile-content .content-panel:hover,
+main #profile-content .comment:hover {
   -webkit-box-shadow: 0 0 0.4rem 0 #8c8c8c;
           box-shadow: 0 0 0.4rem 0 #8c8c8c;
 }
 
-main #profile-content .content-panel:hover .overlay {
+main #profile-content .content-panel:hover .overlay,
+main #profile-content .comment:hover .overlay {
   opacity: 100%;
 }
 

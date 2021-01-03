@@ -70,7 +70,11 @@
     </svg> --}}
     <div id="about-container">
         <h1>About Me</h1>
-        <p>About Me</p>
+        @if(isset($user->profile->about_me))
+        <p id="bio">{{ $user->profile->about_me }}</p>
+        @else
+        <p id="bio"><i>{{ $user->first_name }} hasn't written a bio yet</i></p>
+        @endif
         <h1>Profile stats</h1>
         <p>Posts: {{ count($user->posts) }}</p>
         <p>Comments: {{ count($user->comments) }}</p>

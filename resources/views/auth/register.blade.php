@@ -21,10 +21,9 @@
             @if ($errors->has('email'))<p class="form-error-msg">{{ $errors->first('email') }}</p> @endif
             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-            @if ($errors->has('passsword'))<p class="form-error-msg">{{ $errors->first('passsword') }}</p> @endif
+            @if ($errors->has('password'))<p class="form-error-msg">{{ $errors->first('password') }}</p> @endif
             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-            @if ($errors->has('passsword'))<p class="form-error-msg">{{ $errors->first('passsword') }}</p> @endif
             <button type="submit" class="btn btn-primary">
                 {{ __('Register') }}
             </button>

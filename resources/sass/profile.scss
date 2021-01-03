@@ -154,6 +154,13 @@ main {
 
     }
 
+    #profile-content,
+    #about-container,
+    #posts-container,
+    #likes-container {
+        @include flexDisplay(column, center, center);
+    }
+
     #profile-content {
         width: 100%;
 
@@ -161,6 +168,8 @@ main {
         #posts-container,
         #likes-container {
             @include flexDisplay(column, center, center);
+
+            width: 50%;
         }
 
         #likes-container {
@@ -200,10 +209,23 @@ main {
 
         }
 
-        .content-panel {
+        #about-container {
+            h1 {
+                margin: 1rem 0;
+            }
 
+            #bio {
+                margin-bottom: 2.4rem;
+            }
+        }
+
+
+        .content-panel,
+        .comment {
             margin: 1.4rem 0;
             transition: box-shadow $transitionTime ease-in-out;
+
+            width: 100%;
 
             .content-preview {
                 position: relative;

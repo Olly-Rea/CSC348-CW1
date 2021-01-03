@@ -1,9 +1,6 @@
 // Variables
 @import 'variables';
 
-// // Bootstrap
-// @import '~bootstrap/scss/bootstrap';
-
 // Body and HTML tags formatting
 body,
 html {
@@ -72,12 +69,10 @@ nav {
     }
 
     svg {
-
         fill: $foreLight;
         stroke: $foreLight;
 
         transition: transform $transitionTime ease-in-out;
-
     }
 
 }
@@ -275,8 +270,8 @@ form {
     p.form-error-msg {
         align-self: flex-start;
 
-        margin: 1rem 0;
-        margin-top: -0.28rem;
+        margin: 1.4rem 0;
+        margin-top: -1.2rem;
         color: $appRedDark;
     }
 
@@ -344,7 +339,6 @@ input:not([type="checkbox"]) {
     font-family: inherit;
     background-color: $inputColor;
 
-    // @include hasShadow();
     box-shadow: 0 0 0.1rem 0 $shdwClr;
 
     border: none;
@@ -353,7 +347,6 @@ input:not([type="checkbox"]) {
     transition: box-shadow $transitionTime ease-in-out;
 
     &:hover {
-        // background-color: $offBack;
         box-shadow: 0 0 0.2rem 0 $shdwClr;
     }
 
@@ -364,12 +357,11 @@ input[type="submit"] {
     min-width: 8rem;
 
     padding: 1vh 2vh;
-    margin: 0 0.5vh;
+    margin: 0 0.6rem;
 
     border: none;
     border-radius: $roundedEnd;
 
-    // background-color: $panelColor;
     background-color: $appGreen;
     @include hasShadow();
 

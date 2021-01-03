@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             // Define foreign key
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
-            $table->text('about_me');
+            $table->text('about_me')->nullable();
         });
     }
 

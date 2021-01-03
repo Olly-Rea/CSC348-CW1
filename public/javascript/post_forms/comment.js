@@ -58,6 +58,7 @@ var $form;
         $("#site-overlay, #confirm.prompt").fadeIn(transitionTime);
         // Add 'confirm' button click handler
         $("#confirm.prompt button").on("click", function() {
+            $("#confirm.prompt button").off("click");
             $("#site-overlay, #confirm.prompt").fadeOut(transitionTime);
             // Perform the ajax query
             $.ajax({

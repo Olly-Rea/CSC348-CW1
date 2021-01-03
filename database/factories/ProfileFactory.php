@@ -22,7 +22,7 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'about_me' => $this->faker->paragraph($maxNbChars = rand(8, 32)),
         ];
     }
 }

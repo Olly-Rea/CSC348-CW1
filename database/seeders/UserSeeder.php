@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 // Custom import
 use App\Models\User;
+use App\Models\Profile;
 
 class UserSeeder extends Seeder
 {
@@ -17,6 +18,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Call User factory
-        User::factory(60)->create();
+        User::factory(60)->has(Profile::factory(1))->create();
     }
 }

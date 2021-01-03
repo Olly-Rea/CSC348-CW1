@@ -9,5 +9,23 @@ class Profile extends Model
 {
     use HasFactory;
 
-    // TODO GET THIS SETUP
+    // Disable timestamps
+    public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'about_me',
+    ];
+
+    /**
+     * One-to-One relation
+     */
+    public function user() {
+        return $this->belongsTo('App\Models\user');
+    }
+
 }

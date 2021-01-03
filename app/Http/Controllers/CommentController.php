@@ -126,11 +126,12 @@ class CommentController extends Controller
                     // Delete the comment
                     $comment->delete();
                     // return success
-                    return true;
+                    $success = true;
                 } else {
                     // Return 'issue'
-                    return false;
+                    $success = false;
                 }
+                return $success;
             }
         // Else return a 404 not found error
         } else {
