@@ -143,8 +143,8 @@ nav svg {
 }
 
 #loading-screen svg.loading-graphic {
-  height: 12rem;
-  width: 12rem;
+  height: 10rem;
+  width: 10rem;
 }
 
 svg.loading-graphic .elem {

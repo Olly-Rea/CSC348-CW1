@@ -1,28 +1,34 @@
 @if(is_countable($comments))
-    @foreach($comments as $comment)
+    @foreach($comments as $reply)
     <div class="comment">
-        <input value="comment-{{ $comment->id }}" hidden>
-        <a href="/profile/{{ $comment->user->id }}" class="author-info">
+        <input value="comment-{{ $reply->id }}" hidden>
+        <a href="/profile/{{ $reply->user->id }}" class="author-info">
             <div class="profile-image-container">
                 <div class="profile-image">
-                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $comment->user->first_name }} {{ $comment->user->last_name }}">
+                    <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $reply->user->first_name }} {{ $reply->user->last_name }}">
                 </div>
             </div>
             <div>
-                <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
-                {{-- <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p> --}}
-                @if(date('dmY') == date('dmY', strtotime($comment->created_at)))
-                <p>Today • {{ date("g:ia", strtotime($comment->created_at)) }}</p>
+                <h3>{{ $reply->user->first_name }} {{ $reply->user->last_name }}</h3>
+                @if(date('dmY') == date('dmY', strtotime($reply->created_at)))
+                <p>Today • {{ date("g:ia", strtotime($reply->created_at)) }}</p>
                 @else
-                <p>{{ date("j F Y", strtotime($comment->created_at)) }}</p>
+                <p>{{ date("j F Y", strtotime($reply->created_at)) }}</p>
                 @endif
             </div>
         </a>
-        {{-- <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p> --}}
-        <p>{{ $comment->content }}</p>
+        @if(Auth::check() && Auth::user()->id == $reply->user->id)
+        <form class="comment-edit" style="display: none">
+            <input name="comment" type="text" value="{{ $reply->content }}" autocomplete="off">
+            <p class="form-cancel">Cancel</p>
+        </form>
+        <p>{{ $reply->content }}</p>
+        @else
+        <p>{{ $reply->content }}</p>
+        @endif
         @php
             if (Auth::check()) {
-                $hasLike = $comment->likes->contains(function ($like) {
+                $hasLike = $reply->likes->contains(function ($like) {
                     return $like->user_id == Auth::user()->id;
                 });
             } else {
@@ -33,8 +39,25 @@
             <svg class="like-thumb">
                 <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
             </svg>
-            <h4>{{ count($comment->likes) }}</h4>
+            <h4>{{ count($reply->likes) }}</h4>
         </div>
+        @if(Auth::check() && Auth::user()->id == $reply->user->id)
+        <div class="overlay">
+            <div id="edit" class="menu-item">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                </svg>
+            </div>
+            <div id="delete" class="menu-item" >
+                <form class="comment-delete" action="{{ route('comment.delete', $reply->id) }}" method="POST" style="display: none" hidden>
+                    @csrf
+                </form>
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                </svg>
+            </div>
+        </div>
+        @endif
     </div>
     @endforeach
 @else
@@ -51,7 +74,6 @@
             </div>
             <div>
                 <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
-                {{-- <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p> --}}
                 @if(date('dmY') == date('dmY', strtotime($comment->created_at)))
                 <p>Today • {{ date("g:ia", strtotime($comment->created_at)) }}</p>
                 @else
@@ -59,8 +81,15 @@
                 @endif
             </div>
         </a>
-        {{-- <p>{{ $comment->content }} • comment_id: {{ $comment->id }} </p> --}}
+        @if(Auth::check() && Auth::user()->id == $comment->user->id)
+        <form class="comment-edit" style="display: none">
+            <input name="comment" type="text" value="{{ $comment->content }}" autocomplete="off">
+            <p class="form-cancel">Cancel</p>
+        </form>
         <p>{{ $comment->content }}</p>
+        @else
+        <p>{{ $comment->content }}</p>
+        @endif
         @php
             if (Auth::check()) {
                 $hasLike = $comment->likes->contains(function ($like) {
@@ -76,6 +105,23 @@
             </svg>
             <h4>{{ count($comment->likes) }}</h4>
         </div>
+        @if(Auth::check() && Auth::user()->id == $comment->user->id)
+        <div class="overlay">
+            <div id="edit" class="menu-item">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                </svg>
+            </div>
+            <div id="delete" class="menu-item" >
+                <form class="comment-delete" action="{{ route('comment.delete', $comment->id) }}" method="POST" style="display: none" hidden>
+                    @csrf
+                </form>
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                </svg>
+            </div>
+        </div>
+        @endif
     </div>
     @if($comment->commentable_type == 'App\Models\Post')
     <div class="reply-button">

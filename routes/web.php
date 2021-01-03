@@ -40,7 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route to allow the Auth user to comment on posts / reply to comments (but NOT access the URI)
     Route::match(['get', 'post'], '/comment/create', 'CommentController@create')->name('comment.create');
     // Method to allow a user to edit/delete their comments
-    Route::match(['get', 'post'], '/comment/update', 'CommentController@update')->name('comment.edit');
+    Route::match(['get', 'post'], '/comment/edit', 'CommentController@update')->name('comment.edit');
     Route::match(['get', 'post'], '/comment/delete', 'CommentController@delete')->name('comment.delete');
     // Notification routes
     Route::match(['get', 'post'], '/notify/read', 'NotifyController@notifyRead')->name('comment.edit');

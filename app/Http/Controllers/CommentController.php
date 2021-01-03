@@ -84,12 +84,12 @@ class CommentController extends Controller
             // Ensure the user is logged in
             if(Auth::check()) {
                 // Get the comment to edit
-                $comment = Auth::user()->comments()->where('id', $request->comment_id)->first();
+                $comment = Auth::user()->comments()->where('id', $request->id)->first();
                 // Check the the user does in fact have acces to this comment
                 if($comment != null) {
                     // Update the comment
                     $comment->update([
-                        'content' => $request->comment_val
+                        'content' => $request->val
                     ]);
                     // return success
                     return true;
@@ -113,9 +113,16 @@ class CommentController extends Controller
             // Ensure the user is logged in
             if(Auth::check()) {
                 // Get the comment to edit
-                $comment = Auth::user()->comments()->where('id', $request->comment_id)->first();
+                $comment = Auth::user()->comments()->where('id', $request->id)->first();
                 // Check the the user does in fact have acces to this comment
                 if($comment != null) {
+                    // Delete all the likes on this comment and those on the comment's replies
+                    $comment->likes()->delete();
+                    foreach($comment->replies as $reply) {
+                        $reply->likes()->delete();
+                    }
+                    // Delete the comment's replies
+                    $comment->replies()->delete();
                     // Delete the comment
                     $comment->delete();
                     // return success
@@ -124,7 +131,6 @@ class CommentController extends Controller
                     // Return 'issue'
                     return false;
                 }
-
             }
         // Else return a 404 not found error
         } else {

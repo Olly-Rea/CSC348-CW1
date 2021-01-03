@@ -143,8 +143,8 @@ nav svg {
 }
 
 #loading-screen svg.loading-graphic {
-  height: 12rem;
-  width: 12rem;
+  height: 10rem;
+  width: 10rem;
 }
 
 svg.loading-graphic .elem {
@@ -265,15 +265,70 @@ main .content-panel {
 main .error-container {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 132%;
+}
+
+main .error-container div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+main .error-container div .seperator {
+  margin: 0 0.8rem;
+  width: 1px;
+  height: 6rem;
+  background-color: #e9e9e9;
 }
 
 main .error-container a {
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+main .error-container a:hover {
+  -webkit-transform: translateX(-50%) scale(1.04);
+          transform: translateX(-50%) scale(1.04);
+}
+
+main .error-container a:active {
+  -webkit-transform: translateX(-50%) scale(1);
+          transform: translateX(-50%) scale(1);
 }
 
 .profile-image-container {
@@ -1465,34 +1520,159 @@ main .reply-container .comment {
   margin: 1rem 0;
   width: calc(100% - 2.8rem);
   border-radius: 1.6rem;
+  overflow: hidden;
 }
 
-main #comment-container .comment form,
-main #comment-container .comment p,
-main .reply-container .comment form,
-main .reply-container .comment p {
+main #comment-container .comment.edit-active .overlay,
+main .reply-container .comment.edit-active .overlay {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+main #comment-container .comment > p,
+main .reply-container .comment > p {
   width: 90%;
 }
 
 main #comment-container .comment form,
 main .reply-container .comment form {
   margin: 0;
+  margin-left: 2.5%;
   padding: 0;
+  width: 95%;
 }
 
 main #comment-container .comment form input[type="text"],
 main .reply-container .comment form input[type="text"] {
-  margin: -0.72rem 0;
-  font-size: 1.04rem;
+  margin: 0;
+  margin-bottom: 0.32rem;
   width: 100%;
-  background-color: #f2f2f2;
+  background-color: #e9e9e9;
   -webkit-box-shadow: none;
           box-shadow: none;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 }
 
 main #comment-container .comment form input[type="text"]:hover,
 main .reply-container .comment form input[type="text"]:hover {
-  background-color: #e9e9e9;
+  background-color: gainsboro;
+}
+
+main #comment-container .comment form p,
+main .reply-container .comment form p {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin: 0;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+main #comment-container .comment form p:hover,
+main .reply-container .comment form p:hover {
+  -webkit-transform: scale(1.12);
+          transform: scale(1.12);
+}
+
+main #comment-container .comment form p:active,
+main .reply-container .comment form p:active {
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
+}
+
+main #comment-container .comment .overlay,
+main .reply-container .comment .overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 54%;
+  width: 20%;
+  background-color: rgba(10, 10, 10, 0.5);
+  border-radius: 1.6rem;
+  opacity: 0;
+  -webkit-transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
+}
+
+main #comment-container .comment .overlay .menu-item,
+main .reply-container .comment .overlay .menu-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 0.8rem;
+  height: 3.6rem;
+  width: 3.6rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.32);
+  -webkit-transition: background-color 0.1s ease-in-out, stroke 0.1s ease-in-out, fill 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out, stroke 0.1s ease-in-out, fill 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out, stroke 0.1s ease-in-out, fill 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out, stroke 0.1s ease-in-out, fill 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+main #comment-container .comment .overlay .menu-item svg,
+main .reply-container .comment .overlay .menu-item svg {
+  height: 56%;
+  width: 56%;
+  fill: #fcfcfc;
+  stroke: #fcfcfc;
+}
+
+main #comment-container .comment .overlay .menu-item:hover,
+main .reply-container .comment .overlay .menu-item:hover {
+  -webkit-transform: scale(1.12);
+          transform: scale(1.12);
+}
+
+main #comment-container .comment .overlay .menu-item:active,
+main .reply-container .comment .overlay .menu-item:active {
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
+}
+
+main #comment-container .comment:hover .overlay,
+main .reply-container .comment:hover .overlay {
+  opacity: 1;
+}
+
+main #comment-container .comment:active .overlay,
+main .reply-container .comment:active .overlay {
+  opacity: 1;
 }
 
 main #comment-container > p,

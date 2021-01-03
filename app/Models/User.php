@@ -87,4 +87,8 @@ class User extends Authenticatable
         return ProfileController::loadImage($this->profile->profile_id);
     }
 
+    // TODO ADD ADMIN ROLES
+    // E.g is_site_admin means any user with minimum level of site admin can do this
+    // E.g is_system_admin means only users with minimum level of system admin can do this
+
 }

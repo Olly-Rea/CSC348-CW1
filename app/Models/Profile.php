@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+
+    // TODO GET THIS SETUP
 }

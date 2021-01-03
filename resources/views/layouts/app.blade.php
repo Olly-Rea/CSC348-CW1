@@ -59,13 +59,13 @@
             <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         </div>
         @else
-        <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit/*'))active @endif" >
-            <a href="@if(Request::is('post/create') || Request::is('post/edit/*'))# @elseif((Auth::check() && isset($post)) && !(Request::is('Me')) && Auth::user()->id == $post->user->id){{ route('post.edit', $post->id) }} @else(){{ route('post.create') }}@endif">
+        <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit/*'))active @endif">
+            <a href="@if(Request::is('post/create') || Request::is('post/edit/*'))# @elseif((Auth::check() && isset($post)) && !(Request::is('Me')) && ((Auth::check() && isset($post)) && Auth::user()->id == $post->user->id || isset(Auth::user()->system_admin) && Auth::user()->system_admin == true) ){{ route('post.edit', $post->id) }} @else(){{ route('post.create') }}@endif">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
             </a>
-            @if((Auth::check() && isset($post)) && !(Request::is('Me')) && Auth::user()->id == $post->user->id)
+            @if(((Auth::check() && isset($post)) && Auth::user()->id == $post->user->id) || isset(Auth::user()->system_admin) && Auth::user()->system_admin == true)
                 <h1>Edit</h1>
             @else
                 <h1>Create</h1>
@@ -158,7 +158,7 @@
         <button>Okay</button>
     </div>
     <div id="warning" class="prompt" style="display: none">
-        <h1>Warning!</h1>
+        <h1>Whoopsie!</h1>
         <p></p>
         <button>Okay</button>
     </div>

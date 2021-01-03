@@ -12,8 +12,6 @@ use App\Models\Post;
 class PostNewsContainer
 {
 
-    // TODO Create BIG feed of all stuff and then sort and paginate
-
     /**
      * Big ol' array to store all the feed stuff (ready to be paginated)
      */

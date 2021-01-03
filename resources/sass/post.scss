@@ -70,29 +70,120 @@ main {
             width: calc(100% - 2.8rem);
 
             border-radius: $panelCorner;
+
+            overflow: hidden;
             // @include hasShadow();
 
-            form,
-            p {
+            &.edit-active {
+                .overlay {
+                    opacity: 0 !important;
+                    pointer-events: none;
+                }
+            }
+
+            > p {
                 width: 90%;
             }
             form {
                 margin: 0;
+                margin-left: 2.5%;
                 padding: 0;
 
+                width: 95%;
+
                 input[type="text"] {
-                    margin: -0.72rem 0;
-
-                    font-size: 1.04rem;
-
+                    margin: 0;
+                    margin-bottom: 0.32rem;
                     width: 100%;
-                    background-color: $panelColor;
-
+                    background-color: $logoLight;
                     box-shadow: none;
 
+                    transition: background-color $transitionTime ease-in-out;
+
                     &:hover {
-                        background-color: $logoLight;
+                        background-color: $footerColor;
                     }
+                }
+                p {
+                    align-self: flex-end;
+                    margin: 0;
+                    margin-bottom: 0.6rem;
+
+                    cursor: pointer;
+
+                    transition: transform $transitionTime ease-in-out;
+
+                    &:hover {
+                        transform: scale(1.12);
+                    }
+                    &:active {
+                        transform: scale(0.96);
+                    }
+                }
+            }
+
+            .overlay {
+                @include flexDisplay(row, center, center);
+
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                height: 54%;
+                width: 20%;
+
+                background-color: $overlayColor;
+                border-radius: $panelCorner;
+                opacity: 0;
+
+                transition: opacity $transitionTime ease-in-out;
+
+                .menu-item {
+                    position: relative;
+
+                    @include flexDisplay(column, center, center);
+
+                    margin: 0 0.8rem;
+
+                    height: 3.6rem;
+                    width: 3.6rem;
+                    border-radius: 50%;
+                    background-color: rgba(255,255,255, 0.32);
+
+                    transition: transform $transitionTime ease-in-out,
+                        background-color $transitionTime ease-in-out,
+                        stroke $transitionTime ease-in-out,
+                        fill $transitionTime ease-in-out;
+
+                    cursor: pointer;
+                    user-select: none;
+
+                    svg {
+                        height: 56%;
+                        width: 56%;
+
+                        fill: $inputColor;
+                        stroke: $inputColor;
+                    }
+
+                    &:hover {
+                        transform: scale(1.12);
+                    }
+                    &:active {
+                        transform: scale(0.96);
+                    }
+                }
+            }
+
+            &:hover {
+                .overlay {
+                    opacity: 1;
+                }
+            }
+            &:active {
+                .overlay {
+                    opacity: 1;
                 }
             }
 

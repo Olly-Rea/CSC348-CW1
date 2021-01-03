@@ -37,7 +37,6 @@
         </div>
         <div>
             <h3>{{ $post->user->first_name }} {{ $post->user->last_name }}</h3>
-            {{-- <p>{{ date("j F Y", strtotime($post->created_at)) }} • post_id: {{ $post->id }}</p> --}}
             @if(date('dmY') == date('dmY', strtotime($post->created_at)))
             <p>Today • {{ date("g:ia", strtotime($post->created_at)) }}</p>
             @else
@@ -90,7 +89,6 @@
             </div>
             <div>
                 <h3>{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h3>
-                {{-- <p>{{ date("j F Y", strtotime($comment->created_at)) }} • commentable_id: {{ $comment->commentable->id }}</p> --}}
                 @if(date('dmY') == date('dmY', strtotime($comment->created_at)))
                 <p>Today • {{ date("g:ia", strtotime($comment->created_at)) }}</p>
                 @else
@@ -99,9 +97,11 @@
             </div>
         </a>
         @if(Auth::check() && Auth::user() == $comment->user)
-        <form class="comment-edit">
+        <form class="comment-edit" style="display: none">
             <input name="comment" type="text" value="{{ $comment->content }}" autocomplete="off">
+            <p class="form-cancel">Cancel</p>
         </form>
+        <p>{{ $comment->content }}</p>
         @else
         <p>{{ $comment->content }}</p>
         @endif
@@ -120,6 +120,23 @@
             </svg>
             <h4>{{ count($comment->likes) }}</h4>
         </div>
+        @if(Auth::check() && Auth::user() == $comment->user)
+        <div class="overlay">
+            <div id="edit" class="menu-item">
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                </svg>
+            </div>
+            <div id="delete" class="menu-item" >
+                <form class="comment-delete" action="{{ route('comment.delete', $comment->id) }}" method="POST" style="display: none" hidden>
+                    @csrf
+                </form>
+                <svg>
+                    <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                </svg>
+            </div>
+        </div>
+        @endif
     </div>
     <div class="reply-button">
         <svg>

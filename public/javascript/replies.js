@@ -41,8 +41,8 @@ function fetch_data($container) {
                 }
                 $container.append("<p class=\"empty\">This comment has no replies yet!</p>");
             }
-            $container.find("form").appendTo($container);
-            $container.find("form").fadeIn(transitionTime);
+            $container.find("> form").appendTo($container);
+            $container.find("> form").fadeIn(transitionTime);
         },
         error: function() {
             $loadingGraphic.fadeOut(transitionTime)

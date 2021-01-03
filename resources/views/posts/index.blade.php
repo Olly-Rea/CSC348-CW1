@@ -17,7 +17,7 @@
     <div class="overlay">
         <div class="button-container">
             <button onclick="window.location.href='{{ route('post', $post->id) }}'">Show more</button>
-            @if(Auth::check() && Auth::user()->id == $post->user->id)
+            @if(Auth::check() && Auth::user()->id == $post->user->id) {
             <button onclick="window.location.href='{{ route('post.edit', $post->id) }}'">Edit</button>
             @endif
         </div>

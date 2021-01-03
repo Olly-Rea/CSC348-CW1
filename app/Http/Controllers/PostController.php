@@ -174,7 +174,7 @@ class PostController extends Controller
      */
     public static function edit(Post $post) {
         // Check a user is logged in (AND owns this post)
-        if(Auth::check() && Auth::user()->id == $post->user->id) {
+        if((Auth::check() && Auth::user()->id == $post->user->id) || isset(Auth::user()->system_admin) && Auth::user()->system_admin == true) {
             // Get the possible tags you can use in a post
             $tags = Tag::get();
             // The post/edit view with tags
@@ -218,25 +218,18 @@ class PostController extends Controller
                 $post->tags()->sync($tags);
             }
 
-            // Get the (correct) length of items to rearrange
-            $contentRequest = request('content');
-            foreach($contentRequest as $key => $content) {
-                if(!isset($content['id']) && isset($content['to_delete'])) {
-                    unset($contentRequest[$key]);
-                }
-            }
-
+            // Get the start position to move all the elements 'out of the way' to (whichever is larger - to prevent integrity constraints)
+            $pos = count(request('content')) > $post->content->last()->position ? count(request('content')) : $post->content->last()->position;
+            $pos++;
             // Loop through all the posts and move them 'out of the way'
-            $pos = count($contentRequest) + 1;
             foreach($post->content as $content) {
                 $content->update([
                     'position' => $pos++
                 ]);
             }
 
-            $pos = 0;
             // Loop through all the Post 'content' in the form
-            foreach($contentRequest as $editContent) {
+            foreach(request('content') as $key => $editContent) {
                 // If the Content isn't null
                 if($editContent != null) {
                     // Check if the content already exists
@@ -260,7 +253,7 @@ class PostController extends Controller
                             if($postContent->position != $key) {
                                 // If so; set the new position of the content
                                 $postContent->update([
-                                    'position' => $pos++
+                                    'position' => $key
                                 ]);
                             }
                         }
@@ -269,7 +262,7 @@ class PostController extends Controller
                             // Create the new content
                             $postContent = Content::create([
                                 'post_id' => $post->id,
-                                'position' => $pos++,
+                                'position' => $key,
                                 'type' => 'undefined',
                                 'content' => $editContent['content'],
                             ]);
@@ -365,8 +358,9 @@ class PostController extends Controller
      * Method to delete a post
      */
     public static function delete(Post $post) {
-        // Delete all the likes of a post
+        // Delete all the likes and comments (polymorphics) of this post
         $post->likes()->delete();
+        $post->comments()->delete();
         // Delete the post
         $post->delete();
         // Redirect the user to the feed
@@ -374,4 +368,3 @@ class PostController extends Controller
     }
 
 }
-
