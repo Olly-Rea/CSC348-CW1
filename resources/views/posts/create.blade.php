@@ -20,8 +20,9 @@
 @section('content')
 <form id="post-form" method="POST" action="{{ route('post.save') }}" enctype="multipart/form-data">
     @csrf
+    <input id="publish-input" name="publish" type="number" value="0" hidden>
     <div class="content-panel">
-        <input name="title" type="text" placeholder="Insert title here..." onfocusout="this.placeholder = 'Insert title here...'" value="{{ old("title") }}" autocomplete="off" required/>
+        <input id="title-input" name="title" type="text" placeholder="Insert title here..." onfocusout="this.placeholder = 'Insert title here...'" value="{{ old("title") }}" autocomplete="off" required/>
         @if ($errors->has('title')) <p class="form-error-msg">{{ $errors->first('title') }}</p> @endif
         <div class="tag-container">
             <p id="tag-selector">No Tags!</p>
@@ -29,7 +30,7 @@
         @if ($errors->has('tags')) <p class="form-error-msg">{{ $errors->first('tags') }}</p> @endif
     </div>
     @if(old("content"))
-        @foreach(old("content") as $content)
+        @foreach(old("content") as $key => $content)
         <div class="text-container">
             <textarea name="content[]" rows="8" placeholder="Insert text here!" onfocusout="this.placeholder = 'Insert text here!'" autocomplete="off" required>{{ $content }}</textarea>
             <div class="overlay">
@@ -131,14 +132,15 @@
         </div>
         <h1>Save</h1>
     </label>
-    <div id="publish" class="menu-item" >
+    <label id="publish" class="menu-item">
         <div>
+            <input type="submit" form="post-form">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/about.svg#icon') }}"></use>
+                <use xlink:href="{{ asset('images/graphics/publish.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Publish</h1>
-    </div>
+    </label>
 </div>
 
 @endsection

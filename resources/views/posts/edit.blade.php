@@ -16,8 +16,9 @@
 @section('content')
 <form id="post-form" method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
     @csrf
+    <input id="publish-input" name="publish" type="number" value="{{ $post->published }}" hidden>
     <div class="content-panel">
-        <input name="title" type="text" placeholder="Insert title here..." onfocusout="this.placeholder = 'Insert title here...'" value="{{ old('title') ? old('title') : $post->title }}" autocomplete="off" required/>
+        <input id="title-input" name="title" type="text" placeholder="Insert title here..." onfocusout="this.placeholder = 'Insert title here...'" value="{{ old('title') ? old('title') : $post->title }}" autocomplete="off" required/>
         @if ($errors->has('title')) <p class="form-error-msg">{{ $errors->first('title') }}</p> @endif
         <div class="tag-container">
             @forelse ($post->tags as $tag)
@@ -123,14 +124,17 @@
         </div>
         <h1>Save</h1>
     </label>
-    <div id="publish" class="menu-item" >
+    @if(!$post->published)
+    <label id="publish" class="menu-item">
         <div>
+            <input type="submit" form="post-form">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/about.svg#icon') }}"></use>
+                <use xlink:href="{{ asset('images/graphics/publish.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Publish</h1>
-    </div>
+    </label>
+    @endif
     <div id="delete" class="menu-item" >
         <div>
             <svg>

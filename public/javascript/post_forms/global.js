@@ -83,40 +83,52 @@
         // Final 'updatePositions' on form submit
         updatePositions();
         // Check each image input and prevent submission until they are filled in (or removed)
-        $(".image-container:visible").each(function() {
-            // Get the image container
-            $container = $(this);
-            $input = $container.find("input[type=\"file\"]");
-            // If the input value is null (or blank)
-            if(($input.val() == null || $input.val() == "") && $input.attr("value") == null) {
-                event.preventDefault();
-                // Scroll to the element
-                $("html, body").animate({
-                    scrollTop: $container.offset().top - (9 * parseInt($('html').css('font-size'))) // translate down 9rem
-                }, 250);
-                // Wait until element has been scrolled to
-                setTimeout(function () {
-                    // Pulse the image container overlay (for 1.5 seconds)
-                    $container.addClass("focused");
-                    setTimeout(function () {
-                        $container.removeClass("focused");
-                    }, 1500);
-                }, 250);
-                // Break out of the loop
-                return false;
-            }
-        });
-
+        checkImageInputs();
         // Check that the user has at least one 'content' element in their post
         if($("#post-form div:visible").length < 3) {
             event.preventDefault();
             warningPrompt("You must have at least one element in your post!");
         } else {
+            $("#publish-input").val("0");
             // re-bind the beforeunload handler
             $(window).unbind("beforeunload");
             $(window).bind("beforeunload", function() {
                 windowUnload();
             });
+        }
+    });
+
+    $("#publish.menu-item").on("click", function() {
+        // Final 'updatePositions' on form submit
+        updatePositions();
+        // Check that the user has at least one 'content' element in their post
+        if($("#post-form div:visible").length < 3) {
+            event.preventDefault();
+            warningPrompt("You must have at least one element in your post!");
+        } else {
+            // Check each image and text input and prevent submission until they are filled in (or removed)
+            if(checkTitle() && checkImageInputs() && checkTextInputs() && $("#publish-input").val() == "0") {
+                event.preventDefault();
+                // Alter the confirm prompt message
+                $("#confirm.prompt > p").not("p.cancel-prompt").html("This will save any changes, and make your post public!");
+                // Show the confirm prompt
+                $("#site-overlay, #confirm.prompt").fadeIn(transitionTime);
+                // Add 'confirm' button click handler
+                $("#confirm.prompt button").on("click", function() {
+                    $("#publish-input").val("1")
+                    // re-bind the beforeunload handler
+                    $(window).unbind("beforeunload");
+                    $(window).bind("beforeunload", function() {
+                        windowUnload();
+                    });
+                    $("#post-form").submit();
+                });
+                // Add cancel-prompt click handler
+                $("p.cancel-prompt").on("click", function() {
+                    $("p.cancel-prompt").off("click");
+                    $("#site-overlay, #confirm.prompt").fadeOut(transitionTime);
+                });
+            }
         }
 
     });
@@ -160,4 +172,61 @@ function showTags() {
         $("p.close-prompt").off("click");
         $("#site-overlay, #tags.prompt").fadeOut(transitionTime);
     });
+}
+
+function checkTitle() {
+
+    console.log($("#title-input").val());
+
+    if($("#title-input").val() == '') {
+        return false;
+    } else {
+        return true
+    }
+}
+
+// Method to check if each image input (which is visible) has an input (if /create or /edit) or a value (if /edit)
+function checkImageInputs() {
+    $finished = true;
+    $(".image-container:visible").each(function() {
+        // Get the image container
+        $container = $(this);
+        $input = $container.find("input[type=\"file\"]");
+        // If the input value is null (or blank)
+        if(($input.val() == null || $input.val() == "") && $input.attr("value") == null) {
+            event.preventDefault();
+            // Scroll to the element
+            $("html, body").animate({
+                scrollTop: $container.offset().top - (9 * parseInt($('html').css('font-size'))) // translate down 9rem
+            }, 250);
+            // Wait until element has been scrolled to
+            setTimeout(function () {
+                // Pulse the image container overlay (for 1.5 seconds)
+                $container.addClass("focused");
+                setTimeout(function () {
+                    $container.removeClass("focused");
+                }, 1500);
+            }, 250);
+            // Break out of the loop
+            $finished = false;
+            return $finished;
+        }
+    });
+    return $finished;
+}
+// Method to check if each text input (which is visible) has an input
+function checkTextInputs() {
+    $finished = true;
+    $(".text-container:visible").each(function() {
+        // Get the image container
+        $container = $(this);
+        $input = $container.find("textarea");
+        // If the input value is null (or blank)
+        if($input.prop('required') && $input.val() == '') {
+            // Break out of the loop
+            $finished = false;
+            return $finished;
+        }
+    });
+    return $finished;
 }

@@ -1777,6 +1777,7 @@ main svg.loading-graphic {
 }
 
 #form-nav #save.menu-item input,
+#form-nav #publish.menu-item input,
 #form-nav #delete.menu-item input {
   display: none;
 }

@@ -32,7 +32,7 @@ class PostNewsContainer
         // Get ALL the news
         $news = app()->make('App\NewsContainer')->get();
         // Get the first page of posts (as a array instance)
-        $posts = Post::get()->toArray();
+        $posts = Post::where('published', true)->get()->toArray();
 
         if($news != null) {
             // Sort the array by date created_at

@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function index() {
         // Get the first page of post results
-        $posts = Post::orderBy('created_at', 'DESC')->paginate($this->paginate);
+        $posts = Post::orderBy('created_at', 'DESC')->where('published', true)->paginate($this->paginate);
         // Return them in the feed view
         return view('posts.index', ['posts' => $posts]);
     }
@@ -48,7 +48,7 @@ class PostController extends Controller
         // Check that the request is ajax
         if ($request->ajax()) {
             // Get the next page of paginated posts
-            $posts = Post::orderBy('created_at', 'DESC')->paginate($this->paginate);
+            $posts = Post::orderBy('created_at', 'DESC')->where('published', true)->paginate($this->paginate);
             // If $posts != null and is > 0...
             if($posts != null && count($posts) > 0) {
                 // ...render the posts and return them to the feed
@@ -66,8 +66,13 @@ class PostController extends Controller
      * Method to return the post feed
      */
     public function show(Post $post) {
-        // Return them in the feed view
-        return view('posts.show', ['post' => $post]);
+        // Only allow viewing if the post is published (or it is owned by the User)
+        if($post->published || $post->user == Auth::user()) {
+            // Return them in the feed view
+            return view('posts.show', ['post' => $post]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -89,26 +94,31 @@ class PostController extends Controller
 
         // Ensure the user is logged in
         if(Auth::check()) {
+
             // Set Validator attribute names
             $attributeNames = array(
                 'title' => 'Title',
+                'publish' => 'Publish',
                 'tags[]' => 'Tags',
                 'content[]' => 'Content',
             );
             // Validate the data
             Validator::make(request()->all(), [
                 'title' => ['required', 'string', 'max:255'],
+                'publish' => ['required', 'boolean'],
                 'tags'    => ['array'],
                 'tags.*'  => ['string', 'distinct'],
                 'content'    => ['required', 'array', 'min:1'],
                 'content.*'  => ['distinct'],
             ], [], $attributeNames)->validate();
 
+            // dd(boolval(request('publish')));
+
             // Create the Post
             $post = Post::create([
                 'user_id' => Auth::user()->id,
+                'published' => boolval(request('publish')),
                 'title' => request('title'),
-                'published' => true,
             ]);
 
             // if the request has tags...
@@ -193,12 +203,14 @@ class PostController extends Controller
             // Set Validator attribute names
             $attributeNames = array(
                 'title' => 'Title',
+                'publish' => 'Publish',
                 'tags[]' => 'Tags',
-                'content[][]' => 'Content',
+                'content[]' => 'Content',
             );
             // Validate the data
             Validator::make(request()->all(), [
                 'title' => ['required', 'string', 'max:255'],
+                'publish' => ['required', 'boolean'],
                 'tags'    => ['array'],
                 'tags.*'  => ['string', 'distinct'],
                 'content'    => ['required', 'array', 'min:1'],
@@ -208,7 +220,7 @@ class PostController extends Controller
             // Update the post
             $post->update([
                 'title' => request('title'),
-                'published' => true,
+                'published' => boolval(request('publish')) == 1 ? boolval(request('publish')) : $post->published,
             ]);
 
             // if the request has tags...
