@@ -59,13 +59,17 @@
             <button onclick="window.location.href='{{ route('register') }}'">Sign Up</button>
         </div>
         @else
+        @php
+            $userAccess = ((Request::is('post/*') && !Request::is('post/create')) || Request::is('post/edit/*')) && ((Auth::check() && isset($post)) && Auth::user()->id == $post->user->id);
+            $siteAdminAccess = ((Request::is('post/*') && !Request::is('post/create'))) && (Auth::check() && isset(Auth::user()->system_admin)) && Auth::user()->system_admin == true;
+        @endphp
         <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit/*'))active @endif">
-            <a href="@if(Request::is('post/create') || Request::is('post/edit/*'))# @elseif((Auth::check() && isset($post)) && !(Request::is('Me')) && ((Auth::check() && isset($post)) && Auth::user()->id == $post->user->id || isset(Auth::user()->system_admin) && Auth::user()->system_admin == true) ){{ route('post.edit', $post->id) }} @else(){{ route('post.create') }}@endif">
+            <a href="@if(Request::is('post/create') || Request::is('post/edit/*'))#@elseif($userAccess || $siteAdminAccess){{ route('post.edit', $post->id) }} @else(){{ route('post.create') }}@endif">
                 <svg>
                     <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
             </a>
-            @if(((Auth::check() && isset($post)) && Auth::user()->id == $post->user->id) || isset(Auth::user()->system_admin) && Auth::user()->system_admin == true)
+            @if($userAccess || $siteAdminAccess)
                 <h1>Edit</h1>
             @else
                 <h1>Create</h1>
