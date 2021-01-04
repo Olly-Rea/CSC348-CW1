@@ -76,7 +76,7 @@
         @if(isset($user->profile->about_me))
         <p id="bio">{{ $user->profile->about_me }}</p>
         @else
-        <p id="bio"><i>{{ $user->first_name }} hasn't written a bio yet</i></p>
+        <p id="bio"><i>@if(Auth::check() && Auth::user() == $user)You haven't @else{{ $user->first_name }} hasn't @endif()written a bio yet</i></p>
         @endif
         <h1>Profile stats</h1>
         <p>Posts: {{ count($user->posts) }}</p>
