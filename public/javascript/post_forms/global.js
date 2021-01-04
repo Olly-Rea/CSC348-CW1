@@ -175,9 +175,6 @@ function showTags() {
 }
 
 function checkTitle() {
-
-    console.log($("#title-input").val());
-
     if($("#title-input").val() == '') {
         return false;
     } else {

@@ -116,8 +116,7 @@ $(window).on("load, pageshow", function() {
             type : 'POST',
             url : "/like",
             data: {'likeable_type': likeableType, 'likeable_id': likeableID},
-            success: function(data) {
-                if(data) { console.log(data); }
+            success: function() {
                 // get the like counter
                 $likeCount = $this.children().last();
                 // Add or remove the 'liked' class and increment/decrement the like count
