@@ -24,10 +24,10 @@ class PostController extends Controller
         $imagePath = 'storage'.DIRECTORY_SEPARATOR.$path;
         // Check the file exists, and if so, output it, otherwise, return the image placeholder
         if (file_exists(public_path().DIRECTORY_SEPARATOR.$imagePath)) {
-            return asset($imagePath);
+            return secure_asset($imagePath);
         } else {
             clearstatcache();
-            return asset('/images/graphics/image.svg');
+            return secure_asset('/images/graphics/image.svg');
         }
     }
 

@@ -20,7 +20,7 @@
     @endphp
     <div class="thumb-container @if($hasLike)liked @endif">
     <svg class="like-thumb">
-            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+            <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
         </svg>
         <h3>{{ count($post->likes) }}</h3>
     </div>
@@ -98,7 +98,7 @@
             @endphp
             <div class="thumb-container @if($hasLike)liked @endif">
                 <svg class="like-thumb">
-                    <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                 </svg>
                 <h4>{{ count($topComment->likes) }}</h4>
             </div>

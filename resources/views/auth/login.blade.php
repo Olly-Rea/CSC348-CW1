@@ -1,7 +1,7 @@
 @extends("layouts.global")
 
 @section("styles")
-<link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/welcome.css') }}" rel="stylesheet">
 @endsection
 
 @section("title")
@@ -22,7 +22,7 @@
                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                 <span class="checkbox">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/checkbox.svg#icon') }}"></use>
                     </svg>
                     Remember Me
                 </span>

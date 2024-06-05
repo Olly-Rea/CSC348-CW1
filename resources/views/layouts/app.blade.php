@@ -6,9 +6,9 @@
 
 @section('scripts-app')
 @auth
-<script src="{{ asset('javascript/auth.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/auth.js') }}" defer></script>
 @else
-<script src="{{ asset('javascript/guest.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/guest.js') }}" defer></script>
 @endauth
 @yield('scripts')
 @endsection
@@ -20,7 +20,7 @@
         <form id="search-box" action="">
             <div class="form-box">
                 <svg id="search-icon">
-                    <use xlink:href="{{ asset('images/graphics/search.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/search.svg#icon') }}"></use>
                 </svg>
                 <input id="search-bar" type="text" name="search" placeholder="I'm looking for..." onfocus="this.placeholder = ''" onfocusout="this.placeholder = 'I\'m looking for...'" />
             </div>
@@ -30,7 +30,7 @@
         <div id="all" class="menu-item @if(Request::is('feed'))active @endif">
             <a href="@if(Request::is('feed'))# @else(){{ route('feed') }}@endif">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/all.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/all.svg#icon') }}"></use>
                 </svg>
             </a>
             <h1>All</h1>
@@ -38,7 +38,7 @@
         <div id="posts" class="menu-item @if(Request::is('feed/posts') || (Request::is('post/*') && !(Request::is('post/create') || Request::is('post/edit/*'))))active @endif">
             <a href="@if(Request::is('feed/posts'))# @else(){{ route('posts') }}@endif">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/post.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/post.svg#icon') }}"></use>
                 </svg>
             </a>
             <h1>Posts</h1>
@@ -46,7 +46,7 @@
         <div id="news" class="menu-item @if(Request::is('feed/news'))active @endif">
             <a href="@if(Request::is('feed/news'))# @else(){{ route('news') }}@endif">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/news.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/news.svg#icon') }}"></use>
                 </svg>
             </a>
             <h1>News</h1>
@@ -66,7 +66,7 @@
         <div id="create" class="menu-item @if(Request::is('post/create') || Request::is('post/edit/*'))active @endif">
             <a href="@if(Request::is('post/create') || Request::is('post/edit/*'))#@elseif($userAccess || $siteAdminAccess){{ route('post.edit', $post->id) }} @else(){{ route('post.create') }}@endif">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
             </a>
             @if($userAccess || $siteAdminAccess)
@@ -78,7 +78,7 @@
         <div id="notifications" class="menu-item" >
             <a>
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/bell.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/bell.svg#icon') }}"></use>
                 </svg>
                 @php
                     $count = count(Auth::user()->unreadNotifications);
@@ -99,7 +99,7 @@
         <div id="logout" class="menu-item" >
             <a>
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/logout.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/logout.svg#icon') }}"></use>
                 </svg>
             </a>
             <h1>Logout</h1>

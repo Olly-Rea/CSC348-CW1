@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section("styles")
-<link href="{{ asset('css/feed.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/feed.css') }}" rel="stylesheet">
 @endsection
 
 @section("scripts")
 @if(!$requestFail)
-<script src="{{ asset('javascript/feed/onScroll.js') }}" defer></script>
-<script src="{{ asset('javascript/feed/newsFetch.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/feed/onScroll.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/feed/newsFetch.js') }}" defer></script>
 @endif
 @endsection
 
@@ -27,7 +27,7 @@
             <a href="{{ $news["url"] }}" target="_blank" class="author-info">
                 <div class="profile-image-container">
                     <div class="profile-image">
-                        <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $news["author"] }}">
+                        <img src="{{ secure_asset('images/profile-default.svg') }}" alt="{{ $news["author"] }}">
                     </div>
                 </div>
                 <div>

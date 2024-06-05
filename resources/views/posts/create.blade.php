@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section("styles")
-<link href="{{ asset('css/post-edit.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/post-edit.css') }}" rel="stylesheet">
 @endsection
 
 @section("jquery")
@@ -9,8 +9,8 @@
 @endsection
 
 @section("scripts")
-<script src="{{ asset('javascript/post_forms/global.js') }}" defer></script>
-<script src="{{ asset('javascript/post_forms/create.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/post_forms/global.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/post_forms/create.js') }}" defer></script>
 @endsection
 
 @section('title')
@@ -36,17 +36,17 @@
             <div class="overlay">
                 <div id="edit" class="menu-item">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                     </svg>
                 </div>
                 <div id="move" class="menu-item">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/move.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/move.svg#icon') }}"></use>
                     </svg>
                 </div>
                 <div id="delete" class="menu-item" >
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/delete.svg#icon') }}"></use>
                     </svg>
                 </div>
             </div>
@@ -57,7 +57,7 @@
     @else
         <div class="image-container">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/image.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/image.svg#icon') }}"></use>
             </svg>
             <img src="">
             <div class="overlay">
@@ -65,18 +65,18 @@
                     <input type="file" name="content[]" accept=".jpg, .jpeg, .png, .bmp">
                     <span>
                         <svg>
-                            <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                            <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                         </svg>
                     </span>
                 </label>
                 <div id="move" class="menu-item">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/move.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/move.svg#icon') }}"></use>
                     </svg>
                 </div>
                 <div id="delete" class="menu-item" >
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/delete.svg#icon') }}"></use>
                     </svg>
                 </div>
             </div>
@@ -86,17 +86,17 @@
             <div class="overlay">
                 <div id="edit" class="menu-item">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                     </svg>
                 </div>
                 <div id="move" class="menu-item">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/move.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/move.svg#icon') }}"></use>
                     </svg>
                 </div>
                 <div id="delete" class="menu-item" >
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/delete.svg#icon') }}"></use>
                     </svg>
                 </div>
             </div>
@@ -110,7 +110,7 @@
     <div id="add-text" class="menu-item">
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/text.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/text.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Text</h1>
@@ -118,7 +118,7 @@
     <div id="add-image" class="menu-item">
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/image.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/image.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Image</h1>
@@ -127,7 +127,7 @@
         <div>
             <input type="submit" form="post-form">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/save.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/save.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Save</h1>
@@ -136,7 +136,7 @@
         <div>
             <input type="submit" form="post-form">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/publish.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/publish.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Publish</h1>
@@ -161,7 +161,7 @@
             <input form="post-form" type="checkbox" name="tags[]" value="{{ $tag->name }}" @if(in_array($tag->name, old('tags'))) checked @endif/>
             <span class="checkbox">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/checkbox.svg#icon') }}"></use>
                 </svg>
                 {{ $tag->name }}
             </span>
@@ -173,7 +173,7 @@
             <input form="post-form" type="checkbox" name="tags[]" value="{{ $tag->name }}"/>
             <span class="checkbox">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/checkbox.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/checkbox.svg#icon') }}"></use>
                 </svg>
                 {{ $tag->name }}
             </span>

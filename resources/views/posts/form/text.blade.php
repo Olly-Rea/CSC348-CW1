@@ -3,17 +3,17 @@
     <div class="overlay">
         <div id="edit" class="menu-item">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
             </svg>
         </div>
         <div id="move" class="menu-item">
             <svg>
-                <use xlink:href="{{ asset('images/graphics/move.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/move.svg#icon') }}"></use>
             </svg>
         </div>
         <div id="delete" class="menu-item" >
             <svg>
-                <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/delete.svg#icon') }}"></use>
             </svg>
         </div>
     </div>

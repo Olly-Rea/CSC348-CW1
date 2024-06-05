@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section("styles")
-<link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/profile.css') }}" rel="stylesheet">
 @if(Request::is('Me') && Auth::check())
-<link href="{{ asset('css/profile-edit.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/profile-edit.css') }}" rel="stylesheet">
 @endif
 @endsection
 
 @section("scripts")
-<script src="{{ asset('javascript/profile/global.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/profile/global.js') }}" defer></script>
 @if(Request::is('Me') && Auth::check())
-<script src="{{ asset('javascript/profile/me.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/profile/me.js') }}" defer></script>
 @endif
 @endsection
 
@@ -30,7 +30,7 @@
     <div id="about" class="menu-item active">
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/about.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/about.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>About</h1>
@@ -38,7 +38,7 @@
     <div id="posts" class="menu-item">
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/post.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/post.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Posts</h1>
@@ -47,7 +47,7 @@
     <div id="likes" class="menu-item" >
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Likes</h1>
@@ -55,7 +55,7 @@
     <div id="settings" class="menu-item" >
         <div>
             <svg>
-                <use xlink:href="{{ asset('images/graphics/cog.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/cog.svg#icon') }}"></use>
             </svg>
         </div>
         <h1>Edit Profile</h1>
@@ -107,7 +107,7 @@
             @endphp
             <div class="thumb-container @if($hasLike)liked @endif">
                 <svg class="like-thumb">
-                    <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                 </svg>
                 <h3>{{ count($post->likes) }}</h3>
             </div>
@@ -186,7 +186,7 @@
                     @endphp
                     <div class="thumb-container @if($hasLike)liked @endif">
                         <svg class="like-thumb">
-                            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                            <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                         </svg>
                         <h4>{{ count($topComment->likes) }}</h4>
                     </div>
@@ -224,7 +224,7 @@
             @endphp
             <div class="thumb-container @if($hasLike)liked @endif">
                 <svg class="like-thumb">
-                    <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                 </svg>
                 <h3>{{ count($post->likes) }}</h3>
             </div>
@@ -302,7 +302,7 @@
                     @endphp
                     <div class="thumb-container @if($hasLike)liked @endif">
                         <svg class="like-thumb">
-                            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                            <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                         </svg>
                         <h4>{{ count($topComment->likes) }}</h4>
                     </div>
@@ -350,7 +350,7 @@
                     <a class="like-link" href="{{ route('post', $post->id) }}"></a>
                     <div class="thumb-container liked">
                         <svg class="like-thumb">
-                            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                            <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                         </svg>
                         <h3>{{ count($post->likes) }}</h3>
                     </div>
@@ -414,7 +414,7 @@
                 @endphp
                 <div class="thumb-container @if($hasLike)liked @endif">
                     <svg class="like-thumb">
-                        <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                     </svg>
                     <h4>{{ count($comment->likes) }}</h4>
                 </div>
@@ -447,7 +447,7 @@
                         <input type="file" name="profile_image" accept=".jpg, .jpeg, .png, .bmp" hidden>
                         <span>
                             <svg>
-                                <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                                <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                             </svg>
                         </span>
                     </label>
@@ -476,7 +476,7 @@
                 <div>
                     <input type="submit" form="profile-form">
                     <svg>
-                        <use xlink:href="{{ asset('images/graphics/save.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/save.svg#icon') }}"></use>
                     </svg>
                 </div>
                 <h1>Save</h1>

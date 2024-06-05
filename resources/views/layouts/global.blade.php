@@ -14,7 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         @yield ('jquery')
         <!-- Scripts -->
-        <script src="{{ asset('javascript/global.js') }}" defer></script>
+        <script src="{{ secure_asset('javascript/global.js') }}" defer></script>
         @yield("scripts-app")
     </head>
 
@@ -22,12 +22,12 @@
         @if(!Request::is("/"))
         <a @guest()href="/"@else()@if(Request::is("feed"))href="#" @else()href="/feed" @endif()@endguest>
             <svg id="logo" class="live" style="display: none">
-                <use xlink:href="{{ asset('images/graphics/logo.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/logo.svg#icon') }}"></use>
             </svg>
         </a>
         @else
         <svg id="logo" style="display: none">
-            <use xlink:href="{{ asset('images/graphics/logo.svg#icon') }}"></use>
+            <use xlink:href="{{ secure_asset('images/graphics/logo.svg#icon') }}"></use>
         </svg>
         @endif
         <div id="loading-screen">

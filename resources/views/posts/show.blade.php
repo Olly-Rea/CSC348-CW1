@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section("styles")
-<link href="{{ asset('css/post.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/post.css') }}" rel="stylesheet">
 @endsection
 
 @section("scripts")
-<script src="{{ asset('javascript/replies.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/replies.js') }}" defer></script>
 @auth
-<script src="{{ asset('javascript/post_forms/comment.js') }}" defer></script>
+<script src="{{ secure_asset('javascript/post_forms/comment.js') }}" defer></script>
 @endauth
 @endsection
 
@@ -25,7 +25,7 @@
     @endphp
     <div class="thumb-container @if($hasLike)liked @endif">
         <svg class="like-thumb">
-            <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+            <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
         </svg>
         <h3>{{ count($post->likes) }}</h3>
     </div>
@@ -116,7 +116,7 @@
         @endphp
         <div class="thumb-container @if($hasLike)liked @endif">
             <svg class="like-thumb">
-                <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
             </svg>
             <h4>{{ count($comment->likes) }}</h4>
         </div>
@@ -124,7 +124,7 @@
         <div class="overlay">
             <div id="edit" class="menu-item">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
             </div>
             <div id="delete" class="menu-item" >
@@ -132,7 +132,7 @@
                     @csrf
                 </form>
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/delete.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/delete.svg#icon') }}"></use>
                 </svg>
             </div>
         </div>
@@ -140,7 +140,7 @@
     </div>
     <div class="reply-button">
         <svg>
-            <use xlink:href="{{ asset('images/graphics/reply.svg#icon') }}"></use>
+            <use xlink:href="{{ secure_asset('images/graphics/reply.svg#icon') }}"></use>
         </svg>
         <h3>Show replies</h3>
     </div>
@@ -156,7 +156,7 @@
             <input type="hidden" value="comment-{{ $comment->id }}" hidden readonly>
             <div class="form-box">
                 <svg>
-                    <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+                    <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
                 </svg>
                 <input type="text" name="reply" placeholder="Type your reply here!" onfocusout="this.placeholder = 'Type your reply here!'" autocomplete="off"/>
             </div>
@@ -171,7 +171,7 @@
     <input type="hidden" value="post-{{ $post->id }}" hidden readonly>
     <div class="form-box">
         <svg>
-            <use xlink:href="{{ asset('images/graphics/pen.svg#icon') }}"></use>
+            <use xlink:href="{{ secure_asset('images/graphics/pen.svg#icon') }}"></use>
         </svg>
         <input type="text" name="comment" placeholder="Type your comment here!" onfocusout="this.placeholder = 'Type your comment here!'" autocomplete="off"/>
     </div>

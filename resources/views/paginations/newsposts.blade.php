@@ -13,7 +13,7 @@
             <a href="{{ $news["url"] }}" target="_blank" class="author-info">
                 <div class="profile-image-container">
                     <div class="profile-image">
-                        <img src="{{ asset('images/profile-default.svg') }}" alt="{{ $news["author"] }}">
+                        <img src="{{ secure_asset('images/profile-default.svg') }}" alt="{{ $news["author"] }}">
                     </div>
                 </div>
                 <div>
@@ -60,7 +60,7 @@
         @endphp
         <div class="thumb-container @if($hasLike)liked @endif">
             <svg class="like-thumb">
-                <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
             </svg>
             <h3>{{ count($post->likes) }}</h3>
         </div>
@@ -138,7 +138,7 @@
                 @endphp
                 <div class="thumb-container @if($hasLike)liked @endif">
                     <svg class="like-thumb">
-                        <use xlink:href="{{ asset('images/graphics/thumb.svg#icon') }}"></use>
+                        <use xlink:href="{{ secure_asset('images/graphics/thumb.svg#icon') }}"></use>
                     </svg>
                     <h4>{{ $topComment->likes_count }}</h4>
                 </div>

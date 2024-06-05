@@ -1,7 +1,7 @@
 @extends('layouts.global')
 
 @section("styles")
-<link href="{{ asset('css/global.css') }}" rel="stylesheet">
+<link href="{{ secure_asset('css/global.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
