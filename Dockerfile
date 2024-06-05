@@ -1,4 +1,4 @@
-FROM php:8.0-apache
+FROM php:8.3-apache
 
 RUN echo "ServerName coursework" >> /etc/apache2/apache2.conf
 
