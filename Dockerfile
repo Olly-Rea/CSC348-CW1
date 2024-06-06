@@ -28,7 +28,12 @@ COPY --chown=www:www . .
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install project dependencies
-RUN composer install
+RUN composer install --optimize-autoloader --no-dev
+
+# Optimise Laravel framework
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
 
 # Set permissions
 RUN chown -R www-data:www-data ./storage ./bootstrap/cache
