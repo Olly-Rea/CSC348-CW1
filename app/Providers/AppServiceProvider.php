@@ -2,12 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\ServiceProvider;
-
-// Custom import
 use App\NewsContainer;
 use App\PostNewsContainer;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,17 +14,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // register the NewsContainer
-        app()->singleton('App\NewsContainer', function() {
-            return new NewsContainer;
-        });
+        app()->singleton('App\NewsContainer', fn () => new NewsContainer());
 
         // register the PostNewsContainer
-        app()->singleton('App\PostNewsContainer', function() {
-            return new PostNewsContainer;
-        });
+        app()->singleton('App\PostNewsContainer', fn () => new PostNewsContainer());
     }
 
     /**
@@ -34,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         URL::forceScheme('https');
     }

@@ -22,27 +22,31 @@ class Comment extends Model
     ];
 
     /**
-     * Parent Model relationships
+     * Parent Model relationships.
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo("App\Models\User");
     }
 
     /**
-     * Polymorphic Child Model relationships
+     * Polymorphic Child Model relationships.
      */
-    public function commentable() {
+    public function commentable()
+    {
         return $this->morphTo();
     }
-    public function replies() {
-        return $this->morphMany("App\Models\Comment", "commentable");
+
+    public function replies()
+    {
+        return $this->morphMany("App\Models\Comment", 'commentable');
     }
 
     /**
-     * 'Likes' model relationship
+     * 'Likes' model relationship.
      */
-    public function likes() {
+    public function likes()
+    {
         return $this->morphMany('App\Models\Likes', 'likeable');
     }
-
 }

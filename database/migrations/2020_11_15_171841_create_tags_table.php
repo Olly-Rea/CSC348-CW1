@@ -6,16 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTagsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         // Create Table
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table): void {
             // Primary key
             $table->id();
             // Table content
@@ -23,7 +22,7 @@ class CreateTagsTable extends Migration
         });
 
         // post_tags pivot table
-        Schema::create('post_tags', function (Blueprint $table) {
+        Schema::create('post_tags', function (Blueprint $table): void {
             // Foreign keys (and constraints)
             $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('tag_id')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');
@@ -36,7 +35,7 @@ class CreateTagsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('tags');
     }

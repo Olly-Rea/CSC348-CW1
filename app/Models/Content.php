@@ -34,15 +34,16 @@ class Content extends Model
     ];
 
     /**
-     * Parent Post Model relationship
+     * Parent Post Model relationship.
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\Post');
     }
 
     // Function to call on the content loadImage method
-    public function loadImage() {
+    public function loadImage()
+    {
         return PostController::loadImage($this->content);
     }
-
 }

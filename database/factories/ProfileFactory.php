@@ -19,10 +19,10 @@ class ProfileFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'about_me' => $this->faker->paragraph($maxNbChars = rand(8, 32)),
+            'about_me' => $this->faker->paragraph($maxNbChars = random_int(8, 32)),
         ];
     }
 }

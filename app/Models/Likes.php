@@ -21,16 +21,18 @@ class Likes extends Model
     ];
 
     /**
-     * User model relationship
+     * User model relationship.
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo("App\Models\User");
     }
+
     /**
-     * Post model relationship
+     * Post model relationship.
      */
-    public function likeable() {
+    public function likeable()
+    {
         return $this->morphTo();
     }
-
 }

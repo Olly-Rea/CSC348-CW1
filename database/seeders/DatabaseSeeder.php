@@ -6,14 +6,14 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-
     /**
      * Seed the application's databases.
      *
      * @return void
      */
-    public function run() {
-        echo("\n");
+    public function run(): void
+    {
+        echo "\n";
         // Call on 'User' Seeder
         $this->call(UserSeeder::class);
         // Call on 'Post' Seeder (includes 'Content' seeding)
@@ -27,5 +27,4 @@ class DatabaseSeeder extends Seeder
         // Call on 'Likes' Seeder
         $this->call(LikesSeeder::class);
     }
-
 }

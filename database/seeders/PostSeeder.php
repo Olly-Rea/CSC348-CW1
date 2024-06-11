@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-
-// Custom import
-use App\Models\Post;
 use App\Models\Content;
+use App\Models\Post;
+use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
 {
@@ -15,7 +13,7 @@ class PostSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         // Call on Post factory (with differing amounts of 'Content')
         Post::factory(48)->has(Content::factory(4))->create();

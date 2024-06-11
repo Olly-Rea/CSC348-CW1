@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateLikesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('likes', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('likes', function (Blueprint $table): void {
             // Define primary key
             $table->id();
             // Define foreign key
@@ -30,7 +30,8 @@ class CreateLikesTable extends Migration
      *
      * @return void
      */
-    public function down() {
+    public function down(): void
+    {
         Schema::dropIfExists('likes');
     }
 }

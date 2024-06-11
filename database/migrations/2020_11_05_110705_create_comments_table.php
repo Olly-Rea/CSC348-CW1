@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCommentsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('comments', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('comments', function (Blueprint $table): void {
             // Define primary key
             $table->id();
             // Define foreign keys
@@ -21,7 +21,7 @@ class CreateCommentsTable extends Migration
             // Define polymorphic properties (shorthand)
             $table->morphs('commentable'); // Post or Comment
             // Define table contents
-            $table->text("content");
+            $table->text('content');
             // Add created_at & updated_at attributes
             $table->timestamps();
         });
@@ -32,8 +32,8 @@ class CreateCommentsTable extends Migration
      *
      * @return void
      */
-    public function down() {
+    public function down(): void
+    {
         Schema::dropIfExists('comments');
     }
-
 }

@@ -21,37 +21,42 @@ class Post extends Model
     ];
 
     /**
-     * Parent User Model relationship
+     * Parent User Model relationship.
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
     /**
-     * Tag model relationship
+     * Tag model relationship.
      */
-    public function tags() {
+    public function tags()
+    {
         return $this->belongsToMany('App\Models\Tag', 'post_tags');
     }
+
     /**
-     * 'Likes' model relationship
+     * 'Likes' model relationship.
      */
-    public function likes() {
+    public function likes()
+    {
         return $this->morphMany('App\Models\Likes', 'likeable');
     }
 
     /**
-     * Child relationship for post content (text and imagery)
+     * Child relationship for post content (text and imagery).
      */
-    public function content() {
+    public function content()
+    {
         return $this->hasMany('App\Models\Content')->orderBy('position');
     }
 
     /**
-     * Child Model relationship
+     * Child Model relationship.
      */
-    public function comments() {
+    public function comments()
+    {
         return $this->morphMany('App\Models\Comment', 'commentable');
     }
-
 }

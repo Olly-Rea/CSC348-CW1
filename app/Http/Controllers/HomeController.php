@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-// Custom import
-use App\PostNewsContainer;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\NewsContainer;
+use App\PostNewsContainer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,9 +18,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function show() {
+    public function show(): \Illuminate\Contracts\Support\Renderable
+    {
         // If authorised, go to main feed
-        if(Auth::check()) {
+        if (Auth::check()) {
             return redirect('/feed');
         } else {
             return view('welcome');
@@ -30,23 +29,25 @@ class HomeController extends Controller
     }
 
     /**
-     * Method to show both news and posts on the feed 'home' page
+     * Method to show both news and posts on the feed 'home' page.
      */
-    public function index(PostNewsContainer $postNewsContainer, NewsContainer $newsContainer) {
+    public function index(PostNewsContainer $postNewsContainer, NewsContainer $newsContainer)
+    {
         // Return the merged (and sorted) feedItems array
         return view('feed', ['requestFail' => $newsContainer->getRequestStatus(), 'feedItems' => $postNewsContainer->paginate(0, $this->paginate)]);
     }
 
     /**
-     * Method to fetch the next page of all feed data
+     * Method to fetch the next page of all feed data.
      */
-    public function fetch(Request $request, PostNewsContainer $postNewsContainer) {
+    public function fetch(Request $request, PostNewsContainer $postNewsContainer)
+    {
         // Check that the request is ajax
         if ($request->ajax()) {
             // Get the next page of paginated news
             $all = $postNewsContainer->paginate($request->page, $this->paginate);
             // If post&news != null and is > 0...
-            if($all != null && count($all) > 0) {
+            if ($all !== null && \count($all) > 0) {
                 // render all the feedItems and return them to the feed
                 return view('paginations.newsposts', ['feedItems' => $all])->render();
             } else {

@@ -15,10 +15,11 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
-     * @return \App\Models\User
+     * @param array $input
+     *
+     * @return User
      */
-    public function create(array $input)
+    public function create(array $input): User
     {
         // Validate the input
         Validator::make($input, [
@@ -30,7 +31,7 @@ class CreateNewUser implements CreatesNewUsers
         // Split the user name input into first and last name
         $name = explode(' ', ucwords($input['name']));
         $first_name = $name[0];
-        if(count($name) == 2) {
+        if (\count($name) === 2) {
             $last_name = $name[1];
         } else {
             $last_name = null;
@@ -53,6 +54,7 @@ class CreateNewUser implements CreatesNewUsers
             'about_me' => null,
             'profile_image' => null,
         ]);
+
         // return the User
         return $user;
     }

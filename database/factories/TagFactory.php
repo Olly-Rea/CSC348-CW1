@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TagFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -16,7 +15,8 @@ class TagFactory extends Factory
     protected $model = Tag::class;
 
     // Method to return the tags for the website
-    public static function getTags() {
+    public static function getTags()
+    {
         return ['Work', 'Technology', 'Home', 'Leisure', 'DIY', 'Health', 'Cooking', 'Gaming', 'NSFW'];
     }
 
@@ -25,12 +25,12 @@ class TagFactory extends Factory
      *
      * @return array
      */
-    public function definition() {
+    public function definition(): array
+    {
         // return new database record (row) to seed
         return [
             // Seed the array of tags
             'name' => $this->faker->unique()->randomElement($this->getTags()),
         ];
     }
-
 }

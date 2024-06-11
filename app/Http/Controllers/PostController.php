@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
-use Illuminate\Http\Request;
-
-// Custom imports
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -18,39 +16,46 @@ class PostController extends Controller
     private $paginate = 12;
 
     /**
-     * Method to load images for image-type 'Content'
+     * Method to load images for image-type 'Content'.
+     *
+     * @param mixed $path
      */
-    public static function loadImage($path) {
-        $imagePath = 'storage'.DIRECTORY_SEPARATOR.$path;
+    public static function loadImage($path)
+    {
+        $imagePath = 'storage' . DIRECTORY_SEPARATOR . $path;
         // Check the file exists, and if so, output it, otherwise, return the image placeholder
-        if (file_exists(public_path().DIRECTORY_SEPARATOR.$imagePath)) {
+        if (file_exists(public_path() . DIRECTORY_SEPARATOR . $imagePath)) {
             return secure_asset($imagePath);
         } else {
             clearstatcache();
+
             return secure_asset('/images/graphics/image.svg');
         }
     }
 
     /**
-     * Method to return the post feed
+     * Method to return the post feed.
      */
-    public function index() {
+    public function index()
+    {
         // Get the first page of post results
         $posts = Post::orderBy('created_at', 'DESC')->where('published', true)->paginate($this->paginate);
+
         // Return them in the feed view
         return view('posts.index', ['posts' => $posts]);
     }
 
     /**
-     * Method to fetch the next page of paginated data
+     * Method to fetch the next page of paginated data.
      */
-    public function fetch(Request $request) {
+    public function fetch(Request $request)
+    {
         // Check that the request is ajax
         if ($request->ajax()) {
             // Get the next page of paginated posts
             $posts = Post::orderBy('created_at', 'DESC')->where('published', true)->paginate($this->paginate);
             // If $posts != null and is > 0...
-            if($posts != null && count($posts) > 0) {
+            if ($posts !== null && \count($posts) > 0) {
                 // ...render the posts and return them to the feed
                 return view('paginations.posts', ['posts' => $posts])->render();
             } else {
@@ -63,11 +68,12 @@ class PostController extends Controller
     }
 
     /**
-     * Method to return the post feed
+     * Method to return the post feed.
      */
-    public function show(Post $post) {
+    public function show(Post $post)
+    {
         // Only allow viewing if the post is published (or it is owned by the User)
-        if($post->published || $post->user == Auth::user()) {
+        if ($post->published || $post->user === Auth::user()) {
             // Return them in the feed view
             return view('posts.show', ['post' => $post]);
         } else {
@@ -76,40 +82,42 @@ class PostController extends Controller
     }
 
     /**
-     * Method to create new Post
+     * Method to create new Post.
      */
-    public function create() {
+    public function create()
+    {
         // Get the possible tags you can use in a post
         $tags = Tag::get();
+
         // The post/create view with tags
         return view('posts.create', ['tags' => $tags]);
     }
 
     /**
-     * Method to save a post
+     * Method to save a post.
      */
-    public function save() {
+    public function save()
+    {
         // // Check that the request is ajax
         // if ($request->ajax()) {
 
         // Ensure the user is logged in
-        if(Auth::check()) {
-
+        if (Auth::check()) {
             // Set Validator attribute names
-            $attributeNames = array(
+            $attributeNames = [
                 'title' => 'Title',
                 'publish' => 'Publish',
                 'tags[]' => 'Tags',
                 'content[]' => 'Content',
-            );
+            ];
             // Validate the data
             Validator::make(request()->all(), [
                 'title' => ['required', 'string', 'max:255'],
                 'publish' => ['required', 'boolean'],
-                'tags'    => ['array'],
-                'tags.*'  => ['string', 'distinct'],
-                'content'    => ['required', 'array', 'min:1'],
-                'content.*'  => ['distinct'],
+                'tags' => ['array'],
+                'tags.*' => ['string', 'distinct'],
+                'content' => ['required', 'array', 'min:1'],
+                'content.*' => ['distinct'],
             ], [], $attributeNames)->validate();
 
             // dd(boolval(request('publish')));
@@ -117,23 +125,23 @@ class PostController extends Controller
             // Create the Post
             $post = Post::create([
                 'user_id' => Auth::user()->id,
-                'published' => boolval(request('publish')),
+                'published' => \boolval(request('publish')),
                 'title' => request('title'),
             ]);
 
             // if the request has tags...
-            if(request('tags')) {
+            if (request('tags')) {
                 // Get and attach tags
                 $tags = Tag::whereIn('name', request('tags'))->get();
                 $post->tags()->attach($tags);
             }
 
             // Loop through all the Post 'content' in the form
-            foreach(request('content') as $key => $rawContent) {
+            foreach (request('content') as $key => $rawContent) {
                 // If the content isn't null
-                if($rawContent != null) {
+                if ($rawContent !== null) {
                     // Check If the content is an uploaded file (an image)
-                    if(is_uploaded_file($rawContent)) {
+                    if (is_uploaded_file($rawContent)) {
                         // Set $image as the input file
                         $image = $rawContent;
                         // Set the content type as 'image'
@@ -162,7 +170,7 @@ class PostController extends Controller
                         'position' => $key,
                         'type' => $contentType,
                         'content' => $content,
-                        'sub_content' => $subContent
+                        'sub_content' => $subContent,
                     ]);
                     // Add the new content to the post
                     $post->content()->save($newContent);
@@ -170,23 +178,24 @@ class PostController extends Controller
             }
 
             // redirect the user to the new post
-            return redirect('/post/'.$post->id);
+            return redirect('/post/' . $post->id);
 
         // Else return a 404 not found error
         } else {
             abort(404);
         }
-
     }
 
     /**
-     * Method to edit an existing Post
+     * Method to edit an existing Post.
      */
-    public static function edit(Post $post) {
+    public static function edit(Post $post)
+    {
         // Check a user is logged in (AND owns this post)
-        if((Auth::check() && Auth::user()->id == $post->user->id) || isset(Auth::user()->system_admin) && Auth::user()->system_admin == true) {
+        if ((Auth::check() && Auth::user()->id === $post->user->id) || isset(Auth::user()->system_admin) && Auth::user()->system_admin === true) {
             // Get the possible tags you can use in a post
             $tags = Tag::get();
+
             // The post/edit view with tags
             return view('posts.edit', ['post' => $post, 'tags' => $tags]);
         } else {
@@ -195,63 +204,64 @@ class PostController extends Controller
     }
 
     /**
-     * Method to persist the changes made to a post
+     * Method to persist the changes made to a post.
      */
-    public static function update(Post $post) {
+    public static function update(Post $post)
+    {
         // Ensure the user is logged in
-        if(Auth::check()) {
+        if (Auth::check()) {
             // Set Validator attribute names
-            $attributeNames = array(
+            $attributeNames = [
                 'title' => 'Title',
                 'publish' => 'Publish',
                 'tags[]' => 'Tags',
                 'content[]' => 'Content',
-            );
+            ];
             // Validate the data
             Validator::make(request()->all(), [
                 'title' => ['required', 'string', 'max:255'],
                 'publish' => ['required', 'boolean'],
-                'tags'    => ['array'],
-                'tags.*'  => ['string', 'distinct'],
-                'content'    => ['required', 'array', 'min:1'],
-                'content.*'  => ['distinct'],
+                'tags' => ['array'],
+                'tags.*' => ['string', 'distinct'],
+                'content' => ['required', 'array', 'min:1'],
+                'content.*' => ['distinct'],
             ], [], $attributeNames)->validate();
 
             // Update the post
             $post->update([
                 'title' => request('title'),
-                'published' => boolval(request('publish')) == 1 ? boolval(request('publish')) : $post->published,
+                'published' => \boolval(request('publish')) === 1 ? \boolval(request('publish')) : $post->published,
             ]);
 
             // if the request has tags...
-            if(request('tags')) {
+            if (request('tags')) {
                 // Get and attach tags
                 $tags = Tag::whereIn('name', request('tags'))->get();
                 $post->tags()->sync($tags);
             }
 
             // Get the start position to move all the elements 'out of the way' to (whichever is larger - to prevent integrity constraints)
-            $pos = count(request('content')) > $post->content->last()->position ? count(request('content')) : $post->content->last()->position;
-            $pos++;
+            $pos = \count(request('content')) > $post->content->last()->position ? \count(request('content')) : $post->content->last()->position;
+            ++$pos;
             // Loop through all the posts and move them 'out of the way'
-            foreach($post->content as $content) {
+            foreach ($post->content as $content) {
                 $content->update([
-                    'position' => $pos++
+                    'position' => $pos++,
                 ]);
             }
 
             // Loop through all the Post 'content' in the form
-            foreach(request('content') as $key => $editContent) {
+            foreach (request('content') as $key => $editContent) {
                 // If the Content isn't null
-                if($editContent != null) {
+                if ($editContent !== null) {
                     // Check if the content already exists
-                    if(isset($editContent['id'])) {
+                    if (isset($editContent['id'])) {
                         // get the Post Content to edit
                         $postContent = $post->content()->where('id', $editContent['id'])->first();
                         // Firstly, check if the content is to be deleted
-                        if(isset($editContent['to_delete'])) {
+                        if (isset($editContent['to_delete'])) {
                             // check if the Content type is an image
-                            if($postContent->type == 'image') {
+                            if ($postContent->type === 'image') {
                                 // Delete the stored file
                                 Storage::delete($postContent->content);
                             }
@@ -262,15 +272,15 @@ class PostController extends Controller
                         // Otherwise...
                         } else {
                             // Check if the $postContent position has changed
-                            if($postContent->position != $key) {
+                            if ($postContent->position !== $key) {
                                 // If so; set the new position of the content
                                 $postContent->update([
-                                    'position' => $key
+                                    'position' => $key,
                                 ]);
                             }
                         }
                     } else {
-                        if(!isset($editContent['to_delete'])) {
+                        if (!isset($editContent['to_delete'])) {
                             // Create the new content
                             $postContent = Content::create([
                                 'post_id' => $post->id,
@@ -284,9 +294,9 @@ class PostController extends Controller
                     }
 
                     // Check if the input has included content (image input is nullable)
-                    if(isset($editContent['content'])) {
+                    if (isset($editContent['content'])) {
                         // Check If the content is an uploaded file (an image)
-                        if(is_uploaded_file($editContent['content'])) {
+                        if (is_uploaded_file($editContent['content'])) {
                             // Delete the old file
                             Storage::delete($postContent->content);
 
@@ -310,14 +320,14 @@ class PostController extends Controller
                             $postContent->update([
                                 'type' => 'image',
                                 'content' => $content,
-                                'sub_content' => $subContent
+                                'sub_content' => $subContent,
                             ]);
                         } else {
                             $content = $editContent['content'];
                             // Update the text content
                             $postContent->update([
                                 'type' => 'text',
-                                'content' => $content
+                                'content' => $content,
                             ]);
                         }
                     }
@@ -326,40 +336,41 @@ class PostController extends Controller
 
             // Final check to ensure all content is in the correct position
             $pos = 0;
-            foreach($post->content as $key => $content) {
+            foreach ($post->content as $key => $content) {
                 // Check the content position isn't already at '$pos'
-                if($key != $pos++) {
+                if ($key !== $pos++) {
                     $content->update([
-                        'position' => $pos
+                        'position' => $pos,
                     ]);
                 }
             }
 
             // redirect the user to the new post
-            return redirect('/post/'.$post->id);
+            return redirect('/post/' . $post->id);
 
-        // Else return a 404 not found error
-        } else {
-            abort(404);
-        }
-
-    }
-
-    // Methods to add a text/image input to the post create/edit forms
-    public static function addTextInput(Request $request) {
-        if ($request->ajax()) {
-            return view('posts.form.text', ['editing' => boolval($request->editing)])->render();
         // Else return a 404 not found error
         } else {
             abort(404);
         }
     }
-    public static function addImageInput(Request $request) {
-        if ($request->ajax()) {
 
+    // Methods to add a text/image input to the post create/edit forms
+    public static function addTextInput(Request $request)
+    {
+        if ($request->ajax()) {
+            return view('posts.form.text', ['editing' => \boolval($request->editing)])->render();
+        // Else return a 404 not found error
+        } else {
+            abort(404);
+        }
+    }
+
+    public static function addImageInput(Request $request)
+    {
+        if ($request->ajax()) {
             // dd($request->editing);
 
-            return view('posts.form.image', ['editing' => boolval($request->editing)])->render();
+            return view('posts.form.image', ['editing' => \boolval($request->editing)])->render();
         // Else return a 404 not found error
         } else {
             abort(404);
@@ -367,9 +378,10 @@ class PostController extends Controller
     }
 
     /**
-     * Method to delete a post
+     * Method to delete a post.
      */
-    public static function delete(Post $post) {
+    public static function delete(Post $post)
+    {
         // Delete all the likes and comments (polymorphics) of this post
         $post->likes()->delete();
         $post->comments()->delete();
@@ -379,8 +391,8 @@ class PostController extends Controller
 
         // Delete the post
         $post->delete();
+
         // Redirect the user to the feed
         return redirect('feed');
     }
-
 }

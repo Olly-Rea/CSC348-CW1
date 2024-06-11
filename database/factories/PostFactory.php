@@ -3,14 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
-// Custom imports
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -23,7 +20,7 @@ class PostFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         // Pick a random user from the list of all Users
         $user = User::inRandomOrder()->first();
@@ -33,7 +30,7 @@ class PostFactory extends Factory
         // ...and (possibly) an updated_at date
         $update_date = null;
         // 50% chance of updated date
-        if(rand(0,1) == 1) {
+        if (random_int(0, 1) === 1) {
             $update_date = $this->faker->dateTimeThisYear();
         }
 
@@ -41,11 +38,10 @@ class PostFactory extends Factory
         return [
             'user_id' => $user->id,
             'published' => true,
-            'title' => $this->faker->sentence(rand(4,10)),
+            'title' => $this->faker->sentence(random_int(4, 10)),
             // default 'Model' attributes for 'published' and 'edited'
             'created_at' => $create_date,
-            'updated_at' => $update_date
+            'updated_at' => $update_date,
         ];
-
     }
 }

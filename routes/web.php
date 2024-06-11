@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@show')->name('home');
 
 // Routes that can only be used by Auth users
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function (): void {
     // Routes to display, edit and delete the Auth user profile
     Route::get('/Me', 'ProfileController@me')->name('me');
     Route::post('/Me/update', 'ProfileController@update')->name('me.update');
@@ -62,5 +62,3 @@ Route::post('/reply/fetch', 'CommentController@fetch');
 
 // Route to display site users' profiles
 Route::get('/profile/{user}', 'ProfileController@show');
-
-

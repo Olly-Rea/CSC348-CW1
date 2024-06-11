@@ -3,11 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
-// Custom import
 use Illuminate\Support\Facades\Auth;
 
 class CommentNotification extends Notification
@@ -21,9 +17,13 @@ class CommentNotification extends Notification
     /**
      * Create a new notification instance.
      *
+     * @param mixed $interactable
+     * @param mixed $user
+     *
      * @return void
      */
-    public function __construct($interactable, $user) {
+    public function __construct($interactable, $user)
+    {
         $this->interactable = $interactable;
         $this->user = $user;
     }
@@ -31,10 +31,11 @@ class CommentNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['database'];
     }
@@ -42,32 +43,34 @@ class CommentNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
-    public function toArray($notifiable) {
+    public function toArray($notifiable): array
+    {
         // Check if the user is interacting with their own content
-        if($this->interactable->user->id == Auth::id()) {
-            $userName = "You";
+        if ($this->interactable->user->id === Auth::id()) {
+            $userName = 'You';
         } else {
             $userName = $this->user->first_name;
         }
 
         // Get the type of interaction
-        if($this->interactable::class == 'App\Models\Post' ) {
+        if ($this->interactable::class === 'App\Models\Post') {
             // Set the content type and the id of the post
-            $action = " commented on your post!";
+            $action = ' commented on your post!';
             $id = $this->interactable->id;
-        } elseif($this->interactable::class == 'App\Models\Comment' ) {
+        } elseif ($this->interactable::class === 'App\Models\Comment') {
             // Set the content type and the id of the post
-            $action = " replied to your comment!";
+            $action = ' replied to your comment!';
             $id = $this->interactable->commentable->id;
         } else {
             $action = null;
         }
 
         // Make the notification
-        if($action != null) {
+        if ($action !== null) {
             return [
                 'post_id' => $id,
                 'message' => $userName . $action,

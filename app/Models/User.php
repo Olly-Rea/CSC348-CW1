@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -62,27 +61,32 @@ class User extends Authenticatable
     ];
 
     /**
-     * One-to-One relation
+     * One-to-One relation.
      */
-    public function profile() {
+    public function profile()
+    {
         return $this->hasOne('App\Models\Profile');
     }
 
     /**
-     * Child Model relationships
+     * Child Model relationships.
      */
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany('App\Models\Post');
     }
-    public function comments() {
+
+    public function comments()
+    {
         return $this->hasMany('App\Models\Comment');
     }
-    public function likes() {
+
+    public function likes()
+    {
         return $this->hasMany('App\Models\Likes');
     }
 
     // TODO ADD ADMIN ROLES
     // E.g is_site_admin means any user with minimum level of site admin can do this
     // E.g is_system_admin means only users with minimum level of system admin can do this
-
 }

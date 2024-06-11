@@ -11,8 +11,9 @@ class CreateContentTable extends Migration
      *
      * @return void
      */
-    public function up() {
-        Schema::create('content', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('content', function (Blueprint $table): void {
             // Define primary key
             $table->id();
             // Define foreign key
@@ -23,8 +24,8 @@ class CreateContentTable extends Migration
             $table->unique(['post_id', 'position']);
             // Define table contents
             $table->string('type');
-            $table->text("content");
-            $table->text("sub_content")->nullable();
+            $table->text('content');
+            $table->text('sub_content')->nullable();
         });
     }
 
@@ -33,7 +34,8 @@ class CreateContentTable extends Migration
      *
      * @return void
      */
-    public function down() {
+    public function down(): void
+    {
         Schema::dropIfExists('content');
     }
 }

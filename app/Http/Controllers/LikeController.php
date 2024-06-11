@@ -2,41 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-// Custom imports
-use Illuminate\Support\Facades\Auth;
-use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Post;
 use App\Notifications\LikeNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-
     /**
-     * Method for a user to like a post
+     * Method for a user to like a post.
      */
-    public static function like(Request $request) {
+    public static function like(Request $request)
+    {
         // Check that the request is ajax
         if ($request->ajax()) {
             // Ensure the user is logged in
-            if(Auth::check()) {
+            if (Auth::check()) {
                 // Check what likeable object is being added
-                if($request->likeable_type == 'Post') {
+                if ($request->likeable_type === 'Post') {
                     // Get the post from the request
                     $toLike = Post::where('id', $request->likeable_id)->first();
-                } elseif($request->likeable_type == 'Comment') {
+                } elseif ($request->likeable_type === 'Comment') {
                     // Get the post from the request
                     $toLike = Comment::where('id', $request->likeable_id)->first();
                 } else {
-                    return "Unrecognised likeable object!";
+                    return 'Unrecognised likeable object!';
                 }
 
                 // See if the user is 'liking' or 'un-liking' this 'likeable' item
-                $hasLike = $toLike->likes->contains(function ($like) {
-                    return $like->user_id == Auth::user()->id;
-                });
-                if($hasLike) {
+                $hasLike = $toLike->likes->contains(fn ($like) => $like->user_id === Auth::user()->id);
+                if ($hasLike) {
                     // remove the post to the user's likes
                     $toLike->likes()->where('user_id', Auth::user()->id)->delete();
                 } else {
@@ -54,6 +50,4 @@ class LikeController extends Controller
             abort(404);
         }
     }
-
-
 }

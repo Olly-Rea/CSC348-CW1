@@ -6,21 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('posts', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table): void {
             // Define primary key
             $table->id();
             // Define foreign key
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             // Define table contents
             $table->boolean('published');
-            $table->text("title");
+            $table->text('title');
             // Add created_at & updated_at attributes
             $table->timestamps();
         });
@@ -31,7 +31,8 @@ class CreatePostsTable extends Migration
      *
      * @return void
      */
-    public function down() {
+    public function down(): void
+    {
         Schema::dropIfExists('posts');
     }
 }

@@ -6,15 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProfilesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table): void {
             // Define primary key
             $table->id();
             // Define foreign key
@@ -30,7 +29,7 @@ class CreateProfilesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('profiles');
     }
